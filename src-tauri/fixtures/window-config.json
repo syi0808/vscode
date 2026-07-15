@@ -1,1334 +1,1336 @@
 {
-	"_": [
-		"/Users/classting/Workspace/temp/vscode-deno"
-	],
-	"diff": false,
-	"merge": false,
-	"add": false,
-	"remove": false,
-	"goto": false,
-	"new-window": false,
-	"reuse-window": false,
-	"agents": false,
-	"wait": false,
-	"help": false,
-	"list-extensions": false,
-	"show-versions": false,
-	"pre-release": false,
-	"update-extensions": false,
-	"version": false,
-	"verbose": false,
-	"status": false,
-	"prof-startup": false,
-	"no-cached-data": false,
-	"prof-v8-extensions": false,
-	"disable-extensions": false,
-	"disable-extension": [
-		"vscode.vscode-api-tests"
-	],
-	"disable-lcd-text": false,
-	"disable-gpu": false,
-	"disable-chromium-sandbox": false,
-	"sandbox": false,
-	"telemetry": false,
-	"debugRenderer": false,
-	"enable-smoke-test-driver": false,
-	"skip-sessions-welcome": false,
-	"logExtensionHostCommunication": false,
-	"skip-release-notes": false,
-	"skip-welcome": false,
-	"disable-telemetry": false,
-	"disable-updates": false,
-	"share-secrets-with-agents-app": false,
-	"transient": false,
-	"use-inmemory-secretstorage": false,
-	"disable-workspace-trust": false,
-	"disable-crash-reporter": false,
-	"skip-add-to-recently-opened": false,
-	"open-url": false,
-	"file-write": false,
-	"file-chmod": false,
-	"force": false,
-	"do-not-sync": false,
-	"do-not-include-pack-dependencies": false,
-	"trace": false,
-	"trace-memory-infra": false,
-	"preserve-env": false,
-	"force-user-env": false,
-	"force-disable-user-env": false,
-	"open-devtools": true,
-	"disable-gpu-sandbox": false,
-	"__enable-file-policy": false,
-	"enable-coi": false,
-	"enable-rdp-display-tracking": false,
-	"disable-layout-restore": false,
-	"disable-experiments": false,
-	"no-proxy-server": false,
-	"no-sandbox": false,
-	"nolazy": false,
-	"force-renderer-accessibility": false,
-	"ignore-certificate-errors": false,
-	"allow-insecure-localhost": false,
-	"disable-dev-shm-usage": false,
-	"profile-temp": false,
-	"logsPath": "/Users/classting/Library/Application Support/code-oss-dev/logs/20260715T182953",
-	"machineId": "01616b88699aef9256297abd683cd7715ae264c854df7e8af150a24ca0c296c3",
-	"sqmId": "",
-	"devDeviceId": "78b15a52-eb1c-419a-9fd4-bb5b636b0a64",
-	"isPortable": false,
-	"windowId": 1,
-	"mainPid": 54030,
-	"appRoot": "/Users/classting/Workspace/temp/vscode-deno",
-	"execPath": "/Users/classting/Workspace/temp/vscode-deno/.build/electron/Code - OSS.app/Contents/MacOS/Code - OSS",
-	"backupPath": "/Users/classting/Library/Application Support/code-oss-dev/Backups/80e3935dae3ea8e1e312792857c32820",
-	"profiles": {
-		"home": {
-			"scheme": "vscode-userdata",
-			"authority": "",
-			"path": "/Users/classting/Library/Application Support/code-oss-dev/User/profiles",
-			"query": "",
-			"fragment": "",
-			"_formatted": null,
-			"_fsPath": null
-		},
-		"all": [
-			{
-				"id": "__default__profile__",
-				"name": "Default",
-				"location": {
-					"scheme": "vscode-userdata",
-					"authority": "",
-					"path": "/Users/classting/Library/Application Support/code-oss-dev/User",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"isDefault": true,
-				"globalStorageHome": {
-					"scheme": "vscode-userdata",
-					"authority": "",
-					"path": "/Users/classting/Library/Application Support/code-oss-dev/User/globalStorage",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"settingsResource": {
-					"scheme": "vscode-userdata",
-					"authority": "",
-					"path": "/Users/classting/Library/Application Support/code-oss-dev/User/settings.json",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"keybindingsResource": {
-					"scheme": "vscode-userdata",
-					"authority": "",
-					"path": "/Users/classting/Library/Application Support/code-oss-dev/User/keybindings.json",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"tasksResource": {
-					"scheme": "vscode-userdata",
-					"authority": "",
-					"path": "/Users/classting/Library/Application Support/code-oss-dev/User/tasks.json",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"snippetsHome": {
-					"scheme": "vscode-userdata",
-					"authority": "",
-					"path": "/Users/classting/Library/Application Support/code-oss-dev/User/snippets",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"promptsHome": {
-					"scheme": "vscode-userdata",
-					"authority": "",
-					"path": "/Users/classting/Library/Application Support/code-oss-dev/User/prompts",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"extensionsResource": {
-					"scheme": "vscode-userdata",
-					"authority": "",
-					"path": "/Users/classting/.vscode-oss-dev/extensions/extensions.json",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"mcpResource": {
-					"scheme": "vscode-userdata",
-					"authority": "",
-					"path": "/Users/classting/Library/Application Support/code-oss-dev/User/mcp.json",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"languageModelsResource": {
-					"scheme": "vscode-userdata",
-					"authority": "",
-					"path": "/Users/classting/Library/Application Support/code-oss-dev/User/chatLanguageModels.json",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"agentPluginsHome": {
-					"scheme": "file",
-					"authority": "",
-					"path": "/Users/classting/.vscode-oss-dev/agent-plugins",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"cacheHome": {
-					"scheme": "file",
-					"authority": "",
-					"path": "/Users/classting/Library/Application Support/code-oss-dev/CachedProfilesData/__default__profile__",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				},
-				"isAgentsWindowProfile": false,
-				"workspaces": [
-					{
-						"scheme": "file",
-						"authority": "",
-						"path": "/Users/classting/Workspace/temp/vscode-deno",
-						"query": "",
-						"fragment": "",
-						"_formatted": null,
-						"_fsPath": null
-					}
-				]
-			}
-		],
-		"profile": {
-			"id": "__default__profile__",
-			"name": "Default",
-			"location": {
-				"scheme": "vscode-userdata",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/User",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"isDefault": true,
-			"globalStorageHome": {
-				"scheme": "vscode-userdata",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/User/globalStorage",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"settingsResource": {
-				"scheme": "vscode-userdata",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/User/settings.json",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"keybindingsResource": {
-				"scheme": "vscode-userdata",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/User/keybindings.json",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"tasksResource": {
-				"scheme": "vscode-userdata",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/User/tasks.json",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"snippetsHome": {
-				"scheme": "vscode-userdata",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/User/snippets",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"promptsHome": {
-				"scheme": "vscode-userdata",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/User/prompts",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"extensionsResource": {
-				"scheme": "vscode-userdata",
-				"authority": "",
-				"path": "/Users/classting/.vscode-oss-dev/extensions/extensions.json",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"mcpResource": {
-				"scheme": "vscode-userdata",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/User/mcp.json",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"languageModelsResource": {
-				"scheme": "vscode-userdata",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/User/chatLanguageModels.json",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"agentPluginsHome": {
-				"scheme": "file",
-				"authority": "",
-				"path": "/Users/classting/.vscode-oss-dev/agent-plugins",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"cacheHome": {
-				"scheme": "file",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/CachedProfilesData/__default__profile__",
-				"query": "",
-				"fragment": "",
-				"_formatted": null,
-				"_fsPath": null
-			},
-			"isAgentsWindowProfile": false,
-			"workspaces": [
-				{
-					"scheme": "file",
-					"authority": "",
-					"path": "/Users/classting/Workspace/temp/vscode-deno",
-					"query": "",
-					"fragment": "",
-					"_formatted": null,
-					"_fsPath": null
-				}
-			]
-		}
-	},
-	"homeDir": "/Users/classting",
-	"tmpDir": "/var/folders/3k/12hczwjj5_v62745k4g8_jsw0000gn/T",
-	"userDataDir": "/Users/classting/Library/Application Support/code-oss-dev",
-	"workspace": {
-		"id": "2aea8fe715d4daac2e22651bd69e99d4",
-		"uri": {
-			"scheme": "file",
-			"authority": "",
-			"path": "/Users/classting/Workspace/temp/vscode-deno",
-			"query": "",
-			"fragment": "",
-			"_formatted": "file:///Users/classting/Workspace/temp/vscode-deno",
-			"_fsPath": "/Users/classting/Workspace/temp/vscode-deno"
-		}
-	},
-	"userEnv": {
-		"VSCODE_IPC_HOOK": "/Users/classting/Library/Application Support/code-oss-dev/1.13-main.sock",
-		"VSCODE_NLS_CONFIG": "{\"userLocale\":\"en-us\",\"osLocale\":\"en-kr\",\"resolvedLanguage\":\"en\",\"defaultMessagesFile\":\"/Users/classting/Workspace/temp/vscode-deno/out/nls.messages.json\",\"locale\":\"en-us\",\"availableLanguages\":{}}"
-	},
-	"nls": {
-		"language": "en"
-	},
-	"logLevel": 3,
-	"loggers": [
-		{
-			"resource": {
-				"scheme": "file",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/logs/20260715T182953/main.log",
-				"query": "",
-				"fragment": "",
-				"_formatted": "file:///Users/classting/Library/Application%20Support/code-oss-dev/logs/20260715T182953/main.log",
-				"_fsPath": "/Users/classting/Library/Application Support/code-oss-dev/logs/20260715T182953/main.log"
-			},
-			"id": "main",
-			"name": "Main"
-		},
-		{
-			"resource": {
-				"scheme": "file",
-				"authority": "",
-				"path": "/Users/classting/Library/Application Support/code-oss-dev/logs/20260715T182953/mcpGateway.log",
-				"query": "",
-				"fragment": "",
-				"_formatted": "file:///Users/classting/Library/Application%20Support/code-oss-dev/logs/20260715T182953/mcpGateway.log",
-				"_fsPath": "/Users/classting/Library/Application Support/code-oss-dev/logs/20260715T182953/mcpGateway.log"
-			},
-			"id": "mcpGateway",
-			"logLevel": 1,
-			"name": "MCP Gateway"
-		}
-	],
-	"product": {
-		"nameShort": "Code - OSS Dev",
-		"nameLong": "Code - OSS Dev",
-		"applicationName": "code-oss",
-		"dataFolderName": ".vscode-oss-dev",
-		"sharedDataFolderName": ".vscode-oss-shared",
-		"win32MutexName": "vscodeoss",
-		"licenseName": "MIT",
-		"licenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
-		"serverLicenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
-		"serverGreeting": [],
-		"serverLicense": [],
-		"serverLicensePrompt": "",
-		"serverApplicationName": "code-server-oss",
-		"serverDataFolderName": ".vscode-server-oss-dev",
-		"tunnelApplicationName": "code-tunnel-oss",
-		"win32DirName": "Microsoft Code OSS",
-		"win32NameVersion": "Microsoft Code OSS",
-		"win32RegValueName": "CodeOSS",
-		"win32x64AppId": "{{D77B7E06-80BA-4137-BCF4-654B95CCEBC5}",
-		"win32arm64AppId": "{{D1ACE434-89C5-48D1-88D3-E2991DF85475}",
-		"win32x64UserAppId": "{{CC6B787D-37A0-49E8-AE24-8559A032BE0C}",
-		"win32arm64UserAppId": "{{3AEBF0C8-F733-4AD4-BADE-FDB816D53D7B}",
-		"win32AppUserModelId": "Microsoft.CodeOSS",
-		"win32ShellNameShort": "C&ode - OSS",
-		"win32TunnelServiceMutex": "vscodeoss-tunnelservice",
-		"win32TunnelMutex": "vscodeoss-tunnel",
-		"darwinBundleIdentifier": "com.visualstudio.code.oss",
-		"darwinProfileUUID": "47827DD9-4734-49A0-AF80-7E19B11495CC",
-		"darwinProfilePayloadUUID": "CF808BE7-53F3-46C6-A7E2-7EDB98A5E959",
-		"linuxIconName": "code-oss",
-		"licenseFileName": "LICENSE.txt",
-		"reportIssueUrl": "https://github.com/microsoft/vscode/issues/new",
-		"nodejsArtifactFeed": "",
-		"electronArtifactFeed": "",
-		"urlProtocol": "code-oss",
-		"agentsTelemetryAppName": "agents",
-		"webviewContentExternalBaseUrlTemplate": "https://{{uuid}}.vscode-cdn.net/insider/ef65ac1ba57f57f2a3961bfe94aa20481caca4c6/out/vs/workbench/contrib/webview/browser/pre/",
-		"builtInExtensions": [
-			{
-				"name": "ms-vscode.js-debug-companion",
-				"version": "1.1.3",
-				"sha256": "7380a890787452f14b2db7835dfa94de538caf358ebc263f9d46dd68ac52de93",
-				"repo": "https://github.com/microsoft/vscode-js-debug-companion",
-				"metadata": {
-					"id": "99cb0b7f-7354-4278-b8da-6cc79972169d",
-					"publisherId": {
-						"publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
-						"publisherName": "ms-vscode",
-						"displayName": "Microsoft",
-						"flags": "verified"
-					},
-					"publisherDisplayName": "Microsoft"
-				}
-			},
-			{
-				"name": "ms-vscode.js-debug",
-				"version": "1.117.0",
-				"sha256": "854eeb8a785b1f41ba2bd02d7ccd4fdbe10021b61473293973c7e96d036c7fb8",
-				"repo": "https://github.com/microsoft/vscode-js-debug",
-				"metadata": {
-					"id": "25629058-ddac-4e17-abba-74678e126c5d",
-					"publisherId": {
-						"publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
-						"publisherName": "ms-vscode",
-						"displayName": "Microsoft",
-						"flags": "verified"
-					},
-					"publisherDisplayName": "Microsoft"
-				}
-			},
-			{
-				"name": "ms-vscode.vscode-js-profile-table",
-				"version": "1.0.10",
-				"sha256": "7361748ddf9fd09d8a2ed1f2a2d7376a2cf9aae708692820b799708385c38e08",
-				"repo": "https://github.com/microsoft/vscode-js-profile-visualizer",
-				"metadata": {
-					"id": "7e52b41b-71ad-457b-ab7e-0620f1fc4feb",
-					"publisherId": {
-						"publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
-						"publisherName": "ms-vscode",
-						"displayName": "Microsoft",
-						"flags": "verified"
-					},
-					"publisherDisplayName": "Microsoft"
-				}
-			}
-		],
-		"defaultChatAgent": {
-			"extensionId": "GitHub.copilot",
-			"chatExtensionId": "GitHub.copilot-chat",
-			"chatExtensionOutputId": "GitHub.copilot-chat.GitHub Copilot Chat.log",
-			"chatExtensionOutputExtensionStateCommand": "github.copilot.debug.extensionState",
-			"documentationUrl": "https://aka.ms/github-copilot-overview",
-			"termsStatementUrl": "https://aka.ms/github-copilot-terms-statement",
-			"privacyStatementUrl": "https://aka.ms/github-copilot-privacy-statement",
-			"skusDocumentationUrl": "https://aka.ms/github-copilot-plans",
-			"optimizeUsageDocumentationUrl": "https://aka.ms/token-usage-tips",
-			"publicCodeMatchesUrl": "https://aka.ms/github-copilot-match-public-code",
-			"managePlanUrl": "https://aka.ms/github-copilot-manage-plan",
-			"upgradePlanUrl": "https://aka.ms/github-copilot-upgrade-plan",
-			"signUpUrl": "https://aka.ms/github-sign-up",
-			"provider": {
-				"default": {
-					"id": "github",
-					"name": "GitHub"
-				},
-				"enterprise": {
-					"id": "github-enterprise",
-					"name": "GHE"
-				},
-				"google": {
-					"id": "google",
-					"name": "Google"
-				},
-				"apple": {
-					"id": "apple",
-					"name": "Apple"
-				}
-			},
-			"providerExtensionId": "vscode.github-authentication",
-			"providerUriSetting": "github-enterprise.uri",
-			"providerScopes": [
-				[
-					"read:user",
-					"user:email",
-					"repo",
-					"workflow"
-				],
-				[
-					"user:email"
-				],
-				[
-					"read:user"
-				]
-			],
-			"entitlementUrl": "https://api.github.com/copilot_internal/user",
-			"entitlementSignupLimitedUrl": "https://api.github.com/copilot_internal/subscribe_limited_user",
-			"chatQuotaExceededContext": "github.copilot.chat.quotaExceeded",
-			"completionsQuotaExceededContext": "github.copilot.completions.quotaExceeded",
-			"walkthroughCommand": "github.copilot.open.walkthrough",
-			"completionsMenuCommand": "github.copilot.toggleStatusMenu",
-			"chatRefreshTokenCommand": "github.copilot.refreshToken",
-			"generateCommitMessageCommand": "github.copilot.git.generateCommitMessage",
-			"resolveMergeConflictsCommand": "github.copilot.git.resolveMergeConflicts",
-			"completionsAdvancedSetting": "github.copilot.advanced",
-			"completionsEnablementSetting": "github.copilot.enable",
-			"nextEditSuggestionsSetting": "github.copilot.nextEditSuggestions.enabled",
-			"tokenEntitlementUrl": "https://api.github.com/copilot_internal/v2/token",
-			"mcpRegistryDataUrl": "https://api.github.com/copilot/mcp_registry",
-			"managedSettingsUrl": "https://api.github.com/copilot_internal/managed_settings"
-		},
-		"trustedExtensionAuthAccess": {
-			"github": [
-				"GitHub.copilot-chat"
-			],
-			"github-enterprise": [
-				"GitHub.copilot-chat"
-			]
-		},
-		"onboardingKeymaps": [
-			{
-				"id": "vscode",
-				"label": "VS Code",
-				"description": "Default keyboard mapping"
-			},
-			{
-				"id": "sublime",
-				"label": "Sublime Text",
-				"extensionId": "ms-vscode.sublime-keybindings",
-				"description": "Keyboard mapping from Sublime Text"
-			},
-			{
-				"id": "intellij",
-				"label": "IntelliJ / JetBrains",
-				"extensionId": "k--kato.intellij-idea-keybindings",
-				"description": "Keyboard mapping from IntelliJ IDEA"
-			},
-			{
-				"id": "vim",
-				"label": "Vim",
-				"extensionId": "vscodevim.vim",
-				"description": "Vim modal editing"
-			},
-			{
-				"id": "eclipse",
-				"label": "Eclipse",
-				"extensionId": "alphabotsec.vscode-eclipse-keybindings",
-				"description": "Keyboard mapping from Eclipse"
-			},
-			{
-				"id": "notepadpp",
-				"label": "Notepad++",
-				"extensionId": "ms-vscode.notepadplusplus-keybindings",
-				"description": "Keyboard mapping from Notepad++"
-			}
-		],
-		"onboardingThemes": [
-			{
-				"id": "dark-2026",
-				"label": "Dark 2026",
-				"themeId": "Dark 2026",
-				"type": "dark"
-			},
-			{
-				"id": "hc-dark",
-				"label": "Dark High Contrast",
-				"themeId": "Default High Contrast",
-				"type": "hcDark"
-			},
-			{
-				"id": "solarized-dark",
-				"label": "Solarized Dark",
-				"themeId": "Solarized Dark",
-				"type": "dark"
-			},
-			{
-				"id": "light-2026",
-				"label": "Light 2026",
-				"themeId": "Light 2026",
-				"type": "light"
-			},
-			{
-				"id": "hc-light",
-				"label": "Light High Contrast",
-				"themeId": "Default High Contrast Light",
-				"type": "hcLight"
-			},
-			{
-				"id": "solarized-light",
-				"label": "Solarized Light",
-				"themeId": "Solarized Light",
-				"type": "light"
-			}
-		],
-		"builtInExtensionsEnabledWithAutoUpdates": [
-			"GitHub.copilot-chat"
-		],
-		"sessionsWindowAllowedExtensions": [],
-		"voiceWsUrl": "wss://falcon-caas.mai.microsoft.com/voice-code/api/v1/realtime/voice",
-		"version": "1.130.0"
-	},
-	"isInitialStartup": true,
-	"perfMarks": [
-		{
-			"name": "code/timeOrigin",
-			"startTime": 1784107793316.161
-		},
-		{
-			"name": "code/didStartMain",
-			"startTime": 1784107793658
-		},
-		{
-			"name": "code/willLoadMainBundle",
-			"startTime": 1784107793316
-		},
-		{
-			"name": "code/didLoadMainBundle",
-			"startTime": 1784107793658
-		},
-		{
-			"name": "code/willStartCrashReporter",
-			"startTime": 1784107793661
-		},
-		{
-			"name": "code/didStartCrashReporter",
-			"startTime": 1784107793676
-		},
-		{
-			"name": "code/mainAppReady",
-			"startTime": 1784107793753
-		},
-		{
-			"name": "code/willGenerateNls",
-			"startTime": 1784107793754
-		},
-		{
-			"name": "code/didGenerateNls",
-			"startTime": 1784107793754
-		},
-		{
-			"name": "code/willLoadNls",
-			"startTime": 1784107793754
-		},
-		{
-			"name": "code/registerFilesystem/file",
-			"startTime": 1784107793967
-		},
-		{
-			"name": "code/registerFilesystem/vscode-userdata",
-			"startTime": 1784107793968
-		},
-		{
-			"name": "code/didRunMainBundle",
-			"startTime": 1784107794007
-		},
-		{
-			"name": "code/willStartMainServer",
-			"startTime": 1784107794027
-		},
-		{
-			"name": "code/didStartMainServer",
-			"startTime": 1784107794028
-		},
-		{
-			"name": "code/willCreateCodeWindow",
-			"startTime": 1784107794145
-		},
-		{
-			"name": "code/willRestoreCodeWindowState",
-			"startTime": 1784107794145
-		},
-		{
-			"name": "code/didRestoreCodeWindowState",
-			"startTime": 1784107794148
-		},
-		{
-			"name": "code/willCreateCodeBrowserWindow",
-			"startTime": 1784107794148
-		},
-		{
-			"name": "code/didCreateCodeBrowserWindow",
-			"startTime": 1784107794286
-		},
-		{
-			"name": "code/didCreateCodeWindow",
-			"startTime": 1784107794302
-		},
-		{
-			"name": "code/willOpenNewWindow",
-			"startTime": 1784107794303
-		}
-	],
-	"os": {
-		"release": "25.2.0",
-		"hostname": "Castles.local",
-		"arch": "arm64"
-	},
-	"autoDetectHighContrast": true,
-	"autoDetectColorScheme": false,
-	"accessibilitySupport": false,
-	"colorScheme": {
-		"dark": true,
-		"highContrast": false
-	},
-	"policiesData": {
-		"UpdateMode": {
-			"definition": {
-				"type": "string"
-			}
-		},
-		"TelemetryLevel": {
-			"definition": {
-				"type": "string"
-			}
-		},
-		"EnableFeedback": {
-			"definition": {
-				"type": "boolean"
-			}
-		},
-		"AllowedExtensions": {
-			"definition": {
-				"type": "string"
-			}
-		},
-		"Claude3PIntegration": {
-			"definition": {
-				"type": "boolean"
-			}
-		},
-		"Codex3PIntegration": {
-			"definition": {
-				"type": "boolean"
-			}
-		},
-		"CopilotOtelEnabled": {
-			"definition": {
-				"type": "boolean",
-				"managedSettings": {
-					"telemetry.enabled": {
-						"type": "boolean"
-					}
-				}
-			}
-		},
-		"CopilotOtelProtocol": {
-			"definition": {
-				"type": "string",
-				"managedSettings": {
-					"telemetry.protocol": {
-						"type": "string"
-					}
-				}
-			}
-		},
-		"CopilotOtelEndpoint": {
-			"definition": {
-				"type": "string",
-				"managedSettings": {
-					"telemetry.endpoint": {
-						"type": "string"
-					}
-				}
-			}
-		},
-		"CopilotOtelCaptureContent": {
-			"definition": {
-				"type": "boolean",
-				"managedSettings": {
-					"telemetry.captureContent": {
-						"type": "boolean"
-					},
-					"telemetry.lockCaptureContent": {
-						"type": "boolean"
-					}
-				}
-			}
-		},
-		"CopilotOtelOutfile": {
-			"definition": {
-				"type": "string",
-				"managedSettings": {
-					"telemetry.endpoint": {
-						"type": "string"
-					},
-					"telemetry.protocol": {
-						"type": "string"
-					}
-				}
-			}
-		},
-		"CopilotOtelOtlpProtocol": {
-			"definition": {
-				"type": "string",
-				"managedSettings": {
-					"telemetry.protocol": {
-						"type": "string"
-					}
-				}
-			}
-		},
-		"CopilotOtelServiceName": {
-			"definition": {
-				"type": "string",
-				"managedSettings": {
-					"telemetry.serviceName": {
-						"type": "string"
-					}
-				}
-			}
-		},
-		"CopilotOtelResourceAttributes": {
-			"definition": {
-				"type": "string",
-				"managedSettings": {
-					"telemetry.resourceAttributes": {
-						"type": "string"
-					}
-				}
-			}
-		},
-		"CopilotOtelHeaders": {
-			"definition": {
-				"type": "string",
-				"managedSettings": {
-					"telemetry.headers": {
-						"type": "string"
-					}
-				}
-			}
-		}
-	},
-	"cssModules": [
-		"vs/base/browser/ui/actionbar/actionbar.css",
-		"vs/base/browser/ui/aria/aria.css",
-		"vs/base/browser/ui/breadcrumbs/breadcrumbsWidget.css",
-		"vs/base/browser/ui/button/button.css",
-		"vs/base/browser/ui/codicons/codicon/codicon-modifiers.css",
-		"vs/base/browser/ui/codicons/codicon/codicon.css",
-		"vs/base/browser/ui/contextview/contextview.css",
-		"vs/base/browser/ui/countBadge/countBadge.css",
-		"vs/base/browser/ui/dialog/dialog.css",
-		"vs/base/browser/ui/dnd/dnd.css",
-		"vs/base/browser/ui/dropdown/dropdown.css",
-		"vs/base/browser/ui/findinput/findInput.css",
-		"vs/base/browser/ui/grid/gridview.css",
-		"vs/base/browser/ui/hover/hoverWidget.css",
-		"vs/base/browser/ui/iconLabel/iconlabel.css",
-		"vs/base/browser/ui/icons/iconSelectBox.css",
-		"vs/base/browser/ui/inputbox/inputBox.css",
-		"vs/base/browser/ui/keybindingLabel/keybindingLabel.css",
-		"vs/base/browser/ui/list/list.css",
-		"vs/base/browser/ui/menu/menubar.css",
-		"vs/base/browser/ui/mouseCursor/mouseCursor.css",
-		"vs/base/browser/ui/pixelSpinner/pixelSpinner.css",
-		"vs/base/browser/ui/progressbar/progressbar.css",
-		"vs/base/browser/ui/radio/radio.css",
-		"vs/base/browser/ui/sash/sash.css",
-		"vs/base/browser/ui/scrollbar/media/scrollbars.css",
-		"vs/base/browser/ui/selectBox/selectBox.css",
-		"vs/base/browser/ui/selectBox/selectBoxCustom.css",
-		"vs/base/browser/ui/severityIcon/media/severityIcon.css",
-		"vs/base/browser/ui/splitview/paneview.css",
-		"vs/base/browser/ui/splitview/splitview.css",
-		"vs/base/browser/ui/table/table.css",
-		"vs/base/browser/ui/toggle/toggle.css",
-		"vs/base/browser/ui/toolbar/toolbar.css",
-		"vs/base/browser/ui/tree/media/paneviewlet.css",
-		"vs/base/browser/ui/tree/media/tree.css",
-		"vs/base/test/node/pfs/fixtures/site.css",
-		"vs/editor/browser/controller/editContext/native/nativeEditContext.css",
-		"vs/editor/browser/controller/editContext/textArea/textAreaEditContext.css",
-		"vs/editor/browser/gpu/css/media/decorationCssRuleExtractor.css",
-		"vs/editor/browser/viewParts/blockDecorations/blockDecorations.css",
-		"vs/editor/browser/viewParts/currentLineHighlight/currentLineHighlight.css",
-		"vs/editor/browser/viewParts/decorations/decorations.css",
-		"vs/editor/browser/viewParts/glyphMargin/glyphMargin.css",
-		"vs/editor/browser/viewParts/gpuMark/gpuMark.css",
-		"vs/editor/browser/viewParts/indentGuides/indentGuides.css",
-		"vs/editor/browser/viewParts/lineNumbers/lineNumbers.css",
-		"vs/editor/browser/viewParts/linesDecorations/linesDecorations.css",
-		"vs/editor/browser/viewParts/margin/margin.css",
-		"vs/editor/browser/viewParts/marginDecorations/marginDecorations.css",
-		"vs/editor/browser/viewParts/minimap/minimap.css",
-		"vs/editor/browser/viewParts/overlayWidgets/overlayWidgets.css",
-		"vs/editor/browser/viewParts/rulers/rulers.css",
-		"vs/editor/browser/viewParts/scrollDecoration/scrollDecoration.css",
-		"vs/editor/browser/viewParts/selections/selections.css",
-		"vs/editor/browser/viewParts/viewCursors/viewCursors.css",
-		"vs/editor/browser/viewParts/viewLines/viewLines.css",
-		"vs/editor/browser/viewParts/whitespace/whitespace.css",
-		"vs/editor/browser/widget/codeEditor/editor.css",
-		"vs/editor/browser/widget/diffEditor/components/accessibleDiffViewer.css",
-		"vs/editor/browser/widget/diffEditor/style.css",
-		"vs/editor/browser/widget/markdownRenderer/browser/renderedMarkdown.css",
-		"vs/editor/browser/widget/multiDiffEditor/style.css",
-		"vs/editor/contrib/anchorSelect/browser/anchorSelect.css",
-		"vs/editor/contrib/bracketMatching/browser/bracketMatching.css",
-		"vs/editor/contrib/codeAction/browser/lightBulbWidget.css",
-		"vs/editor/contrib/codelens/browser/codelensWidget.css",
-		"vs/editor/contrib/colorPicker/browser/colorPicker.css",
-		"vs/editor/contrib/dnd/browser/dnd.css",
-		"vs/editor/contrib/dropOrPasteInto/browser/postEditWidget.css",
-		"vs/editor/contrib/find/browser/findOptionsWidget.css",
-		"vs/editor/contrib/find/browser/findWidget.css",
-		"vs/editor/contrib/floatingMenu/browser/floatingMenu.css",
-		"vs/editor/contrib/folding/browser/folding.css",
-		"vs/editor/contrib/gotoError/browser/media/gotoErrorWidget.css",
-		"vs/editor/contrib/gotoSymbol/browser/link/goToDefinitionAtPosition.css",
-		"vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.css",
-		"vs/editor/contrib/hover/browser/hover.css",
-		"vs/editor/contrib/inPlaceReplace/browser/inPlaceReplace.css",
-		"vs/editor/contrib/inlineCompletions/browser/hintsWidget/inlineCompletionsHintsWidget.css",
-		"vs/editor/contrib/inlineCompletions/browser/view/ghostText/ghostTextView.css",
-		"vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/view.css",
-		"vs/editor/contrib/inlineProgress/browser/inlineProgressWidget.css",
-		"vs/editor/contrib/linkedEditing/browser/linkedEditing.css",
-		"vs/editor/contrib/links/browser/links.css",
-		"vs/editor/contrib/message/browser/messageController.css",
-		"vs/editor/contrib/middleScroll/browser/middleScroll.css",
-		"vs/editor/contrib/parameterHints/browser/parameterHints.css",
-		"vs/editor/contrib/peekView/browser/media/peekViewWidget.css",
-		"vs/editor/contrib/placeholderText/browser/placeholderText.css",
-		"vs/editor/contrib/rename/browser/renameWidget.css",
-		"vs/editor/contrib/snippet/browser/snippetSession.css",
-		"vs/editor/contrib/stickyScroll/browser/stickyScroll.css",
-		"vs/editor/contrib/suggest/browser/media/suggest.css",
-		"vs/editor/contrib/symbolIcons/browser/symbolIcons.css",
-		"vs/editor/contrib/unicodeHighlighter/browser/bannerController.css",
-		"vs/editor/contrib/unicodeHighlighter/browser/unicodeHighlighter.css",
-		"vs/editor/contrib/wordHighlighter/browser/highlightDecorations.css",
-		"vs/editor/contrib/zoneWidget/browser/zoneWidget.css",
-		"vs/editor/standalone/browser/iPadShowKeyboard/iPadShowKeyboard.css",
-		"vs/editor/standalone/browser/inspectTokens/inspectTokens.css",
-		"vs/editor/standalone/browser/quickInput/standaloneQuickInput.css",
-		"vs/editor/standalone/browser/standalone-tokens.css",
-		"vs/platform/actionWidget/browser/actionWidget.css",
-		"vs/platform/actionWidget/browser/tabbedActionListWidget.css",
-		"vs/platform/actions/browser/menuEntryActionViewItem.css",
-		"vs/platform/files/test/node/fixtures/resolver/site.css",
-		"vs/platform/files/test/node/fixtures/service/some_utf16le.css",
-		"vs/platform/hover/browser/hover.css",
-		"vs/platform/opener/browser/link.css",
-		"vs/platform/quickinput/browser/media/quickInput.css",
-		"vs/sessions/browser/media/openInVSCode.css",
-		"vs/sessions/browser/media/sessionsSetUp.css",
-		"vs/sessions/browser/media/sidebarActionButton.css",
-		"vs/sessions/browser/media/style.css",
-		"vs/sessions/browser/parts/media/auxiliaryBarPart.css",
-		"vs/sessions/browser/parts/media/chatCompositeBar.css",
-		"vs/sessions/browser/parts/media/editorPart.css",
-		"vs/sessions/browser/parts/media/panelPart.css",
-		"vs/sessions/browser/parts/media/projectBarPart.css",
-		"vs/sessions/browser/parts/media/sessionDropTarget.css",
-		"vs/sessions/browser/parts/media/sessionReadOnlyBanner.css",
-		"vs/sessions/browser/parts/media/sessionView.css",
-		"vs/sessions/browser/parts/media/sessionsPart.css",
-		"vs/sessions/browser/parts/media/sidebarPart.css",
-		"vs/sessions/browser/parts/media/titlebarpart.css",
-		"vs/sessions/browser/parts/mobile/contributions/media/mobileMultiDiffView.css",
-		"vs/sessions/browser/parts/mobile/contributions/media/mobileOverlayViews.css",
-		"vs/sessions/browser/parts/mobile/media/mobilePickerSheet.css",
-		"vs/sessions/browser/parts/mobile/media/mobileSessionFilterChips.css",
-		"vs/sessions/browser/parts/mobile/media/mobileSortGroupSheet.css",
-		"vs/sessions/browser/parts/mobile/mobileChatShell.css",
-		"vs/sessions/contrib/accountMenu/browser/media/accountTitleBarWidget.css",
-		"vs/sessions/contrib/accountMenu/browser/media/accountWidget.css",
-		"vs/sessions/contrib/agentFeedback/browser/media/agentFeedbackAttachment.css",
-		"vs/sessions/contrib/agentFeedback/browser/media/agentFeedbackEditorInput.css",
-		"vs/sessions/contrib/agentFeedback/browser/media/agentFeedbackEditorOverlay.css",
-		"vs/sessions/contrib/agentFeedback/browser/media/agentFeedbackEditorWidget.css",
-		"vs/sessions/contrib/aiCustomizationTreeView/browser/media/aiCustomizationTreeView.css",
-		"vs/sessions/contrib/aquarium/browser/media/aquarium.css",
-		"vs/sessions/contrib/changes/browser/media/changesSummaryWidget.css",
-		"vs/sessions/contrib/changes/browser/media/changesView.css",
-		"vs/sessions/contrib/changes/browser/media/changesViewActions.css",
-		"vs/sessions/contrib/changes/browser/media/checksWidget.css",
-		"vs/sessions/contrib/changes/browser/media/multiFileDiffEditor.css",
-		"vs/sessions/contrib/changes/browser/media/sessionChangesEditor.css",
-		"vs/sessions/contrib/changes/browser/media/sessionFilesWidget.css",
-		"vs/sessions/contrib/chat/browser/media/chatInput.css",
-		"vs/sessions/contrib/chat/browser/media/chatInputMobile.css",
-		"vs/sessions/contrib/chat/browser/media/chatWidget.css",
-		"vs/sessions/contrib/chat/browser/media/newChatInSession.css",
-		"vs/sessions/contrib/chat/browser/media/noAgentHostEmptyState.css",
-		"vs/sessions/contrib/chat/browser/media/runScriptAction.css",
-		"vs/sessions/contrib/chat/browser/media/sessionChatInputToolbar.css",
-		"vs/sessions/contrib/chat/browser/media/sessionRunningSubagentsControl.css",
-		"vs/sessions/contrib/chat/browser/media/voiceChatView.css",
-		"vs/sessions/contrib/editor/browser/media/editorTabs.css",
-		"vs/sessions/contrib/editor/browser/media/emptyFileEditor.css",
-		"vs/sessions/contrib/files/browser/media/filesView.css",
-		"vs/sessions/contrib/github/browser/media/pullRequestHover.css",
-		"vs/sessions/contrib/policyBlocked/browser/media/sessionsPolicyBlocked.css",
-		"vs/sessions/contrib/promptTimeline/browser/media/promptTimeline.css",
-		"vs/sessions/contrib/providers/agentHost/browser/media/agentHostCodexApprovalsPicker.css",
-		"vs/sessions/contrib/providers/agentHost/browser/media/agentHostSessionConfigPicker.css",
-		"vs/sessions/contrib/providers/agentHost/browser/media/openSubagentChat.css",
-		"vs/sessions/contrib/providers/copilotChatSessions/browser/media/isolationPicker.css",
-		"vs/sessions/contrib/providers/remoteAgentHost/browser/media/hostFilter.css",
-		"vs/sessions/contrib/providers/remoteAgentHost/browser/media/hostPickerDropdown.css",
-		"vs/sessions/contrib/providers/remoteAgentHost/browser/media/hostPickerSheet.css",
-		"vs/sessions/contrib/sessionInputBanners/browser/media/sessionInputBanners.css",
-		"vs/sessions/contrib/sessions/browser/media/agentHostToolbar.css",
-		"vs/sessions/contrib/sessions/browser/media/blockedSessionsList.css",
-		"vs/sessions/contrib/sessions/browser/media/customizationsToolbar.css",
-		"vs/sessions/contrib/sessions/browser/media/newSessionActionViewItem.css",
-		"vs/sessions/contrib/sessions/browser/media/sessionsList.css",
-		"vs/sessions/contrib/sessions/browser/media/sessionsTitleBarWidget.css",
-		"vs/sessions/contrib/sessions/browser/media/sessionsViewPane.css",
-		"vs/workbench/browser/actions/media/actions.css",
-		"vs/workbench/browser/media/animatedCounterWidget.css",
-		"vs/workbench/browser/media/floatingPanels.css",
-		"vs/workbench/browser/media/part.css",
-		"vs/workbench/browser/media/style.css",
-		"vs/workbench/browser/parts/activitybar/media/activityaction.css",
-		"vs/workbench/browser/parts/activitybar/media/activitybarpart.css",
-		"vs/workbench/browser/parts/auxiliarybar/media/auxiliaryBarPart.css",
-		"vs/workbench/browser/parts/banner/media/bannerpart.css",
-		"vs/workbench/browser/parts/editor/media/breadcrumbscontrol.css",
-		"vs/workbench/browser/parts/editor/media/editordroptarget.css",
-		"vs/workbench/browser/parts/editor/media/editorgroupview.css",
-		"vs/workbench/browser/parts/editor/media/editorplaceholder.css",
-		"vs/workbench/browser/parts/editor/media/editorquickaccess.css",
-		"vs/workbench/browser/parts/editor/media/editorstatus.css",
-		"vs/workbench/browser/parts/editor/media/editortabscontrol.css",
-		"vs/workbench/browser/parts/editor/media/editortitlecontrol.css",
-		"vs/workbench/browser/parts/editor/media/modalEditorPart.css",
-		"vs/workbench/browser/parts/editor/media/multieditortabscontrol.css",
-		"vs/workbench/browser/parts/editor/media/sidebysideeditor.css",
-		"vs/workbench/browser/parts/editor/media/singleeditortabscontrol.css",
-		"vs/workbench/browser/parts/media/compositepart.css",
-		"vs/workbench/browser/parts/media/paneCompositePart.css",
-		"vs/workbench/browser/parts/notifications/media/notificationsActions.css",
-		"vs/workbench/browser/parts/notifications/media/notificationsCenter.css",
-		"vs/workbench/browser/parts/notifications/media/notificationsList.css",
-		"vs/workbench/browser/parts/notifications/media/notificationsToasts.css",
-		"vs/workbench/browser/parts/panel/media/panelpart.css",
-		"vs/workbench/browser/parts/sidebar/media/sidebarpart.css",
-		"vs/workbench/browser/parts/statusbar/media/statusbarpart.css",
-		"vs/workbench/browser/parts/titlebar/media/menubarControl.css",
-		"vs/workbench/browser/parts/titlebar/media/titlebarpart.css",
-		"vs/workbench/browser/parts/views/media/paneviewlet.css",
-		"vs/workbench/browser/parts/views/media/views.css",
-		"vs/workbench/contrib/browserView/electron-browser/media/browser.css",
-		"vs/workbench/contrib/bulkEdit/browser/preview/bulkEdit.css",
-		"vs/workbench/contrib/callHierarchy/browser/media/callHierarchy.css",
-		"vs/workbench/contrib/chat/browser/agentPluginEditor/media/agentPluginEditor.css",
-		"vs/workbench/contrib/chat/browser/agentSessions/agentHost/media/agentHostChatInputPicker.css",
-		"vs/workbench/contrib/chat/browser/agentSessions/experiments/media/agentsessionprojection.css",
-		"vs/workbench/contrib/chat/browser/agentSessions/experiments/media/agenttitlebarstatuswidget.css",
-		"vs/workbench/contrib/chat/browser/agentSessions/experiments/media/unifiedQuickAccess.css",
-		"vs/workbench/contrib/chat/browser/agentSessions/media/agentSessionHoverWidget.css",
-		"vs/workbench/contrib/chat/browser/agentSessions/media/agentsessionsviewer.css",
-		"vs/workbench/contrib/chat/browser/aiCustomization/media/aiCustomizationManagement.css",
-		"vs/workbench/contrib/chat/browser/aiCustomization/media/aiCustomizationWelcomePromptLaunchers.css",
-		"vs/workbench/contrib/chat/browser/chatDebug/media/chatDebug.css",
-		"vs/workbench/contrib/chat/browser/chatEditing/media/chatEditingEditorOverlay.css",
-		"vs/workbench/contrib/chat/browser/chatEditing/media/chatEditingExplanationWidget.css",
-		"vs/workbench/contrib/chat/browser/chatEditing/media/chatEditorController.css",
-		"vs/workbench/contrib/chat/browser/chatManagement/media/chatManagementEditor.css",
-		"vs/workbench/contrib/chat/browser/chatManagement/media/chatModelsWidget.css",
-		"vs/workbench/contrib/chat/browser/chatSessions/media/chatSessionPickerActionItem.css",
-		"vs/workbench/contrib/chat/browser/chatSetup/media/chatSetup.css",
-		"vs/workbench/contrib/chat/browser/chatStatus/media/chatStatus.css",
-		"vs/workbench/contrib/chat/browser/media/chatTurnPills.css",
-		"vs/workbench/contrib/chat/browser/planReviewFeedback/media/planReviewFeedback.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/chatIncrementalRendering/media/chatIncrementalRendering.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatAgentFeedbackReviewConfirmation.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatAutoModeResolution.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatCodeBlockPill.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatCollapsibleContentPart.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatConfirmationWidget.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatDisabledClaudeHooksContent.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatExtensionsContent.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatHookContentPart.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatInlineAnchorWidget.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatMarkdownPart.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatMcpServersInteractionContent.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatPlanReview.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatPullRequestContent.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatQuestionCarousel.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatSessionCreatedResult.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatSubagentContent.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatTerminalToolProgressPart.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatThinkingContent.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatTipContent.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatToolConfirmationCarousel.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/media/codeBlockPart.css",
-		"vs/workbench/contrib/chat/browser/widget/chatContentParts/toolInvocationParts/media/toolRiskBadge.css",
-		"vs/workbench/contrib/chat/browser/widget/input/editor/media/editorHoverWrapper.css",
-		"vs/workbench/contrib/chat/browser/widget/input/media/chatGoalBannerWidget.css",
-		"vs/workbench/contrib/chat/browser/widget/input/media/chatInputNotificationWidget.css",
-		"vs/workbench/contrib/chat/browser/widget/input/media/chatPhoneInputPresenter.css",
-		"vs/workbench/contrib/chat/browser/widget/media/chat.css",
-		"vs/workbench/contrib/chat/browser/widget/media/chatAgentHover.css",
-		"vs/workbench/contrib/chat/browser/widget/media/chatViewWelcome.css",
-		"vs/workbench/contrib/chat/browser/widgetHosts/viewPane/media/chatContextUsageDetails.css",
-		"vs/workbench/contrib/chat/browser/widgetHosts/viewPane/media/chatContextUsageWidget.css",
-		"vs/workbench/contrib/chat/browser/widgetHosts/viewPane/media/chatViewPane.css",
-		"vs/workbench/contrib/chat/browser/widgetHosts/viewPane/media/chatViewTitleControl.css",
-		"vs/workbench/contrib/chat/electron-browser/actions/media/voiceChatActions.css",
-		"vs/workbench/contrib/chat/electron-browser/agentSessions/media/openInAgents.css",
-		"vs/workbench/contrib/chat/electron-browser/media/tunnelHost.css",
-		"vs/workbench/contrib/codeEditor/browser/accessibility/accessibility.css",
-		"vs/workbench/contrib/codeEditor/browser/dictation/editorDictation.css",
-		"vs/workbench/contrib/codeEditor/browser/emptyTextEditorHint/emptyTextEditorHint.css",
-		"vs/workbench/contrib/codeEditor/browser/find/simpleFindWidget.css",
-		"vs/workbench/contrib/codeEditor/browser/inspectEditorTokens/inspectEditorTokens.css",
-		"vs/workbench/contrib/codeEditor/browser/outline/documentSymbolsTree.css",
-		"vs/workbench/contrib/codeEditor/browser/suggestEnabledInput/suggestEnabledInput.css",
-		"vs/workbench/contrib/comments/browser/media/panel.css",
-		"vs/workbench/contrib/comments/browser/media/review.css",
-		"vs/workbench/contrib/customEditor/browser/media/customEditor.css",
-		"vs/workbench/contrib/debug/browser/media/breakpointWidget.css",
-		"vs/workbench/contrib/debug/browser/media/callStackEditorContribution.css",
-		"vs/workbench/contrib/debug/browser/media/callStackWidget.css",
-		"vs/workbench/contrib/debug/browser/media/debug.contribution.css",
-		"vs/workbench/contrib/debug/browser/media/debugHover.css",
-		"vs/workbench/contrib/debug/browser/media/debugToolBar.css",
-		"vs/workbench/contrib/debug/browser/media/debugViewlet.css",
-		"vs/workbench/contrib/debug/browser/media/exceptionWidget.css",
-		"vs/workbench/contrib/debug/browser/media/repl.css",
-		"vs/workbench/contrib/editTelemetry/browser/editStats/media.css",
-		"vs/workbench/contrib/extensions/browser/media/extension.css",
-		"vs/workbench/contrib/extensions/browser/media/extensionActions.css",
-		"vs/workbench/contrib/extensions/browser/media/extensionEditor.css",
-		"vs/workbench/contrib/extensions/browser/media/extensionManagement.css",
-		"vs/workbench/contrib/extensions/browser/media/extensionsViewlet.css",
-		"vs/workbench/contrib/extensions/browser/media/extensionsWidgets.css",
-		"vs/workbench/contrib/extensions/browser/media/runtimeExtensionsEditor.css",
-		"vs/workbench/contrib/files/browser/media/explorerviewlet.css",
-		"vs/workbench/contrib/files/browser/views/media/openeditors.css",
-		"vs/workbench/contrib/imageCarousel/browser/media/imageCarousel.css",
-		"vs/workbench/contrib/inlineChat/browser/media/inlineChat.css",
-		"vs/workbench/contrib/inlineChat/browser/media/inlineChatEditorAffordance.css",
-		"vs/workbench/contrib/interactive/browser/interactiveEditor.css",
-		"vs/workbench/contrib/interactive/browser/media/interactive.css",
-		"vs/workbench/contrib/issue/browser/media/issueReporter.css",
-		"vs/workbench/contrib/issue/browser/media/issueReporterOverlay.css",
-		"vs/workbench/contrib/languageStatus/browser/media/languageStatus.css",
-		"vs/workbench/contrib/markdown/browser/media/markdown.css",
-		"vs/workbench/contrib/markers/browser/markersViewActions.css",
-		"vs/workbench/contrib/markers/browser/media/markers.css",
-		"vs/workbench/contrib/mcp/browser/media/mcpServerAction.css",
-		"vs/workbench/contrib/mcp/browser/media/mcpServerEditor.css",
-		"vs/workbench/contrib/mcp/browser/media/mcpServersView.css",
-		"vs/workbench/contrib/mergeEditor/browser/view/media/mergeEditor.css",
-		"vs/workbench/contrib/notebook/browser/contrib/find/media/notebookFind.css",
-		"vs/workbench/contrib/notebook/browser/contrib/find/notebookFindReplaceWidget.css",
-		"vs/workbench/contrib/notebook/browser/diff/notebookDiff.css",
-		"vs/workbench/contrib/notebook/browser/media/notebook.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookCellChat.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookCellEditorHint.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookCellInsertToolbar.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookCellOutput.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookCellStatusBar.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookCellTitleToolbar.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookChatEditController.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookChatEditorOverlay.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookDnd.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookEditorStickyScroll.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookFocusIndicator.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookFolding.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookKernelActionViewItem.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookOutline.css",
-		"vs/workbench/contrib/notebook/browser/media/notebookToolbar.css",
-		"vs/workbench/contrib/onboarding/browser/media/onboardingTarget.css",
-		"vs/workbench/contrib/onboarding/browser/media/spotlight.css",
-		"vs/workbench/contrib/outline/browser/outlinePane.css",
-		"vs/workbench/contrib/output/browser/output.css",
-		"vs/workbench/contrib/preferences/browser/media/keybindings.css",
-		"vs/workbench/contrib/preferences/browser/media/keybindingsEditor.css",
-		"vs/workbench/contrib/preferences/browser/media/preferencesEditor.css",
-		"vs/workbench/contrib/preferences/browser/media/settingsEditor2.css",
-		"vs/workbench/contrib/preferences/browser/media/settingsWidgets.css",
-		"vs/workbench/contrib/processExplorer/browser/media/processExplorer.css",
-		"vs/workbench/contrib/remote/browser/media/remoteViewlet.css",
-		"vs/workbench/contrib/remote/browser/media/tunnelView.css",
-		"vs/workbench/contrib/replNotebook/browser/interactiveEditor.css",
-		"vs/workbench/contrib/replNotebook/browser/media/interactive.css",
-		"vs/workbench/contrib/scm/browser/media/dirtydiffDecorator.css",
-		"vs/workbench/contrib/scm/browser/media/scm.css",
-		"vs/workbench/contrib/search/browser/media/anythingQuickAccess.css",
-		"vs/workbench/contrib/search/browser/media/searchview.css",
-		"vs/workbench/contrib/searchEditor/browser/media/searchEditor.css",
-		"vs/workbench/contrib/share/browser/share.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/activityBar.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/commandCenter.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/editorBorder.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/fontRamp.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/keyboardFocusOnly.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/notificationsDialogs.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/padding.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/paneHeaders.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/roundedCorners.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/sashHandles.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/shadows.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/statusBar.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/tabs.css",
-		"vs/workbench/contrib/styleOverrides/browser/media/titlebar.css",
-		"vs/workbench/contrib/surveys/browser/media/surveyEditorPane.css",
-		"vs/workbench/contrib/terminal/browser/media/terminal.css",
-		"vs/workbench/contrib/terminal/browser/media/terminalVoice.css",
-		"vs/workbench/contrib/terminal/browser/media/widgets.css",
-		"vs/workbench/contrib/terminal/browser/media/xterm.css",
-		"vs/workbench/contrib/terminalContrib/chat/browser/media/terminalChatWidget.css",
-		"vs/workbench/contrib/terminalContrib/developer/browser/media/developer.css",
-		"vs/workbench/contrib/terminalContrib/find/browser/media/terminalFind.css",
-		"vs/workbench/contrib/terminalContrib/inlineHint/browser/media/terminalInitialHint.css",
-		"vs/workbench/contrib/terminalContrib/quickFix/browser/media/terminalQuickFix.css",
-		"vs/workbench/contrib/terminalContrib/resizeDimensionsOverlay/browser/media/terminalResizeDimensionsOverlay.css",
-		"vs/workbench/contrib/terminalContrib/stickyScroll/browser/media/stickyScroll.css",
-		"vs/workbench/contrib/terminalContrib/suggest/browser/media/terminalSymbolIcons.css",
-		"vs/workbench/contrib/testing/browser/media/testMessageColorizer.css",
-		"vs/workbench/contrib/testing/browser/media/testing.css",
-		"vs/workbench/contrib/testing/browser/testResultsView/testResultsViewContent.css",
-		"vs/workbench/contrib/timeline/browser/media/timelinePane.css",
-		"vs/workbench/contrib/typeHierarchy/browser/media/typeHierarchy.css",
-		"vs/workbench/contrib/update/browser/media/postUpdateWidget.css",
-		"vs/workbench/contrib/update/browser/media/releasenoteseditor.css",
-		"vs/workbench/contrib/update/browser/media/updateTitleBarEntry.css",
-		"vs/workbench/contrib/update/browser/media/updateTooltip.css",
-		"vs/workbench/contrib/userDataProfile/browser/media/userDataProfilesEditor.css",
-		"vs/workbench/contrib/welcomeAgentSessions/browser/media/agentSessionsWelcome.css",
-		"vs/workbench/contrib/welcomeGettingStarted/browser/media/gettingStarted.css",
-		"vs/workbench/contrib/welcomeOnboarding/browser/media/variationA.css",
-		"vs/workbench/contrib/welcomeWalkthrough/browser/media/walkThroughPart.css",
-		"vs/workbench/contrib/workspace/browser/media/workspaceTrustEditor.css",
-		"vs/workbench/electron-browser/actions/media/actions.css",
-		"vs/workbench/electron-browser/media/window.css",
-		"vs/workbench/services/progress/browser/media/progressService.css",
-		"vs/workbench/services/search/test/node/fixtures/site.css",
-		"vs/workbench/services/search/test/node/fixtures/some_utf16be.css",
-		"vs/workbench/services/search/test/node/fixtures/some_utf16le.css",
-		"vs/workbench/services/suggest/browser/media/suggest.css",
-		"vs/workbench/services/textfile/test/node/encoding/fixtures/some_ansi.css",
-		"vs/workbench/services/textfile/test/node/encoding/fixtures/some_file.css",
-		"vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf16be.css",
-		"vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf16le.css",
-		"vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf8.css",
-		"vs/workbench/services/userDataProfile/browser/media/userDataProfileView.css",
-		"vs/workbench/test/browser/componentFixtures/fixtures.css"
-	],
-	"isSessionsWindow": false,
-	"handle": {
-		"buffer": {
-			"0": 0,
-			"1": 11,
-			"2": 211,
-			"3": 1,
-			"4": 4,
-			"5": 1,
-			"6": 0,
-			"7": 0
-		},
-		"byteLength": 8
-	},
-	"fullscreen": false,
-	"maximized": false,
-	"partsSplash": {
-		"zoomLevel": 0,
-		"baseTheme": "vs-dark",
-		"colorInfo": {
-			"foreground": "#cccccc",
-			"background": "#1f1f1f",
-			"editorBackground": "#1f1f1f",
-			"titleBarBackground": "#181818",
-			"titleBarBorder": "#2b2b2b",
-			"activityBarBackground": "#181818",
-			"activityBarBorder": "#2b2b2b",
-			"sideBarBackground": "#181818",
-			"sideBarBorder": "#2b2b2b",
-			"panelBackground": "#181818",
-			"editorGroupBorder": "rgba(255, 255, 255, 0.09)",
-			"agentsPanelBackground": "#181818",
-			"agentsPanelBorder": "rgba(204, 204, 204, 0.15)",
-			"statusBarBackground": "#181818",
-			"statusBarBorder": "#2b2b2b",
-			"statusBarNoFolderBackground": "#1f1f1f"
-		},
-		"layoutInfo": {
-			"sideBarSide": "left",
-			"editorPartMinWidth": 220,
-			"titleBarHeight": 35,
-			"activityBarWidth": 48,
-			"sideBarWidth": 170,
-			"auxiliaryBarWidth": 170,
-			"statusBarHeight": 22,
-			"windowBorder": false,
-			"modernUI": false
-		}
-	},
-	"isCustomZoomLevel": false
+  "_": [
+    "/Users/classting/Workspace/temp/vscode-deno"
+  ],
+  "diff": false,
+  "merge": false,
+  "add": false,
+  "remove": false,
+  "goto": false,
+  "new-window": false,
+  "reuse-window": false,
+  "agents": false,
+  "wait": false,
+  "help": false,
+  "list-extensions": false,
+  "show-versions": false,
+  "pre-release": false,
+  "update-extensions": false,
+  "version": false,
+  "verbose": false,
+  "status": false,
+  "prof-startup": false,
+  "no-cached-data": false,
+  "prof-v8-extensions": false,
+  "disable-extensions": false,
+  "disable-extension": [
+    "vscode.vscode-api-tests"
+  ],
+  "disable-lcd-text": false,
+  "disable-gpu": false,
+  "disable-chromium-sandbox": false,
+  "sandbox": false,
+  "telemetry": false,
+  "debugRenderer": false,
+  "enable-smoke-test-driver": false,
+  "skip-sessions-welcome": false,
+  "logExtensionHostCommunication": false,
+  "skip-release-notes": false,
+  "skip-welcome": false,
+  "disable-telemetry": false,
+  "disable-updates": false,
+  "share-secrets-with-agents-app": false,
+  "transient": false,
+  "use-inmemory-secretstorage": false,
+  "disable-workspace-trust": false,
+  "disable-crash-reporter": false,
+  "skip-add-to-recently-opened": false,
+  "open-url": false,
+  "file-write": false,
+  "file-chmod": false,
+  "force": false,
+  "do-not-sync": false,
+  "do-not-include-pack-dependencies": false,
+  "trace": false,
+  "trace-memory-infra": false,
+  "preserve-env": false,
+  "force-user-env": false,
+  "force-disable-user-env": false,
+  "open-devtools": true,
+  "disable-gpu-sandbox": false,
+  "__enable-file-policy": false,
+  "enable-coi": false,
+  "enable-rdp-display-tracking": false,
+  "disable-layout-restore": false,
+  "disable-experiments": false,
+  "no-proxy-server": false,
+  "no-sandbox": false,
+  "nolazy": false,
+  "force-renderer-accessibility": false,
+  "ignore-certificate-errors": false,
+  "allow-insecure-localhost": false,
+  "disable-dev-shm-usage": false,
+  "profile-temp": false,
+  "logsPath": "/Users/classting/Library/Application Support/code-oss-dev/logs/20260715T182953",
+  "machineId": "01616b88699aef9256297abd683cd7715ae264c854df7e8af150a24ca0c296c3",
+  "sqmId": "",
+  "devDeviceId": "78b15a52-eb1c-419a-9fd4-bb5b636b0a64",
+  "isPortable": false,
+  "windowId": 1,
+  "mainPid": 0,
+  "appRoot": "/Users/classting/Workspace/temp/vscode-deno",
+  "execPath": "/Users/classting/Workspace/temp/vscode-deno/.build/electron/Code - OSS.app/Contents/MacOS/Code - OSS",
+  "backupPath": "/Users/classting/Library/Application Support/code-oss-dev/Backups/80e3935dae3ea8e1e312792857c32820",
+  "profiles": {
+    "home": {
+      "scheme": "vscode-userdata",
+      "authority": "",
+      "path": "/Users/classting/Library/Application Support/code-oss-dev/User/profiles",
+      "query": "",
+      "fragment": "",
+      "_formatted": null,
+      "_fsPath": null
+    },
+    "all": [
+      {
+        "id": "__default__profile__",
+        "name": "Default",
+        "location": {
+          "scheme": "vscode-userdata",
+          "authority": "",
+          "path": "/Users/classting/Library/Application Support/code-oss-dev/User",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "isDefault": true,
+        "globalStorageHome": {
+          "scheme": "vscode-userdata",
+          "authority": "",
+          "path": "/Users/classting/Library/Application Support/code-oss-dev/User/globalStorage",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "settingsResource": {
+          "scheme": "vscode-userdata",
+          "authority": "",
+          "path": "/Users/classting/Library/Application Support/code-oss-dev/User/settings.json",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "keybindingsResource": {
+          "scheme": "vscode-userdata",
+          "authority": "",
+          "path": "/Users/classting/Library/Application Support/code-oss-dev/User/keybindings.json",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "tasksResource": {
+          "scheme": "vscode-userdata",
+          "authority": "",
+          "path": "/Users/classting/Library/Application Support/code-oss-dev/User/tasks.json",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "snippetsHome": {
+          "scheme": "vscode-userdata",
+          "authority": "",
+          "path": "/Users/classting/Library/Application Support/code-oss-dev/User/snippets",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "promptsHome": {
+          "scheme": "vscode-userdata",
+          "authority": "",
+          "path": "/Users/classting/Library/Application Support/code-oss-dev/User/prompts",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "extensionsResource": {
+          "scheme": "vscode-userdata",
+          "authority": "",
+          "path": "/Users/classting/.vscode-oss-dev/extensions/extensions.json",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "mcpResource": {
+          "scheme": "vscode-userdata",
+          "authority": "",
+          "path": "/Users/classting/Library/Application Support/code-oss-dev/User/mcp.json",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "languageModelsResource": {
+          "scheme": "vscode-userdata",
+          "authority": "",
+          "path": "/Users/classting/Library/Application Support/code-oss-dev/User/chatLanguageModels.json",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "agentPluginsHome": {
+          "scheme": "file",
+          "authority": "",
+          "path": "/Users/classting/.vscode-oss-dev/agent-plugins",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "cacheHome": {
+          "scheme": "file",
+          "authority": "",
+          "path": "/Users/classting/Library/Application Support/code-oss-dev/CachedProfilesData/__default__profile__",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        },
+        "isAgentsWindowProfile": false,
+        "workspaces": [
+          {
+            "scheme": "file",
+            "authority": "",
+            "path": "/Users/classting/Workspace/temp/vscode-deno",
+            "query": "",
+            "fragment": "",
+            "_formatted": null,
+            "_fsPath": null
+          }
+        ]
+      }
+    ],
+    "profile": {
+      "id": "__default__profile__",
+      "name": "Default",
+      "location": {
+        "scheme": "vscode-userdata",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/User",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "isDefault": true,
+      "globalStorageHome": {
+        "scheme": "vscode-userdata",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/User/globalStorage",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "settingsResource": {
+        "scheme": "vscode-userdata",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/User/settings.json",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "keybindingsResource": {
+        "scheme": "vscode-userdata",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/User/keybindings.json",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "tasksResource": {
+        "scheme": "vscode-userdata",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/User/tasks.json",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "snippetsHome": {
+        "scheme": "vscode-userdata",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/User/snippets",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "promptsHome": {
+        "scheme": "vscode-userdata",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/User/prompts",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "extensionsResource": {
+        "scheme": "vscode-userdata",
+        "authority": "",
+        "path": "/Users/classting/.vscode-oss-dev/extensions/extensions.json",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "mcpResource": {
+        "scheme": "vscode-userdata",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/User/mcp.json",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "languageModelsResource": {
+        "scheme": "vscode-userdata",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/User/chatLanguageModels.json",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "agentPluginsHome": {
+        "scheme": "file",
+        "authority": "",
+        "path": "/Users/classting/.vscode-oss-dev/agent-plugins",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "cacheHome": {
+        "scheme": "file",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/CachedProfilesData/__default__profile__",
+        "query": "",
+        "fragment": "",
+        "_formatted": null,
+        "_fsPath": null
+      },
+      "isAgentsWindowProfile": false,
+      "workspaces": [
+        {
+          "scheme": "file",
+          "authority": "",
+          "path": "/Users/classting/Workspace/temp/vscode-deno",
+          "query": "",
+          "fragment": "",
+          "_formatted": null,
+          "_fsPath": null
+        }
+      ]
+    }
+  },
+  "homeDir": "/Users/classting",
+  "tmpDir": "/var/folders/3k/12hczwjj5_v62745k4g8_jsw0000gn/T",
+  "userDataDir": "/Users/classting/Library/Application Support/code-oss-dev",
+  "workspace": {
+    "id": "2aea8fe715d4daac2e22651bd69e99d4",
+    "uri": {
+      "scheme": "file",
+      "authority": "",
+      "path": "/Users/classting/Workspace/temp/vscode-deno",
+      "query": "",
+      "fragment": "",
+      "_formatted": "file:///Users/classting/Workspace/temp/vscode-deno",
+      "_fsPath": "/Users/classting/Workspace/temp/vscode-deno"
+    }
+  },
+  "userEnv": {
+    "VSCODE_IPC_HOOK": "/Users/classting/Library/Application Support/code-oss-dev/1.13-main.sock",
+    "VSCODE_NLS_CONFIG": "{\"userLocale\":\"en-us\",\"osLocale\":\"en-kr\",\"resolvedLanguage\":\"en\",\"defaultMessagesFile\":\"/Users/classting/Workspace/temp/vscode-deno/out/nls.messages.json\",\"locale\":\"en-us\",\"availableLanguages\":{}}",
+    "VSCODE_DEV": "1",
+    "NODE_ENV": "development"
+  },
+  "nls": {
+    "language": "en"
+  },
+  "logLevel": 3,
+  "loggers": [
+    {
+      "resource": {
+        "scheme": "file",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/logs/20260715T182953/main.log",
+        "query": "",
+        "fragment": "",
+        "_formatted": "file:///Users/classting/Library/Application%20Support/code-oss-dev/logs/20260715T182953/main.log",
+        "_fsPath": "/Users/classting/Library/Application Support/code-oss-dev/logs/20260715T182953/main.log"
+      },
+      "id": "main",
+      "name": "Main"
+    },
+    {
+      "resource": {
+        "scheme": "file",
+        "authority": "",
+        "path": "/Users/classting/Library/Application Support/code-oss-dev/logs/20260715T182953/mcpGateway.log",
+        "query": "",
+        "fragment": "",
+        "_formatted": "file:///Users/classting/Library/Application%20Support/code-oss-dev/logs/20260715T182953/mcpGateway.log",
+        "_fsPath": "/Users/classting/Library/Application Support/code-oss-dev/logs/20260715T182953/mcpGateway.log"
+      },
+      "id": "mcpGateway",
+      "logLevel": 1,
+      "name": "MCP Gateway"
+    }
+  ],
+  "product": {
+    "nameShort": "Code - OSS Dev",
+    "nameLong": "Code - OSS Dev",
+    "applicationName": "code-oss",
+    "dataFolderName": ".vscode-oss-dev",
+    "sharedDataFolderName": ".vscode-oss-shared",
+    "win32MutexName": "vscodeoss",
+    "licenseName": "MIT",
+    "licenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
+    "serverLicenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
+    "serverGreeting": [],
+    "serverLicense": [],
+    "serverLicensePrompt": "",
+    "serverApplicationName": "code-server-oss",
+    "serverDataFolderName": ".vscode-server-oss-dev",
+    "tunnelApplicationName": "code-tunnel-oss",
+    "win32DirName": "Microsoft Code OSS",
+    "win32NameVersion": "Microsoft Code OSS",
+    "win32RegValueName": "CodeOSS",
+    "win32x64AppId": "{{D77B7E06-80BA-4137-BCF4-654B95CCEBC5}",
+    "win32arm64AppId": "{{D1ACE434-89C5-48D1-88D3-E2991DF85475}",
+    "win32x64UserAppId": "{{CC6B787D-37A0-49E8-AE24-8559A032BE0C}",
+    "win32arm64UserAppId": "{{3AEBF0C8-F733-4AD4-BADE-FDB816D53D7B}",
+    "win32AppUserModelId": "Microsoft.CodeOSS",
+    "win32ShellNameShort": "C&ode - OSS",
+    "win32TunnelServiceMutex": "vscodeoss-tunnelservice",
+    "win32TunnelMutex": "vscodeoss-tunnel",
+    "darwinBundleIdentifier": "com.visualstudio.code.oss",
+    "darwinProfileUUID": "47827DD9-4734-49A0-AF80-7E19B11495CC",
+    "darwinProfilePayloadUUID": "CF808BE7-53F3-46C6-A7E2-7EDB98A5E959",
+    "linuxIconName": "code-oss",
+    "licenseFileName": "LICENSE.txt",
+    "reportIssueUrl": "https://github.com/microsoft/vscode/issues/new",
+    "nodejsArtifactFeed": "",
+    "electronArtifactFeed": "",
+    "urlProtocol": "code-oss",
+    "agentsTelemetryAppName": "agents",
+    "webviewContentExternalBaseUrlTemplate": "https://{{uuid}}.vscode-cdn.net/insider/ef65ac1ba57f57f2a3961bfe94aa20481caca4c6/out/vs/workbench/contrib/webview/browser/pre/",
+    "builtInExtensions": [
+      {
+        "name": "ms-vscode.js-debug-companion",
+        "version": "1.1.3",
+        "sha256": "7380a890787452f14b2db7835dfa94de538caf358ebc263f9d46dd68ac52de93",
+        "repo": "https://github.com/microsoft/vscode-js-debug-companion",
+        "metadata": {
+          "id": "99cb0b7f-7354-4278-b8da-6cc79972169d",
+          "publisherId": {
+            "publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+            "publisherName": "ms-vscode",
+            "displayName": "Microsoft",
+            "flags": "verified"
+          },
+          "publisherDisplayName": "Microsoft"
+        }
+      },
+      {
+        "name": "ms-vscode.js-debug",
+        "version": "1.117.0",
+        "sha256": "854eeb8a785b1f41ba2bd02d7ccd4fdbe10021b61473293973c7e96d036c7fb8",
+        "repo": "https://github.com/microsoft/vscode-js-debug",
+        "metadata": {
+          "id": "25629058-ddac-4e17-abba-74678e126c5d",
+          "publisherId": {
+            "publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+            "publisherName": "ms-vscode",
+            "displayName": "Microsoft",
+            "flags": "verified"
+          },
+          "publisherDisplayName": "Microsoft"
+        }
+      },
+      {
+        "name": "ms-vscode.vscode-js-profile-table",
+        "version": "1.0.10",
+        "sha256": "7361748ddf9fd09d8a2ed1f2a2d7376a2cf9aae708692820b799708385c38e08",
+        "repo": "https://github.com/microsoft/vscode-js-profile-visualizer",
+        "metadata": {
+          "id": "7e52b41b-71ad-457b-ab7e-0620f1fc4feb",
+          "publisherId": {
+            "publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+            "publisherName": "ms-vscode",
+            "displayName": "Microsoft",
+            "flags": "verified"
+          },
+          "publisherDisplayName": "Microsoft"
+        }
+      }
+    ],
+    "defaultChatAgent": {
+      "extensionId": "GitHub.copilot",
+      "chatExtensionId": "GitHub.copilot-chat",
+      "chatExtensionOutputId": "GitHub.copilot-chat.GitHub Copilot Chat.log",
+      "chatExtensionOutputExtensionStateCommand": "github.copilot.debug.extensionState",
+      "documentationUrl": "https://aka.ms/github-copilot-overview",
+      "termsStatementUrl": "https://aka.ms/github-copilot-terms-statement",
+      "privacyStatementUrl": "https://aka.ms/github-copilot-privacy-statement",
+      "skusDocumentationUrl": "https://aka.ms/github-copilot-plans",
+      "optimizeUsageDocumentationUrl": "https://aka.ms/token-usage-tips",
+      "publicCodeMatchesUrl": "https://aka.ms/github-copilot-match-public-code",
+      "managePlanUrl": "https://aka.ms/github-copilot-manage-plan",
+      "upgradePlanUrl": "https://aka.ms/github-copilot-upgrade-plan",
+      "signUpUrl": "https://aka.ms/github-sign-up",
+      "provider": {
+        "default": {
+          "id": "github",
+          "name": "GitHub"
+        },
+        "enterprise": {
+          "id": "github-enterprise",
+          "name": "GHE"
+        },
+        "google": {
+          "id": "google",
+          "name": "Google"
+        },
+        "apple": {
+          "id": "apple",
+          "name": "Apple"
+        }
+      },
+      "providerExtensionId": "vscode.github-authentication",
+      "providerUriSetting": "github-enterprise.uri",
+      "providerScopes": [
+        [
+          "read:user",
+          "user:email",
+          "repo",
+          "workflow"
+        ],
+        [
+          "user:email"
+        ],
+        [
+          "read:user"
+        ]
+      ],
+      "entitlementUrl": "https://api.github.com/copilot_internal/user",
+      "entitlementSignupLimitedUrl": "https://api.github.com/copilot_internal/subscribe_limited_user",
+      "chatQuotaExceededContext": "github.copilot.chat.quotaExceeded",
+      "completionsQuotaExceededContext": "github.copilot.completions.quotaExceeded",
+      "walkthroughCommand": "github.copilot.open.walkthrough",
+      "completionsMenuCommand": "github.copilot.toggleStatusMenu",
+      "chatRefreshTokenCommand": "github.copilot.refreshToken",
+      "generateCommitMessageCommand": "github.copilot.git.generateCommitMessage",
+      "resolveMergeConflictsCommand": "github.copilot.git.resolveMergeConflicts",
+      "completionsAdvancedSetting": "github.copilot.advanced",
+      "completionsEnablementSetting": "github.copilot.enable",
+      "nextEditSuggestionsSetting": "github.copilot.nextEditSuggestions.enabled",
+      "tokenEntitlementUrl": "https://api.github.com/copilot_internal/v2/token",
+      "mcpRegistryDataUrl": "https://api.github.com/copilot/mcp_registry",
+      "managedSettingsUrl": "https://api.github.com/copilot_internal/managed_settings"
+    },
+    "trustedExtensionAuthAccess": {
+      "github": [
+        "GitHub.copilot-chat"
+      ],
+      "github-enterprise": [
+        "GitHub.copilot-chat"
+      ]
+    },
+    "onboardingKeymaps": [
+      {
+        "id": "vscode",
+        "label": "VS Code",
+        "description": "Default keyboard mapping"
+      },
+      {
+        "id": "sublime",
+        "label": "Sublime Text",
+        "extensionId": "ms-vscode.sublime-keybindings",
+        "description": "Keyboard mapping from Sublime Text"
+      },
+      {
+        "id": "intellij",
+        "label": "IntelliJ / JetBrains",
+        "extensionId": "k--kato.intellij-idea-keybindings",
+        "description": "Keyboard mapping from IntelliJ IDEA"
+      },
+      {
+        "id": "vim",
+        "label": "Vim",
+        "extensionId": "vscodevim.vim",
+        "description": "Vim modal editing"
+      },
+      {
+        "id": "eclipse",
+        "label": "Eclipse",
+        "extensionId": "alphabotsec.vscode-eclipse-keybindings",
+        "description": "Keyboard mapping from Eclipse"
+      },
+      {
+        "id": "notepadpp",
+        "label": "Notepad++",
+        "extensionId": "ms-vscode.notepadplusplus-keybindings",
+        "description": "Keyboard mapping from Notepad++"
+      }
+    ],
+    "onboardingThemes": [
+      {
+        "id": "dark-2026",
+        "label": "Dark 2026",
+        "themeId": "Dark 2026",
+        "type": "dark"
+      },
+      {
+        "id": "hc-dark",
+        "label": "Dark High Contrast",
+        "themeId": "Default High Contrast",
+        "type": "hcDark"
+      },
+      {
+        "id": "solarized-dark",
+        "label": "Solarized Dark",
+        "themeId": "Solarized Dark",
+        "type": "dark"
+      },
+      {
+        "id": "light-2026",
+        "label": "Light 2026",
+        "themeId": "Light 2026",
+        "type": "light"
+      },
+      {
+        "id": "hc-light",
+        "label": "Light High Contrast",
+        "themeId": "Default High Contrast Light",
+        "type": "hcLight"
+      },
+      {
+        "id": "solarized-light",
+        "label": "Solarized Light",
+        "themeId": "Solarized Light",
+        "type": "light"
+      }
+    ],
+    "builtInExtensionsEnabledWithAutoUpdates": [
+      "GitHub.copilot-chat"
+    ],
+    "sessionsWindowAllowedExtensions": [],
+    "voiceWsUrl": "wss://falcon-caas.mai.microsoft.com/voice-code/api/v1/realtime/voice",
+    "version": "1.130.0"
+  },
+  "isInitialStartup": true,
+  "perfMarks": [
+    {
+      "name": "code/timeOrigin",
+      "startTime": 1784107793316.161
+    },
+    {
+      "name": "code/didStartMain",
+      "startTime": 1784107793658
+    },
+    {
+      "name": "code/willLoadMainBundle",
+      "startTime": 1784107793316
+    },
+    {
+      "name": "code/didLoadMainBundle",
+      "startTime": 1784107793658
+    },
+    {
+      "name": "code/willStartCrashReporter",
+      "startTime": 1784107793661
+    },
+    {
+      "name": "code/didStartCrashReporter",
+      "startTime": 1784107793676
+    },
+    {
+      "name": "code/mainAppReady",
+      "startTime": 1784107793753
+    },
+    {
+      "name": "code/willGenerateNls",
+      "startTime": 1784107793754
+    },
+    {
+      "name": "code/didGenerateNls",
+      "startTime": 1784107793754
+    },
+    {
+      "name": "code/willLoadNls",
+      "startTime": 1784107793754
+    },
+    {
+      "name": "code/registerFilesystem/file",
+      "startTime": 1784107793967
+    },
+    {
+      "name": "code/registerFilesystem/vscode-userdata",
+      "startTime": 1784107793968
+    },
+    {
+      "name": "code/didRunMainBundle",
+      "startTime": 1784107794007
+    },
+    {
+      "name": "code/willStartMainServer",
+      "startTime": 1784107794027
+    },
+    {
+      "name": "code/didStartMainServer",
+      "startTime": 1784107794028
+    },
+    {
+      "name": "code/willCreateCodeWindow",
+      "startTime": 1784107794145
+    },
+    {
+      "name": "code/willRestoreCodeWindowState",
+      "startTime": 1784107794145
+    },
+    {
+      "name": "code/didRestoreCodeWindowState",
+      "startTime": 1784107794148
+    },
+    {
+      "name": "code/willCreateCodeBrowserWindow",
+      "startTime": 1784107794148
+    },
+    {
+      "name": "code/didCreateCodeBrowserWindow",
+      "startTime": 1784107794286
+    },
+    {
+      "name": "code/didCreateCodeWindow",
+      "startTime": 1784107794302
+    },
+    {
+      "name": "code/willOpenNewWindow",
+      "startTime": 1784107794303
+    }
+  ],
+  "os": {
+    "release": "25.2.0",
+    "hostname": "Castles.local",
+    "arch": "arm64"
+  },
+  "autoDetectHighContrast": true,
+  "autoDetectColorScheme": false,
+  "accessibilitySupport": false,
+  "colorScheme": {
+    "dark": true,
+    "highContrast": false
+  },
+  "policiesData": {
+    "UpdateMode": {
+      "definition": {
+        "type": "string"
+      }
+    },
+    "TelemetryLevel": {
+      "definition": {
+        "type": "string"
+      }
+    },
+    "EnableFeedback": {
+      "definition": {
+        "type": "boolean"
+      }
+    },
+    "AllowedExtensions": {
+      "definition": {
+        "type": "string"
+      }
+    },
+    "Claude3PIntegration": {
+      "definition": {
+        "type": "boolean"
+      }
+    },
+    "Codex3PIntegration": {
+      "definition": {
+        "type": "boolean"
+      }
+    },
+    "CopilotOtelEnabled": {
+      "definition": {
+        "type": "boolean",
+        "managedSettings": {
+          "telemetry.enabled": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "CopilotOtelProtocol": {
+      "definition": {
+        "type": "string",
+        "managedSettings": {
+          "telemetry.protocol": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CopilotOtelEndpoint": {
+      "definition": {
+        "type": "string",
+        "managedSettings": {
+          "telemetry.endpoint": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CopilotOtelCaptureContent": {
+      "definition": {
+        "type": "boolean",
+        "managedSettings": {
+          "telemetry.captureContent": {
+            "type": "boolean"
+          },
+          "telemetry.lockCaptureContent": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "CopilotOtelOutfile": {
+      "definition": {
+        "type": "string",
+        "managedSettings": {
+          "telemetry.endpoint": {
+            "type": "string"
+          },
+          "telemetry.protocol": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CopilotOtelOtlpProtocol": {
+      "definition": {
+        "type": "string",
+        "managedSettings": {
+          "telemetry.protocol": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CopilotOtelServiceName": {
+      "definition": {
+        "type": "string",
+        "managedSettings": {
+          "telemetry.serviceName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CopilotOtelResourceAttributes": {
+      "definition": {
+        "type": "string",
+        "managedSettings": {
+          "telemetry.resourceAttributes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CopilotOtelHeaders": {
+      "definition": {
+        "type": "string",
+        "managedSettings": {
+          "telemetry.headers": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "cssModules": [
+    "vs/base/browser/ui/actionbar/actionbar.css",
+    "vs/base/browser/ui/aria/aria.css",
+    "vs/base/browser/ui/breadcrumbs/breadcrumbsWidget.css",
+    "vs/base/browser/ui/button/button.css",
+    "vs/base/browser/ui/codicons/codicon/codicon-modifiers.css",
+    "vs/base/browser/ui/codicons/codicon/codicon.css",
+    "vs/base/browser/ui/contextview/contextview.css",
+    "vs/base/browser/ui/countBadge/countBadge.css",
+    "vs/base/browser/ui/dialog/dialog.css",
+    "vs/base/browser/ui/dnd/dnd.css",
+    "vs/base/browser/ui/dropdown/dropdown.css",
+    "vs/base/browser/ui/findinput/findInput.css",
+    "vs/base/browser/ui/grid/gridview.css",
+    "vs/base/browser/ui/hover/hoverWidget.css",
+    "vs/base/browser/ui/iconLabel/iconlabel.css",
+    "vs/base/browser/ui/icons/iconSelectBox.css",
+    "vs/base/browser/ui/inputbox/inputBox.css",
+    "vs/base/browser/ui/keybindingLabel/keybindingLabel.css",
+    "vs/base/browser/ui/list/list.css",
+    "vs/base/browser/ui/menu/menubar.css",
+    "vs/base/browser/ui/mouseCursor/mouseCursor.css",
+    "vs/base/browser/ui/pixelSpinner/pixelSpinner.css",
+    "vs/base/browser/ui/progressbar/progressbar.css",
+    "vs/base/browser/ui/radio/radio.css",
+    "vs/base/browser/ui/sash/sash.css",
+    "vs/base/browser/ui/scrollbar/media/scrollbars.css",
+    "vs/base/browser/ui/selectBox/selectBox.css",
+    "vs/base/browser/ui/selectBox/selectBoxCustom.css",
+    "vs/base/browser/ui/severityIcon/media/severityIcon.css",
+    "vs/base/browser/ui/splitview/paneview.css",
+    "vs/base/browser/ui/splitview/splitview.css",
+    "vs/base/browser/ui/table/table.css",
+    "vs/base/browser/ui/toggle/toggle.css",
+    "vs/base/browser/ui/toolbar/toolbar.css",
+    "vs/base/browser/ui/tree/media/paneviewlet.css",
+    "vs/base/browser/ui/tree/media/tree.css",
+    "vs/base/test/node/pfs/fixtures/site.css",
+    "vs/editor/browser/controller/editContext/native/nativeEditContext.css",
+    "vs/editor/browser/controller/editContext/textArea/textAreaEditContext.css",
+    "vs/editor/browser/gpu/css/media/decorationCssRuleExtractor.css",
+    "vs/editor/browser/viewParts/blockDecorations/blockDecorations.css",
+    "vs/editor/browser/viewParts/currentLineHighlight/currentLineHighlight.css",
+    "vs/editor/browser/viewParts/decorations/decorations.css",
+    "vs/editor/browser/viewParts/glyphMargin/glyphMargin.css",
+    "vs/editor/browser/viewParts/gpuMark/gpuMark.css",
+    "vs/editor/browser/viewParts/indentGuides/indentGuides.css",
+    "vs/editor/browser/viewParts/lineNumbers/lineNumbers.css",
+    "vs/editor/browser/viewParts/linesDecorations/linesDecorations.css",
+    "vs/editor/browser/viewParts/margin/margin.css",
+    "vs/editor/browser/viewParts/marginDecorations/marginDecorations.css",
+    "vs/editor/browser/viewParts/minimap/minimap.css",
+    "vs/editor/browser/viewParts/overlayWidgets/overlayWidgets.css",
+    "vs/editor/browser/viewParts/rulers/rulers.css",
+    "vs/editor/browser/viewParts/scrollDecoration/scrollDecoration.css",
+    "vs/editor/browser/viewParts/selections/selections.css",
+    "vs/editor/browser/viewParts/viewCursors/viewCursors.css",
+    "vs/editor/browser/viewParts/viewLines/viewLines.css",
+    "vs/editor/browser/viewParts/whitespace/whitespace.css",
+    "vs/editor/browser/widget/codeEditor/editor.css",
+    "vs/editor/browser/widget/diffEditor/components/accessibleDiffViewer.css",
+    "vs/editor/browser/widget/diffEditor/style.css",
+    "vs/editor/browser/widget/markdownRenderer/browser/renderedMarkdown.css",
+    "vs/editor/browser/widget/multiDiffEditor/style.css",
+    "vs/editor/contrib/anchorSelect/browser/anchorSelect.css",
+    "vs/editor/contrib/bracketMatching/browser/bracketMatching.css",
+    "vs/editor/contrib/codeAction/browser/lightBulbWidget.css",
+    "vs/editor/contrib/codelens/browser/codelensWidget.css",
+    "vs/editor/contrib/colorPicker/browser/colorPicker.css",
+    "vs/editor/contrib/dnd/browser/dnd.css",
+    "vs/editor/contrib/dropOrPasteInto/browser/postEditWidget.css",
+    "vs/editor/contrib/find/browser/findOptionsWidget.css",
+    "vs/editor/contrib/find/browser/findWidget.css",
+    "vs/editor/contrib/floatingMenu/browser/floatingMenu.css",
+    "vs/editor/contrib/folding/browser/folding.css",
+    "vs/editor/contrib/gotoError/browser/media/gotoErrorWidget.css",
+    "vs/editor/contrib/gotoSymbol/browser/link/goToDefinitionAtPosition.css",
+    "vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.css",
+    "vs/editor/contrib/hover/browser/hover.css",
+    "vs/editor/contrib/inPlaceReplace/browser/inPlaceReplace.css",
+    "vs/editor/contrib/inlineCompletions/browser/hintsWidget/inlineCompletionsHintsWidget.css",
+    "vs/editor/contrib/inlineCompletions/browser/view/ghostText/ghostTextView.css",
+    "vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/view.css",
+    "vs/editor/contrib/inlineProgress/browser/inlineProgressWidget.css",
+    "vs/editor/contrib/linkedEditing/browser/linkedEditing.css",
+    "vs/editor/contrib/links/browser/links.css",
+    "vs/editor/contrib/message/browser/messageController.css",
+    "vs/editor/contrib/middleScroll/browser/middleScroll.css",
+    "vs/editor/contrib/parameterHints/browser/parameterHints.css",
+    "vs/editor/contrib/peekView/browser/media/peekViewWidget.css",
+    "vs/editor/contrib/placeholderText/browser/placeholderText.css",
+    "vs/editor/contrib/rename/browser/renameWidget.css",
+    "vs/editor/contrib/snippet/browser/snippetSession.css",
+    "vs/editor/contrib/stickyScroll/browser/stickyScroll.css",
+    "vs/editor/contrib/suggest/browser/media/suggest.css",
+    "vs/editor/contrib/symbolIcons/browser/symbolIcons.css",
+    "vs/editor/contrib/unicodeHighlighter/browser/bannerController.css",
+    "vs/editor/contrib/unicodeHighlighter/browser/unicodeHighlighter.css",
+    "vs/editor/contrib/wordHighlighter/browser/highlightDecorations.css",
+    "vs/editor/contrib/zoneWidget/browser/zoneWidget.css",
+    "vs/editor/standalone/browser/iPadShowKeyboard/iPadShowKeyboard.css",
+    "vs/editor/standalone/browser/inspectTokens/inspectTokens.css",
+    "vs/editor/standalone/browser/quickInput/standaloneQuickInput.css",
+    "vs/editor/standalone/browser/standalone-tokens.css",
+    "vs/platform/actionWidget/browser/actionWidget.css",
+    "vs/platform/actionWidget/browser/tabbedActionListWidget.css",
+    "vs/platform/actions/browser/menuEntryActionViewItem.css",
+    "vs/platform/files/test/node/fixtures/resolver/site.css",
+    "vs/platform/files/test/node/fixtures/service/some_utf16le.css",
+    "vs/platform/hover/browser/hover.css",
+    "vs/platform/opener/browser/link.css",
+    "vs/platform/quickinput/browser/media/quickInput.css",
+    "vs/sessions/browser/media/openInVSCode.css",
+    "vs/sessions/browser/media/sessionsSetUp.css",
+    "vs/sessions/browser/media/sidebarActionButton.css",
+    "vs/sessions/browser/media/style.css",
+    "vs/sessions/browser/parts/media/auxiliaryBarPart.css",
+    "vs/sessions/browser/parts/media/chatCompositeBar.css",
+    "vs/sessions/browser/parts/media/editorPart.css",
+    "vs/sessions/browser/parts/media/panelPart.css",
+    "vs/sessions/browser/parts/media/projectBarPart.css",
+    "vs/sessions/browser/parts/media/sessionDropTarget.css",
+    "vs/sessions/browser/parts/media/sessionReadOnlyBanner.css",
+    "vs/sessions/browser/parts/media/sessionView.css",
+    "vs/sessions/browser/parts/media/sessionsPart.css",
+    "vs/sessions/browser/parts/media/sidebarPart.css",
+    "vs/sessions/browser/parts/media/titlebarpart.css",
+    "vs/sessions/browser/parts/mobile/contributions/media/mobileMultiDiffView.css",
+    "vs/sessions/browser/parts/mobile/contributions/media/mobileOverlayViews.css",
+    "vs/sessions/browser/parts/mobile/media/mobilePickerSheet.css",
+    "vs/sessions/browser/parts/mobile/media/mobileSessionFilterChips.css",
+    "vs/sessions/browser/parts/mobile/media/mobileSortGroupSheet.css",
+    "vs/sessions/browser/parts/mobile/mobileChatShell.css",
+    "vs/sessions/contrib/accountMenu/browser/media/accountTitleBarWidget.css",
+    "vs/sessions/contrib/accountMenu/browser/media/accountWidget.css",
+    "vs/sessions/contrib/agentFeedback/browser/media/agentFeedbackAttachment.css",
+    "vs/sessions/contrib/agentFeedback/browser/media/agentFeedbackEditorInput.css",
+    "vs/sessions/contrib/agentFeedback/browser/media/agentFeedbackEditorOverlay.css",
+    "vs/sessions/contrib/agentFeedback/browser/media/agentFeedbackEditorWidget.css",
+    "vs/sessions/contrib/aiCustomizationTreeView/browser/media/aiCustomizationTreeView.css",
+    "vs/sessions/contrib/aquarium/browser/media/aquarium.css",
+    "vs/sessions/contrib/changes/browser/media/changesSummaryWidget.css",
+    "vs/sessions/contrib/changes/browser/media/changesView.css",
+    "vs/sessions/contrib/changes/browser/media/changesViewActions.css",
+    "vs/sessions/contrib/changes/browser/media/checksWidget.css",
+    "vs/sessions/contrib/changes/browser/media/multiFileDiffEditor.css",
+    "vs/sessions/contrib/changes/browser/media/sessionChangesEditor.css",
+    "vs/sessions/contrib/changes/browser/media/sessionFilesWidget.css",
+    "vs/sessions/contrib/chat/browser/media/chatInput.css",
+    "vs/sessions/contrib/chat/browser/media/chatInputMobile.css",
+    "vs/sessions/contrib/chat/browser/media/chatWidget.css",
+    "vs/sessions/contrib/chat/browser/media/newChatInSession.css",
+    "vs/sessions/contrib/chat/browser/media/noAgentHostEmptyState.css",
+    "vs/sessions/contrib/chat/browser/media/runScriptAction.css",
+    "vs/sessions/contrib/chat/browser/media/sessionChatInputToolbar.css",
+    "vs/sessions/contrib/chat/browser/media/sessionRunningSubagentsControl.css",
+    "vs/sessions/contrib/chat/browser/media/voiceChatView.css",
+    "vs/sessions/contrib/editor/browser/media/editorTabs.css",
+    "vs/sessions/contrib/editor/browser/media/emptyFileEditor.css",
+    "vs/sessions/contrib/files/browser/media/filesView.css",
+    "vs/sessions/contrib/github/browser/media/pullRequestHover.css",
+    "vs/sessions/contrib/policyBlocked/browser/media/sessionsPolicyBlocked.css",
+    "vs/sessions/contrib/promptTimeline/browser/media/promptTimeline.css",
+    "vs/sessions/contrib/providers/agentHost/browser/media/agentHostCodexApprovalsPicker.css",
+    "vs/sessions/contrib/providers/agentHost/browser/media/agentHostSessionConfigPicker.css",
+    "vs/sessions/contrib/providers/agentHost/browser/media/openSubagentChat.css",
+    "vs/sessions/contrib/providers/copilotChatSessions/browser/media/isolationPicker.css",
+    "vs/sessions/contrib/providers/remoteAgentHost/browser/media/hostFilter.css",
+    "vs/sessions/contrib/providers/remoteAgentHost/browser/media/hostPickerDropdown.css",
+    "vs/sessions/contrib/providers/remoteAgentHost/browser/media/hostPickerSheet.css",
+    "vs/sessions/contrib/sessionInputBanners/browser/media/sessionInputBanners.css",
+    "vs/sessions/contrib/sessions/browser/media/agentHostToolbar.css",
+    "vs/sessions/contrib/sessions/browser/media/blockedSessionsList.css",
+    "vs/sessions/contrib/sessions/browser/media/customizationsToolbar.css",
+    "vs/sessions/contrib/sessions/browser/media/newSessionActionViewItem.css",
+    "vs/sessions/contrib/sessions/browser/media/sessionsList.css",
+    "vs/sessions/contrib/sessions/browser/media/sessionsTitleBarWidget.css",
+    "vs/sessions/contrib/sessions/browser/media/sessionsViewPane.css",
+    "vs/workbench/browser/actions/media/actions.css",
+    "vs/workbench/browser/media/animatedCounterWidget.css",
+    "vs/workbench/browser/media/floatingPanels.css",
+    "vs/workbench/browser/media/part.css",
+    "vs/workbench/browser/media/style.css",
+    "vs/workbench/browser/parts/activitybar/media/activityaction.css",
+    "vs/workbench/browser/parts/activitybar/media/activitybarpart.css",
+    "vs/workbench/browser/parts/auxiliarybar/media/auxiliaryBarPart.css",
+    "vs/workbench/browser/parts/banner/media/bannerpart.css",
+    "vs/workbench/browser/parts/editor/media/breadcrumbscontrol.css",
+    "vs/workbench/browser/parts/editor/media/editordroptarget.css",
+    "vs/workbench/browser/parts/editor/media/editorgroupview.css",
+    "vs/workbench/browser/parts/editor/media/editorplaceholder.css",
+    "vs/workbench/browser/parts/editor/media/editorquickaccess.css",
+    "vs/workbench/browser/parts/editor/media/editorstatus.css",
+    "vs/workbench/browser/parts/editor/media/editortabscontrol.css",
+    "vs/workbench/browser/parts/editor/media/editortitlecontrol.css",
+    "vs/workbench/browser/parts/editor/media/modalEditorPart.css",
+    "vs/workbench/browser/parts/editor/media/multieditortabscontrol.css",
+    "vs/workbench/browser/parts/editor/media/sidebysideeditor.css",
+    "vs/workbench/browser/parts/editor/media/singleeditortabscontrol.css",
+    "vs/workbench/browser/parts/media/compositepart.css",
+    "vs/workbench/browser/parts/media/paneCompositePart.css",
+    "vs/workbench/browser/parts/notifications/media/notificationsActions.css",
+    "vs/workbench/browser/parts/notifications/media/notificationsCenter.css",
+    "vs/workbench/browser/parts/notifications/media/notificationsList.css",
+    "vs/workbench/browser/parts/notifications/media/notificationsToasts.css",
+    "vs/workbench/browser/parts/panel/media/panelpart.css",
+    "vs/workbench/browser/parts/sidebar/media/sidebarpart.css",
+    "vs/workbench/browser/parts/statusbar/media/statusbarpart.css",
+    "vs/workbench/browser/parts/titlebar/media/menubarControl.css",
+    "vs/workbench/browser/parts/titlebar/media/titlebarpart.css",
+    "vs/workbench/browser/parts/views/media/paneviewlet.css",
+    "vs/workbench/browser/parts/views/media/views.css",
+    "vs/workbench/contrib/browserView/electron-browser/media/browser.css",
+    "vs/workbench/contrib/bulkEdit/browser/preview/bulkEdit.css",
+    "vs/workbench/contrib/callHierarchy/browser/media/callHierarchy.css",
+    "vs/workbench/contrib/chat/browser/agentPluginEditor/media/agentPluginEditor.css",
+    "vs/workbench/contrib/chat/browser/agentSessions/agentHost/media/agentHostChatInputPicker.css",
+    "vs/workbench/contrib/chat/browser/agentSessions/experiments/media/agentsessionprojection.css",
+    "vs/workbench/contrib/chat/browser/agentSessions/experiments/media/agenttitlebarstatuswidget.css",
+    "vs/workbench/contrib/chat/browser/agentSessions/experiments/media/unifiedQuickAccess.css",
+    "vs/workbench/contrib/chat/browser/agentSessions/media/agentSessionHoverWidget.css",
+    "vs/workbench/contrib/chat/browser/agentSessions/media/agentsessionsviewer.css",
+    "vs/workbench/contrib/chat/browser/aiCustomization/media/aiCustomizationManagement.css",
+    "vs/workbench/contrib/chat/browser/aiCustomization/media/aiCustomizationWelcomePromptLaunchers.css",
+    "vs/workbench/contrib/chat/browser/chatDebug/media/chatDebug.css",
+    "vs/workbench/contrib/chat/browser/chatEditing/media/chatEditingEditorOverlay.css",
+    "vs/workbench/contrib/chat/browser/chatEditing/media/chatEditingExplanationWidget.css",
+    "vs/workbench/contrib/chat/browser/chatEditing/media/chatEditorController.css",
+    "vs/workbench/contrib/chat/browser/chatManagement/media/chatManagementEditor.css",
+    "vs/workbench/contrib/chat/browser/chatManagement/media/chatModelsWidget.css",
+    "vs/workbench/contrib/chat/browser/chatSessions/media/chatSessionPickerActionItem.css",
+    "vs/workbench/contrib/chat/browser/chatSetup/media/chatSetup.css",
+    "vs/workbench/contrib/chat/browser/chatStatus/media/chatStatus.css",
+    "vs/workbench/contrib/chat/browser/media/chatTurnPills.css",
+    "vs/workbench/contrib/chat/browser/planReviewFeedback/media/planReviewFeedback.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/chatIncrementalRendering/media/chatIncrementalRendering.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatAgentFeedbackReviewConfirmation.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatAutoModeResolution.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatCodeBlockPill.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatCollapsibleContentPart.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatConfirmationWidget.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatDisabledClaudeHooksContent.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatExtensionsContent.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatHookContentPart.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatInlineAnchorWidget.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatMarkdownPart.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatMcpServersInteractionContent.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatPlanReview.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatPullRequestContent.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatQuestionCarousel.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatSessionCreatedResult.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatSubagentContent.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatTerminalToolProgressPart.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatThinkingContent.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatTipContent.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/chatToolConfirmationCarousel.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/media/codeBlockPart.css",
+    "vs/workbench/contrib/chat/browser/widget/chatContentParts/toolInvocationParts/media/toolRiskBadge.css",
+    "vs/workbench/contrib/chat/browser/widget/input/editor/media/editorHoverWrapper.css",
+    "vs/workbench/contrib/chat/browser/widget/input/media/chatGoalBannerWidget.css",
+    "vs/workbench/contrib/chat/browser/widget/input/media/chatInputNotificationWidget.css",
+    "vs/workbench/contrib/chat/browser/widget/input/media/chatPhoneInputPresenter.css",
+    "vs/workbench/contrib/chat/browser/widget/media/chat.css",
+    "vs/workbench/contrib/chat/browser/widget/media/chatAgentHover.css",
+    "vs/workbench/contrib/chat/browser/widget/media/chatViewWelcome.css",
+    "vs/workbench/contrib/chat/browser/widgetHosts/viewPane/media/chatContextUsageDetails.css",
+    "vs/workbench/contrib/chat/browser/widgetHosts/viewPane/media/chatContextUsageWidget.css",
+    "vs/workbench/contrib/chat/browser/widgetHosts/viewPane/media/chatViewPane.css",
+    "vs/workbench/contrib/chat/browser/widgetHosts/viewPane/media/chatViewTitleControl.css",
+    "vs/workbench/contrib/chat/electron-browser/actions/media/voiceChatActions.css",
+    "vs/workbench/contrib/chat/electron-browser/agentSessions/media/openInAgents.css",
+    "vs/workbench/contrib/chat/electron-browser/media/tunnelHost.css",
+    "vs/workbench/contrib/codeEditor/browser/accessibility/accessibility.css",
+    "vs/workbench/contrib/codeEditor/browser/dictation/editorDictation.css",
+    "vs/workbench/contrib/codeEditor/browser/emptyTextEditorHint/emptyTextEditorHint.css",
+    "vs/workbench/contrib/codeEditor/browser/find/simpleFindWidget.css",
+    "vs/workbench/contrib/codeEditor/browser/inspectEditorTokens/inspectEditorTokens.css",
+    "vs/workbench/contrib/codeEditor/browser/outline/documentSymbolsTree.css",
+    "vs/workbench/contrib/codeEditor/browser/suggestEnabledInput/suggestEnabledInput.css",
+    "vs/workbench/contrib/comments/browser/media/panel.css",
+    "vs/workbench/contrib/comments/browser/media/review.css",
+    "vs/workbench/contrib/customEditor/browser/media/customEditor.css",
+    "vs/workbench/contrib/debug/browser/media/breakpointWidget.css",
+    "vs/workbench/contrib/debug/browser/media/callStackEditorContribution.css",
+    "vs/workbench/contrib/debug/browser/media/callStackWidget.css",
+    "vs/workbench/contrib/debug/browser/media/debug.contribution.css",
+    "vs/workbench/contrib/debug/browser/media/debugHover.css",
+    "vs/workbench/contrib/debug/browser/media/debugToolBar.css",
+    "vs/workbench/contrib/debug/browser/media/debugViewlet.css",
+    "vs/workbench/contrib/debug/browser/media/exceptionWidget.css",
+    "vs/workbench/contrib/debug/browser/media/repl.css",
+    "vs/workbench/contrib/editTelemetry/browser/editStats/media.css",
+    "vs/workbench/contrib/extensions/browser/media/extension.css",
+    "vs/workbench/contrib/extensions/browser/media/extensionActions.css",
+    "vs/workbench/contrib/extensions/browser/media/extensionEditor.css",
+    "vs/workbench/contrib/extensions/browser/media/extensionManagement.css",
+    "vs/workbench/contrib/extensions/browser/media/extensionsViewlet.css",
+    "vs/workbench/contrib/extensions/browser/media/extensionsWidgets.css",
+    "vs/workbench/contrib/extensions/browser/media/runtimeExtensionsEditor.css",
+    "vs/workbench/contrib/files/browser/media/explorerviewlet.css",
+    "vs/workbench/contrib/files/browser/views/media/openeditors.css",
+    "vs/workbench/contrib/imageCarousel/browser/media/imageCarousel.css",
+    "vs/workbench/contrib/inlineChat/browser/media/inlineChat.css",
+    "vs/workbench/contrib/inlineChat/browser/media/inlineChatEditorAffordance.css",
+    "vs/workbench/contrib/interactive/browser/interactiveEditor.css",
+    "vs/workbench/contrib/interactive/browser/media/interactive.css",
+    "vs/workbench/contrib/issue/browser/media/issueReporter.css",
+    "vs/workbench/contrib/issue/browser/media/issueReporterOverlay.css",
+    "vs/workbench/contrib/languageStatus/browser/media/languageStatus.css",
+    "vs/workbench/contrib/markdown/browser/media/markdown.css",
+    "vs/workbench/contrib/markers/browser/markersViewActions.css",
+    "vs/workbench/contrib/markers/browser/media/markers.css",
+    "vs/workbench/contrib/mcp/browser/media/mcpServerAction.css",
+    "vs/workbench/contrib/mcp/browser/media/mcpServerEditor.css",
+    "vs/workbench/contrib/mcp/browser/media/mcpServersView.css",
+    "vs/workbench/contrib/mergeEditor/browser/view/media/mergeEditor.css",
+    "vs/workbench/contrib/notebook/browser/contrib/find/media/notebookFind.css",
+    "vs/workbench/contrib/notebook/browser/contrib/find/notebookFindReplaceWidget.css",
+    "vs/workbench/contrib/notebook/browser/diff/notebookDiff.css",
+    "vs/workbench/contrib/notebook/browser/media/notebook.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellChat.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellEditorHint.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellInsertToolbar.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellOutput.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellStatusBar.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellTitleToolbar.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookChatEditController.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookChatEditorOverlay.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookDnd.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookEditorStickyScroll.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookFocusIndicator.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookFolding.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookKernelActionViewItem.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookOutline.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookToolbar.css",
+    "vs/workbench/contrib/onboarding/browser/media/onboardingTarget.css",
+    "vs/workbench/contrib/onboarding/browser/media/spotlight.css",
+    "vs/workbench/contrib/outline/browser/outlinePane.css",
+    "vs/workbench/contrib/output/browser/output.css",
+    "vs/workbench/contrib/preferences/browser/media/keybindings.css",
+    "vs/workbench/contrib/preferences/browser/media/keybindingsEditor.css",
+    "vs/workbench/contrib/preferences/browser/media/preferencesEditor.css",
+    "vs/workbench/contrib/preferences/browser/media/settingsEditor2.css",
+    "vs/workbench/contrib/preferences/browser/media/settingsWidgets.css",
+    "vs/workbench/contrib/processExplorer/browser/media/processExplorer.css",
+    "vs/workbench/contrib/remote/browser/media/remoteViewlet.css",
+    "vs/workbench/contrib/remote/browser/media/tunnelView.css",
+    "vs/workbench/contrib/replNotebook/browser/interactiveEditor.css",
+    "vs/workbench/contrib/replNotebook/browser/media/interactive.css",
+    "vs/workbench/contrib/scm/browser/media/dirtydiffDecorator.css",
+    "vs/workbench/contrib/scm/browser/media/scm.css",
+    "vs/workbench/contrib/search/browser/media/anythingQuickAccess.css",
+    "vs/workbench/contrib/search/browser/media/searchview.css",
+    "vs/workbench/contrib/searchEditor/browser/media/searchEditor.css",
+    "vs/workbench/contrib/share/browser/share.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/activityBar.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/commandCenter.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/editorBorder.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/fontRamp.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/keyboardFocusOnly.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/notificationsDialogs.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/padding.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/paneHeaders.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/roundedCorners.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/sashHandles.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/shadows.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/statusBar.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/tabs.css",
+    "vs/workbench/contrib/styleOverrides/browser/media/titlebar.css",
+    "vs/workbench/contrib/surveys/browser/media/surveyEditorPane.css",
+    "vs/workbench/contrib/terminal/browser/media/terminal.css",
+    "vs/workbench/contrib/terminal/browser/media/terminalVoice.css",
+    "vs/workbench/contrib/terminal/browser/media/widgets.css",
+    "vs/workbench/contrib/terminal/browser/media/xterm.css",
+    "vs/workbench/contrib/terminalContrib/chat/browser/media/terminalChatWidget.css",
+    "vs/workbench/contrib/terminalContrib/developer/browser/media/developer.css",
+    "vs/workbench/contrib/terminalContrib/find/browser/media/terminalFind.css",
+    "vs/workbench/contrib/terminalContrib/inlineHint/browser/media/terminalInitialHint.css",
+    "vs/workbench/contrib/terminalContrib/quickFix/browser/media/terminalQuickFix.css",
+    "vs/workbench/contrib/terminalContrib/resizeDimensionsOverlay/browser/media/terminalResizeDimensionsOverlay.css",
+    "vs/workbench/contrib/terminalContrib/stickyScroll/browser/media/stickyScroll.css",
+    "vs/workbench/contrib/terminalContrib/suggest/browser/media/terminalSymbolIcons.css",
+    "vs/workbench/contrib/testing/browser/media/testMessageColorizer.css",
+    "vs/workbench/contrib/testing/browser/media/testing.css",
+    "vs/workbench/contrib/testing/browser/testResultsView/testResultsViewContent.css",
+    "vs/workbench/contrib/timeline/browser/media/timelinePane.css",
+    "vs/workbench/contrib/typeHierarchy/browser/media/typeHierarchy.css",
+    "vs/workbench/contrib/update/browser/media/postUpdateWidget.css",
+    "vs/workbench/contrib/update/browser/media/releasenoteseditor.css",
+    "vs/workbench/contrib/update/browser/media/updateTitleBarEntry.css",
+    "vs/workbench/contrib/update/browser/media/updateTooltip.css",
+    "vs/workbench/contrib/userDataProfile/browser/media/userDataProfilesEditor.css",
+    "vs/workbench/contrib/welcomeAgentSessions/browser/media/agentSessionsWelcome.css",
+    "vs/workbench/contrib/welcomeGettingStarted/browser/media/gettingStarted.css",
+    "vs/workbench/contrib/welcomeOnboarding/browser/media/variationA.css",
+    "vs/workbench/contrib/welcomeWalkthrough/browser/media/walkThroughPart.css",
+    "vs/workbench/contrib/workspace/browser/media/workspaceTrustEditor.css",
+    "vs/workbench/electron-browser/actions/media/actions.css",
+    "vs/workbench/electron-browser/media/window.css",
+    "vs/workbench/services/progress/browser/media/progressService.css",
+    "vs/workbench/services/search/test/node/fixtures/site.css",
+    "vs/workbench/services/search/test/node/fixtures/some_utf16be.css",
+    "vs/workbench/services/search/test/node/fixtures/some_utf16le.css",
+    "vs/workbench/services/suggest/browser/media/suggest.css",
+    "vs/workbench/services/textfile/test/node/encoding/fixtures/some_ansi.css",
+    "vs/workbench/services/textfile/test/node/encoding/fixtures/some_file.css",
+    "vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf16be.css",
+    "vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf16le.css",
+    "vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf8.css",
+    "vs/workbench/services/userDataProfile/browser/media/userDataProfileView.css",
+    "vs/workbench/test/browser/componentFixtures/fixtures.css"
+  ],
+  "isSessionsWindow": false,
+  "handle": {
+    "buffer": {
+      "0": 0,
+      "1": 11,
+      "2": 211,
+      "3": 1,
+      "4": 4,
+      "5": 1,
+      "6": 0,
+      "7": 0
+    },
+    "byteLength": 8
+  },
+  "fullscreen": false,
+  "maximized": false,
+  "partsSplash": {
+    "zoomLevel": 0,
+    "baseTheme": "vs-dark",
+    "colorInfo": {
+      "foreground": "#cccccc",
+      "background": "#1f1f1f",
+      "editorBackground": "#1f1f1f",
+      "titleBarBackground": "#181818",
+      "titleBarBorder": "#2b2b2b",
+      "activityBarBackground": "#181818",
+      "activityBarBorder": "#2b2b2b",
+      "sideBarBackground": "#181818",
+      "sideBarBorder": "#2b2b2b",
+      "panelBackground": "#181818",
+      "editorGroupBorder": "rgba(255, 255, 255, 0.09)",
+      "agentsPanelBackground": "#181818",
+      "agentsPanelBorder": "rgba(204, 204, 204, 0.15)",
+      "statusBarBackground": "#181818",
+      "statusBarBorder": "#2b2b2b",
+      "statusBarNoFolderBackground": "#1f1f1f"
+    },
+    "layoutInfo": {
+      "sideBarSide": "left",
+      "editorPartMinWidth": 220,
+      "titleBarHeight": 35,
+      "activityBarWidth": 48,
+      "sideBarWidth": 170,
+      "auxiliaryBarWidth": 170,
+      "statusBarHeight": 22,
+      "windowBorder": false,
+      "modernUI": false
+    }
+  },
+  "isCustomZoomLevel": false
 }

@@ -398,7 +398,10 @@
 		// ESM Import
 		try {
 			let workbenchUrl: string;
-			if (!!safeProcess.env['VSCODE_DEV'] && globalThis._VSCODE_USE_RELATIVE_IMPORTS) {
+			const isTauri = (globalThis as typeof globalThis & { _VSCODE_TAURI?: boolean })._VSCODE_TAURI === true;
+			if (isTauri) {
+				workbenchUrl = new URL(`vs/workbench/workbench.tauri.main.js`, baseUrl).href;
+			} else if (!!safeProcess.env['VSCODE_DEV'] && globalThis._VSCODE_USE_RELATIVE_IMPORTS) {
 				workbenchUrl = '../../../workbench/workbench.desktop.main.js'; // for dev purposes only
 			} else {
 				workbenchUrl = new URL(`vs/workbench/workbench.desktop.main.js`, baseUrl).href;

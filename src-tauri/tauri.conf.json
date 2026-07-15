@@ -4,19 +4,13 @@
   "version": "0.1.0",
   "identifier": "dev.code.tauri",
   "build": {
-    "devUrl": "http://127.0.0.1:9888",
     "frontendDist": "../out"
   },
   "app": {
-    "windows": [
-      {
-        "label": "main",
-        "title": "Code Tauri",
-        "width": 1440,
-        "height": 900,
-        "resizable": true
-      }
-    ]
+    "windows": [],
+    "security": {
+      "csp": null
+    }
   },
   "bundle": {
     "active": false
