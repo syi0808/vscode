@@ -25,6 +25,10 @@ import type {
 } from '../../platform/log/common/log.js';
 
 import {
+	tauriInvoke
+} from '../../base/parts/sandbox/tauri-browser/globals.js';
+
+import {
 	TauriFileSystemProvider
 } from '../../platform/files/tauri-browser/tauriFileSystemProvider.js';
 
@@ -36,46 +40,118 @@ import type {
 	IWorkbenchEnvironmentService
 } from '../services/environment/common/environmentService.js';
 
+
+interface IAppPaths {
+	readonly dataDir:
+		string;
+
+	readonly cacheDir:
+		string;
+
+	readonly userDataDir:
+		string;
+
+	readonly logsDir:
+		string;
+
+	readonly extensionsDir:
+		string;
+}
+
 // @ts-ignore
-export class TauriBrowserMain extends BrowserMain {
+export class TauriBrowserMain
+	extends BrowserMain {
 
 	protected override async registerIndexedDBFileSystemProviders(
-		_environmentService: IWorkbenchEnvironmentService,
-		fileService: IFileService,
-		_logService: ILogService,
-		_loggerService: ILoggerService,
-		logsPath: URI
+		_environmentService:
+			IWorkbenchEnvironmentService,
+
+		fileService:
+			IFileService,
+
+		_logService:
+			ILogService,
+
+		_loggerService:
+			ILoggerService,
+
+		logsPath:
+			URI
 	): Promise<void> {
 
-		// Phase 5:
-		// logs and user data are intentionally temporary.
-		fileService.registerProvider(
-			logsPath.scheme,
-			new InMemoryFileSystemProvider()
+		const paths =
+			await tauriInvoke<
+				IAppPaths
+			>(
+				'get_app_paths'
+			);
+
+
+		const logProvider =
+			this._register(
+				new TauriFileSystemProvider({
+					root:
+						paths.logsDir,
+
+					scheme:
+						logsPath.scheme
+				})
+			);
+
+		this._register(
+			fileService
+				.registerProvider(
+					logsPath.scheme,
+					logProvider
+				)
 		);
 
-		fileService.registerProvider(
-			Schemas.vscodeUserData,
-			new InMemoryFileSystemProvider()
+
+		const userDataProvider =
+			this._register(
+				new TauriFileSystemProvider({
+					root:
+						paths.userDataDir,
+
+					scheme:
+						Schemas
+							.vscodeUserData
+				})
+			);
+
+		this._register(
+			fileService
+				.registerProvider(
+					Schemas
+						.vscodeUserData,
+
+					userDataProvider
+				)
 		);
 
-		fileService.registerProvider(
-			Schemas.tmp,
-			new InMemoryFileSystemProvider()
+
+		this._register(
+			fileService
+				.registerProvider(
+					Schemas.tmp,
+
+					new InMemoryFileSystemProvider()
+				)
 		);
 
 
-		const tauriFileSystem =
+		const localFileProvider =
 			this._register(
 				new TauriFileSystemProvider()
 			);
 
 		this._register(
-			fileService.registerProvider(
-				Schemas.file,
-				tauriFileSystem
-			)
+			fileService
+				.registerProvider(
+					Schemas.file,
+
+					localFileProvider
+				)
 		);
 	}
-
 }

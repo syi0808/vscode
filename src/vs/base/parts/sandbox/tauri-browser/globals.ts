@@ -7,6 +7,20 @@ interface IInvokeOptions {
 	readonly headers?: Record<string, string>;
 }
 
+
+export interface ITauriChannel<T> {
+	readonly id: number;
+
+	onmessage: (
+		message: T
+	) => void;
+
+	toJSON(): string;
+
+	dispose(): void;
+}
+
+
 interface ICodeTauriGlobal {
 	invoke<T>(
 		command: string,
@@ -15,17 +29,33 @@ interface ICodeTauriGlobal {
 
 	invokeRaw<T>(
 		command: string,
-		body: ArrayBuffer | Uint8Array,
+		body:
+			| ArrayBuffer
+			| Uint8Array,
 		options?: IInvokeOptions
 	): Promise<T>;
 }
 
 
-const bridge = (
-	globalThis as typeof globalThis & {
-		__CODE_TAURI__: ICodeTauriGlobal;
-	}
-).__CODE_TAURI__;
+interface ICodeTauriScope {
+	readonly __CODE_TAURI__:
+		ICodeTauriGlobal;
+
+	readonly __CODE_TAURI_CREATE_CHANNEL__:
+		<T>(
+			onMessage:
+				(message: T) => void
+		) => ITauriChannel<T>;
+}
+
+
+const scope =
+	globalThis as typeof globalThis
+	& ICodeTauriScope;
+
+
+const bridge =
+	scope.__CODE_TAURI__;
 
 
 export function tauriInvoke<T>(
@@ -41,7 +71,9 @@ export function tauriInvoke<T>(
 
 export function tauriInvokeRaw<T>(
 	command: string,
-	body: ArrayBuffer | Uint8Array,
+	body:
+		| ArrayBuffer
+		| Uint8Array,
 	options?: IInvokeOptions
 ): Promise<T> {
 	return bridge.invokeRaw<T>(
@@ -49,4 +81,15 @@ export function tauriInvokeRaw<T>(
 		body,
 		options
 	);
+}
+
+
+export function tauriCreateChannel<T>(
+	onMessage:
+		(message: T) => void
+): ITauriChannel<T> {
+	return scope
+		.__CODE_TAURI_CREATE_CHANNEL__(
+			onMessage
+		);
 }

@@ -1,6 +1,8 @@
 mod bridge;
 mod fs_bridge;
+mod paths_bridge;
 mod vscode_file_protocol;
+mod watch_bridge;
 
 use bridge::{
     resolve_window_configuration, set_webview_zoom, vscode_ipc_invoke, vscode_ipc_send, AppState,
@@ -60,6 +62,7 @@ fn main() {
             root: root.clone(),
             config_path,
         })
+        .manage(watch_bridge::FileWatchState::default())
         .register_uri_scheme_protocol("vscode-file", move |_context, request| {
             vscode_file_protocol::handle(&protocol_root, request)
         })
@@ -75,11 +78,15 @@ fn main() {
             fs_bridge::fs_mkdir,
             fs_bridge::fs_delete,
             fs_bridge::fs_rename,
+            watch_bridge::fs_watch_start,
+            watch_bridge::fs_watch_stop,
+            paths_bridge::get_app_paths,
         ])
         .setup(move |app| {
             let url = workbench_url(&root);
 
             WebviewWindowBuilder::new(app, "main", WebviewUrl::CustomProtocol(url))
+                .initialization_script(include_str!("../preload/channel.js"))
                 .initialization_script(include_str!("../preload/vscode.js"))
                 .title("Code Tauri")
                 .inner_size(1440.0, 900.0)

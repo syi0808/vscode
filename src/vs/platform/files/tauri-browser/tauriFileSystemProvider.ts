@@ -16,7 +16,7 @@ import {
 
 import {
 	isLinux,
-	isMacintosh
+	isWindows
 } from '../../../base/common/platform.js';
 
 import {
@@ -24,11 +24,13 @@ import {
 } from '../../../base/common/uri.js';
 
 import {
+	tauriCreateChannel,
 	tauriInvoke,
 	tauriInvokeRaw
 } from '../../../base/parts/sandbox/tauri-browser/globals.js';
 
 import {
+	FileChangeType,
 	FileSystemProviderCapabilities,
 	FileType,
 	type IFileChange,
@@ -63,8 +65,59 @@ interface ITauriEntry {
 }
 
 
+interface IFsWatchChange {
+	readonly kind:
+		| 'added'
+		| 'updated'
+		| 'deleted';
+
+	readonly path: string;
+}
+
+
+type IFsWatchMessage =
+	| {
+		readonly type:
+			'changes';
+
+		readonly changes:
+			IFsWatchChange[];
+	}
+	| {
+		readonly type:
+			'error';
+
+		readonly message:
+			string;
+	};
+
+
+export interface ITauriFileSystemProviderOptions {
+	/**
+	 * When provided, URI paths are mapped under
+	 * this directory.
+	 *
+	 * Example:
+	 *
+	 * vscode-userdata:/User/settings.json
+	 *
+	 * ->
+	 *
+	 * /app-data/userdata/User/settings.json
+	 */
+	readonly root?: string;
+
+	/**
+	 * Required together with root so watcher
+	 * paths can be mapped back to a URI.
+	 */
+	readonly scheme?: string;
+}
+
+
 function toFileType(
-	type: ITauriStat['entryType']
+	type:
+		ITauriStat['entryType']
 ): FileType {
 	switch (type) {
 		case 'directory':
@@ -79,15 +132,34 @@ function toFileType(
 }
 
 
+function toChangeType(
+	kind:
+		IFsWatchChange['kind']
+): FileChangeType {
+	switch (kind) {
+		case 'added':
+			return FileChangeType.ADDED;
+
+		case 'deleted':
+			return FileChangeType.DELETED;
+
+		default:
+			return FileChangeType.UPDATED;
+	}
+}
+
+
 export class TauriFileSystemProvider
 	extends Disposable
 	implements IFileSystemProvider {
 
 	readonly capabilities =
-		FileSystemProviderCapabilities.FileReadWrite
+		FileSystemProviderCapabilities
+			.FileReadWrite
 		| (
-			isLinux || isMacintosh
-				? FileSystemProviderCapabilities.PathCaseSensitive
+			isLinux
+				? FileSystemProviderCapabilities
+					.PathCaseSensitive
 				: 0
 		);
 
@@ -107,14 +179,281 @@ export class TauriFileSystemProvider
 		this._onDidChangeFile.event;
 
 
+	private readonly _onDidWatchError =
+		this._register(
+			new Emitter<string>()
+		);
+
+	readonly onDidWatchError =
+		this._onDidWatchError.event;
+
+
+	constructor(
+		private readonly options:
+			ITauriFileSystemProviderOptions
+			= {}
+	) {
+		super();
+
+		if (
+			Boolean(options.root)
+			!== Boolean(options.scheme)
+		) {
+			throw new Error(
+				'root and scheme must be ' +
+				'provided together'
+			);
+		}
+	}
+
+
+	private toFsPath(
+		resource: URI
+	): string {
+
+		if (!this.options.root) {
+			return resource.fsPath;
+		}
+
+		const segments =
+			resource.path
+				.split('/')
+				.filter(Boolean);
+
+		if (
+			segments.some(
+				segment =>
+					segment === '..'
+			)
+		) {
+			throw new Error(
+				`Path escapes provider root: ${resource}`
+			);
+		}
+
+		const separator =
+			isWindows
+				? '\\'
+				: '/';
+
+		const root =
+			this.options.root
+				.replace(
+					/[\\/]+$/,
+					''
+				);
+
+		if (
+			segments.length === 0
+		) {
+			return root;
+		}
+
+		return [
+			root,
+			...segments
+		].join(separator);
+	}
+
+
+	private fromFsPath(
+		path: string
+	): URI | undefined {
+
+		if (
+			!this.options.root
+			|| !this.options.scheme
+		) {
+			return URI.file(path);
+		}
+
+		const normalize =
+			(value: string) =>
+				value
+					.replace(
+						/\\/g,
+						'/'
+					)
+					.replace(
+						/\/+$/,
+						''
+					);
+
+		const root =
+			normalize(
+				this.options.root
+			);
+
+		const normalizedPath =
+			normalize(
+				path
+			);
+
+		if (
+			normalizedPath !== root
+			&& !normalizedPath
+				.startsWith(
+					`${root}/`
+				)
+		) {
+			return undefined;
+		}
+
+		const relative =
+			normalizedPath === root
+				? ''
+				: normalizedPath
+					.slice(
+						root.length + 1
+					);
+
+		return URI.from({
+			scheme:
+				this.options.scheme,
+
+			path:
+				`/${relative}`
+		});
+	}
+
+
 	watch(
-		_resource: URI,
-		_opts: IWatchOptions
+		resource: URI,
+		opts: IWatchOptions
 	): IDisposable {
-		// Phase 5.1:
-		// external filesystem watching is not implemented.
+
+		let disposed =
+			false;
+
+		let watchId:
+			number
+			| undefined;
+
+
+		const channel =
+			tauriCreateChannel<
+				IFsWatchMessage
+			>(
+				message => {
+					if (disposed) {
+						return;
+					}
+
+					if (
+						message.type
+						=== 'error'
+					) {
+						this._onDidWatchError
+							.fire(
+								message.message
+							);
+
+						return;
+					}
+
+					const changes:
+						IFileChange[] = [];
+
+					for (
+						const change
+						of message.changes
+					) {
+						const changedResource =
+							this.fromFsPath(
+								change.path
+							);
+
+						if (
+							!changedResource
+						) {
+							continue;
+						}
+
+						changes.push({
+							resource:
+								changedResource,
+
+							type:
+								toChangeType(
+									change.kind
+								)
+						});
+					}
+
+					if (
+						changes.length > 0
+					) {
+						this._onDidChangeFile
+							.fire(
+								changes
+							);
+					}
+				}
+			);
+
+
+		void tauriInvoke<number>(
+			'fs_watch_start',
+			{
+				path:
+					this.toFsPath(
+						resource
+					),
+
+				recursive:
+					opts.recursive,
+
+				excludes:
+					opts.excludes,
+
+				onEvent:
+					channel
+			}
+		).then(
+			id => {
+				if (disposed) {
+					void tauriInvoke(
+						'fs_watch_stop',
+						{
+							watchId:
+								id
+						}
+					);
+
+					return;
+				}
+
+				watchId =
+					id;
+			},
+			error => {
+				this._onDidWatchError
+					.fire(
+						String(error)
+					);
+			}
+		);
+
+
 		return toDisposable(
-			() => {}
+			() => {
+				disposed =
+					true;
+
+				channel.dispose();
+
+				if (
+					watchId
+					!== undefined
+				) {
+					void tauriInvoke(
+						'fs_watch_stop',
+						{
+							watchId
+						}
+					);
+				}
+			}
 		);
 	}
 
@@ -123,11 +462,15 @@ export class TauriFileSystemProvider
 		resource: URI
 	): Promise<IStat> {
 		const stat =
-			await tauriInvoke<ITauriStat>(
+			await tauriInvoke<
+				ITauriStat
+			>(
 				'fs_stat',
 				{
 					path:
-						resource.fsPath
+						this.toFsPath(
+							resource
+						)
 				}
 			);
 
@@ -156,7 +499,9 @@ export class TauriFileSystemProvider
 			'fs_mkdir',
 			{
 				path:
-					resource.fsPath
+					this.toFsPath(
+						resource
+					)
 			}
 		);
 	}
@@ -174,13 +519,16 @@ export class TauriFileSystemProvider
 				'fs_readdir',
 				{
 					path:
-						resource.fsPath
+						this.toFsPath(
+							resource
+						)
 				}
 			);
 
 		return entries.map(
 			entry => [
 				entry.name,
+
 				toFileType(
 					entry.entryType
 				)
@@ -197,7 +545,9 @@ export class TauriFileSystemProvider
 			'fs_delete',
 			{
 				path:
-					resource.fsPath,
+					this.toFsPath(
+						resource
+					),
 
 				recursive:
 					opts.recursive
@@ -215,10 +565,14 @@ export class TauriFileSystemProvider
 			'fs_rename',
 			{
 				fromPath:
-					from.fsPath,
+					this.toFsPath(
+						from
+					),
 
 				toPath:
-					to.fsPath,
+					this.toFsPath(
+						to
+					),
 
 				overwrite:
 					opts.overwrite
@@ -232,18 +586,24 @@ export class TauriFileSystemProvider
 	): Promise<Uint8Array> {
 		const result =
 			await tauriInvoke<
-				ArrayBuffer | Uint8Array
+				ArrayBuffer
+				| Uint8Array
 			>(
 				'fs_read_file',
 				{
 					path:
-						resource.fsPath
+						this.toFsPath(
+							resource
+						)
 				}
 			);
 
-		return result instanceof Uint8Array
-			? result
-			: new Uint8Array(result);
+		return result
+			instanceof Uint8Array
+				? result
+				: new Uint8Array(
+					result
+				);
 	}
 
 
@@ -252,6 +612,7 @@ export class TauriFileSystemProvider
 		content: Uint8Array,
 		opts: IFileWriteOptions
 	): Promise<void> {
+
 		await tauriInvokeRaw(
 			'fs_write_file',
 			content,
@@ -259,7 +620,9 @@ export class TauriFileSystemProvider
 				headers: {
 					'x-code-tauri-path':
 						encodeURIComponent(
-							resource.fsPath
+							this.toFsPath(
+								resource
+							)
 						),
 
 					'x-code-tauri-create':
