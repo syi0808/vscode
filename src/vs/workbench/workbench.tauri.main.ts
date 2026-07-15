@@ -5,36 +5,86 @@
 
 import './workbench.web.main.js';
 
-import { BrowserMain } from './browser/web.main.js';
 import type {
 	IWorkbenchConstructionOptions,
+	IWorkspace,
 	IWorkspaceProvider
 } from './browser/web.api.js';
+
+import {
+	TauriBrowserMain
+} from './tauri-browser/tauri.main.js';
 
 import type {
 	INativeWindowConfiguration
 } from '../platform/window/common/window.js';
 
+import {
+	isSingleFolderWorkspaceIdentifier,
+	isWorkspaceIdentifier,
+	reviveIdentifier
+} from '../platform/workspace/common/workspace.js';
 
-let browserMain: BrowserMain | undefined;
+
+let browserMain:
+	TauriBrowserMain | undefined;
+
+
+function resolveWorkspace(
+	configuration: INativeWindowConfiguration
+): IWorkspace {
+
+	const workspace =
+		reviveIdentifier(
+			configuration.workspace
+		);
+
+	if (
+		isSingleFolderWorkspaceIdentifier(
+			workspace
+		)
+	) {
+		return {
+			folderUri:
+				workspace.uri
+		};
+	}
+
+	if (
+		isWorkspaceIdentifier(
+			workspace
+		)
+	) {
+		return {
+			workspaceUri:
+				workspace.configPath
+		};
+	}
+
+	return undefined;
+}
 
 
 export async function main(
 	configuration: INativeWindowConfiguration
 ): Promise<void> {
 
-	const workspaceProvider: IWorkspaceProvider = {
-		// Phase 4 intentionally starts empty.
-		//
-		// Phase 5 will restore configuration.workspace
-		// after a real Tauri filesystem provider exists.
-		workspace: undefined,
+	const workspaceProvider:
+		IWorkspaceProvider = {
 
-		trusted: true,
+		workspace:
+			resolveWorkspace(
+				configuration
+			),
+
+		trusted:
+			true,
 
 		async open(): Promise<boolean> {
 			console.warn(
-				'[code-tauri] workspace switching is not implemented yet'
+				'[code-tauri] ' +
+				'workspace switching ' +
+				'is not implemented yet'
 			);
 
 			return false;
@@ -42,22 +92,27 @@ export async function main(
 	};
 
 
-	const browserConfiguration: IWorkbenchConstructionOptions = {
+	const browserConfiguration:
+		IWorkbenchConstructionOptions = {
+
 		workspaceProvider,
 
-		enableWorkspaceTrust: false,
+		enableWorkspaceTrust:
+			false,
 
 		productConfiguration: {
 			...configuration.product,
-			embedderIdentifier: 'tauri'
+			embedderIdentifier:
+				'tauri'
 		}
 	};
 
 
-	browserMain = new BrowserMain(
-		document.body,
-		browserConfiguration
-	);
+	browserMain =
+		new TauriBrowserMain(
+			document.body,
+			browserConfiguration
+		);
 
 	await browserMain.open();
 }

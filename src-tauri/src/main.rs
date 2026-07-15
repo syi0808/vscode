@@ -1,4 +1,5 @@
 mod bridge;
+mod fs_bridge;
 mod vscode_file_protocol;
 
 use bridge::{
@@ -67,6 +68,13 @@ fn main() {
             vscode_ipc_invoke,
             vscode_ipc_send,
             set_webview_zoom,
+            fs_bridge::fs_stat,
+            fs_bridge::fs_readdir,
+            fs_bridge::fs_read_file,
+            fs_bridge::fs_write_file,
+            fs_bridge::fs_mkdir,
+            fs_bridge::fs_delete,
+            fs_bridge::fs_rename,
         ])
         .setup(move |app| {
             let url = workbench_url(&root);
