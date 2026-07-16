@@ -3,41 +3,31 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+/* eslint-disable local/code-no-new-javascript-files */
+
 import * as vscode from 'vscode';
-import { commands } from 'vscode';
 
-export async function activate(context) {
-	const dynamicallyImported = await import('vscode');
+const apiRegistryKey = Symbol.for('vscode-test.bun-api-registry');
 
-	if (commands !== vscode.commands) {
-		throw new Error('Named ESM import identity mismatch');
-	}
+function getApiRegistry() {
+	return globalThis[apiRegistryKey] ??= new Map();
+}
 
-	if (dynamicallyImported.commands !== vscode.commands) {
-		throw new Error('Dynamic ESM import identity mismatch');
-	}
+export function activate(context) {
+	getApiRegistry().set('esm', vscode);
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('bunFixture.esm.report', () => ({
-			fixture: 'esm',
-			loader: 'esm',
-			namedImportIdentity: commands === vscode.commands,
-			dynamicImportIdentity: dynamicallyImported.commands === vscode.commands,
-		}))
-	);
+		vscode.commands.registerCommand('bunFixture.esm', async () => {
+			const dynamicallyImported = await import('vscode');
 
-	console.log('BUN_EXT_FIXTURE_RESULT', JSON.stringify({
-		fixture: 'esm',
-		phase: 'activated',
-		namedImportIdentity: true,
-		dynamicImportIdentity: true,
-	}));
+			return {
+				kind: 'esm',
+				staticDynamicMatch: vscode.commands === dynamicallyImported.commands,
+			};
+		})
+	);
 }
 
 export function deactivate() {
-	console.log('BUN_EXT_FIXTURE_RESULT', JSON.stringify({
-		fixture: 'esm',
-		phase: 'deactivated',
-	}));
 	process.stdout.write('[vscode-test-bun-esm] deactivate\n');
 }

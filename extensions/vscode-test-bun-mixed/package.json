@@ -1,0 +1,22 @@
+{
+  "name": "vscode-bun-fixture-mixed",
+  "displayName": "Bun Fixture Mixed",
+  "version": "0.0.1",
+  "publisher": "vscode-test",
+  "type": "module",
+  "engines": {
+    "vscode": "*"
+  },
+  "main": "./extension.cjs",
+  "activationEvents": [
+    "onCommand:bunFixture.mixed"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "bunFixture.mixed",
+        "title": "Bun Mixed Fixture"
+      }
+    ]
+  }
+}

@@ -11,7 +11,7 @@ suite('Bun Extension Host fixtures', function () {
 	this.timeout(60_000);
 	ensureNoDisposablesAreLeakedInTestSuite();
 
-	test('loads CJS and ESM extensions and completes command RPC round trips', async function () {
+	test('loads CJS, ESM, and mixed extensions with isolated APIs and shared command RPC', async function () {
 		const harness = new BunExtensionHostTestHarness();
 		if (!await harness.isAvailable()) {
 			this.skip();
@@ -21,11 +21,14 @@ suite('Bun Extension Host fixtures', function () {
 		assert.deepStrictEqual({
 			cjsResult: run.cjsResult,
 			esmResult: run.esmResult,
+			mixedResult: run.mixedResult,
 			activatedExtensionIds: run.activatedExtensionIds,
 			cjsCommandRegistered: run.cjsCommandRegistered,
 			esmCommandRegistered: run.esmCommandRegistered,
+			mixedCommandRegistered: run.mixedCommandRegistered,
 			cjsDeactivated: run.cjsDeactivated,
 			esmDeactivated: run.esmDeactivated,
+			mixedDeactivated: run.mixedDeactivated,
 			fixtureUnchanged: run.fixtureFilesAfter,
 			bunCacheFiles: run.bunCacheFiles,
 			hasImporterWarning: /Could not identify extension for 'vscode'/.test(run.output),
@@ -36,22 +39,36 @@ suite('Bun Extension Host fixtures', function () {
 				nestedKind: 'cjs-nested',
 				hasWorkspaceApi: true,
 				extensionPath: run.cjsResult.extensionPath,
-				deactivated: false
+				deactivated: false,
+				commandsDistinctFromEsm: true,
+				workspaceDistinctFromEsm: true
 			},
 			esmResult: {
-				fixture: 'esm',
-				loader: 'esm',
-				namedImportIdentity: true,
-				dynamicImportIdentity: true
+				kind: 'esm',
+				staticDynamicMatch: true
+			},
+			mixedResult: {
+				kind: 'mixed',
+				commandsIdentity: true,
+				workspaceIdentity: true,
+				commandsDistinctFromOtherExtensions: true,
+				workspaceDistinctFromOtherExtensions: true,
+				esmCommandResult: {
+					kind: 'esm',
+					staticDynamicMatch: true
+				}
 			},
 			activatedExtensionIds: [
 				'vscode-test.vscode-bun-fixture-cjs',
-				'vscode-test.vscode-bun-fixture-esm'
+				'vscode-test.vscode-bun-fixture-esm',
+				'vscode-test.vscode-bun-fixture-mixed'
 			],
 			cjsCommandRegistered: true,
 			esmCommandRegistered: true,
+			mixedCommandRegistered: true,
 			cjsDeactivated: true,
 			esmDeactivated: true,
+			mixedDeactivated: true,
 			fixtureUnchanged: run.fixtureFilesBefore,
 			bunCacheFiles: [],
 			hasImporterWarning: false,

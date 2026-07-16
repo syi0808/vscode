@@ -30,11 +30,14 @@ import { ProxyIdentifier } from '../../../services/extensions/common/proxyIdenti
 import { RPCProtocol } from '../../../services/extensions/common/rpcProtocol.js';
 
 const cjsCommandId = 'bunFixture.cjs';
-const esmCommandId = 'bunFixture.esm.report';
+const esmCommandId = 'bunFixture.esm';
+const mixedCommandId = 'bunFixture.mixed';
 const cjsExtensionId = new ExtensionIdentifier('vscode-test.vscode-bun-fixture-cjs');
 const esmExtensionId = new ExtensionIdentifier('vscode-test.vscode-bun-fixture-esm');
+const mixedExtensionId = new ExtensionIdentifier('vscode-test.vscode-bun-fixture-mixed');
 const cjsDeactivateSentinel = '[vscode-test-bun-cjs] deactivate';
 const esmDeactivateSentinel = '[vscode-test-bun-esm] deactivate';
+const mixedDeactivateSentinel = '[vscode-test-bun-mixed] deactivate';
 
 export interface IBunCjsFixtureResult {
 	readonly kind: string;
@@ -42,23 +45,35 @@ export interface IBunCjsFixtureResult {
 	readonly hasWorkspaceApi: boolean;
 	readonly extensionPath: string;
 	readonly deactivated: boolean;
+	readonly commandsDistinctFromEsm: boolean;
+	readonly workspaceDistinctFromEsm: boolean;
 }
 
 export interface IBunEsmFixtureResult {
-	readonly fixture: string;
-	readonly loader: string;
-	readonly namedImportIdentity: boolean;
-	readonly dynamicImportIdentity: boolean;
+	readonly kind: string;
+	readonly staticDynamicMatch: boolean;
+}
+
+export interface IBunMixedFixtureResult {
+	readonly kind: string;
+	readonly commandsIdentity: boolean;
+	readonly workspaceIdentity: boolean;
+	readonly commandsDistinctFromOtherExtensions: boolean;
+	readonly workspaceDistinctFromOtherExtensions: boolean;
+	readonly esmCommandResult: IBunEsmFixtureResult;
 }
 
 export interface IBunExtensionHostFixtureRun {
 	readonly cjsResult: IBunCjsFixtureResult;
 	readonly esmResult: IBunEsmFixtureResult;
+	readonly mixedResult: IBunMixedFixtureResult;
 	readonly activatedExtensionIds: readonly string[];
 	readonly cjsCommandRegistered: boolean;
 	readonly esmCommandRegistered: boolean;
+	readonly mixedCommandRegistered: boolean;
 	readonly cjsDeactivated: boolean;
 	readonly esmDeactivated: boolean;
+	readonly mixedDeactivated: boolean;
 	readonly output: string;
 	readonly fixtureFilesBefore: readonly string[];
 	readonly fixtureFilesAfter: readonly string[];
@@ -117,6 +132,7 @@ export class BunExtensionHostTestHarness {
 	private readonly repoRoot = process.cwd();
 	private readonly cjsFixturePath = join(this.repoRoot, 'extensions', 'vscode-test-bun-cjs');
 	private readonly esmFixturePath = join(this.repoRoot, 'extensions', 'vscode-test-bun-esm');
+	private readonly mixedFixturePath = join(this.repoRoot, 'extensions', 'vscode-test-bun-mixed');
 	private readonly bunPath = process.env['CODE_TAURI_BUN'] || this.getBundledBunPath();
 
 	private getBundledBunPath(): string {
@@ -219,9 +235,11 @@ export class BunExtensionHostTestHarness {
 			await rpc.getProxy(ExtHostContext.ExtHostWorkspace).$initializeWorkspace(null as IWorkspaceData | null, true);
 			await rpc.getProxy(ExtHostContext.ExtHostExtensionService).$activateByEvent('*', ActivationKind.Normal);
 			await rpc.getProxy(ExtHostContext.ExtHostExtensionService).$activateByEvent(`onCommand:${cjsCommandId}`, ActivationKind.Normal);
+			await rpc.getProxy(ExtHostContext.ExtHostExtensionService).$activateByEvent(`onCommand:${mixedCommandId}`, ActivationKind.Normal);
 
 			const cjsCommandRegistered = CommandsRegistry.getCommand(cjsCommandId) !== undefined;
 			const esmCommandRegistered = CommandsRegistry.getCommand(esmCommandId) !== undefined;
+			const mixedCommandRegistered = CommandsRegistry.getCommand(mixedCommandId) !== undefined;
 			const cjsResult = await mainThreadCommands.$executeCommand<IBunCjsFixtureResult>(cjsCommandId, []);
 			if (!cjsResult) {
 				throw new Error(`Command '${cjsCommandId}' returned no fixture result.\n${host.output.join('')}`);
@@ -229,6 +247,10 @@ export class BunExtensionHostTestHarness {
 			const esmResult = await mainThreadCommands.$executeCommand<IBunEsmFixtureResult>(esmCommandId, []);
 			if (!esmResult) {
 				throw new Error(`Command '${esmCommandId}' returned no fixture result.\n${host.output.join('')}`);
+			}
+			const mixedResult = await mainThreadCommands.$executeCommand<IBunMixedFixtureResult>(mixedCommandId, []);
+			if (!mixedResult) {
+				throw new Error(`Command '${mixedCommandId}' returned no fixture result.\n${host.output.join('')}`);
 			}
 
 			host.protocol.send(createMessageOfType(MessageType.Terminate));
@@ -240,11 +262,14 @@ export class BunExtensionHostTestHarness {
 			return {
 				cjsResult,
 				esmResult,
+				mixedResult,
 				activatedExtensionIds: [...activatedExtensionIds].sort(),
 				cjsCommandRegistered,
 				esmCommandRegistered,
+				mixedCommandRegistered,
 				cjsDeactivated: output.includes(cjsDeactivateSentinel),
 				esmDeactivated: output.includes(esmDeactivateSentinel),
+				mixedDeactivated: output.includes(mixedDeactivateSentinel),
 				output,
 				fixtureFilesBefore,
 				fixtureFilesAfter,
@@ -316,6 +341,17 @@ export class BunExtensionHostTestHarness {
 			activationEvents: ['*']
 		} satisfies IExtensionManifest;
 		const esmExtension = this.createFixtureDescription(esmManifest, esmExtensionId, this.esmFixturePath);
+		const mixedManifest = {
+			name: 'vscode-bun-fixture-mixed',
+			displayName: 'Bun Fixture Mixed',
+			publisher: 'vscode-test',
+			version: '0.0.1',
+			type: 'module',
+			engines: { vscode: '*' },
+			main: './extension.cjs',
+			activationEvents: [`onCommand:${mixedCommandId}`]
+		} satisfies IExtensionManifest;
+		const mixedExtension = this.createFixtureDescription(mixedManifest, mixedExtensionId, this.mixedFixturePath);
 
 		return {
 			version: 'test',
@@ -335,7 +371,7 @@ export class BunExtensionHostTestHarness {
 				isSessionsWindow: false
 			},
 			workspace: undefined,
-			extensions: new ExtensionHostExtensions(0, [cjsExtension, esmExtension], [cjsExtensionId, esmExtensionId]).toSnapshot(),
+			extensions: new ExtensionHostExtensions(0, [cjsExtension, esmExtension, mixedExtension], [cjsExtensionId, esmExtensionId, mixedExtensionId]).toSnapshot(),
 			telemetryInfo: {
 				sessionId: 'bun-fixtures',
 				machineId: 'bun-fixtures',
@@ -368,10 +404,11 @@ export class BunExtensionHostTestHarness {
 	}
 
 	private async listFixtureFiles(): Promise<string[]> {
-		const [cjsFiles, esmFiles] = await Promise.all([listFiles(this.cjsFixturePath), listFiles(this.esmFixturePath)]);
+		const [cjsFiles, esmFiles, mixedFiles] = await Promise.all([listFiles(this.cjsFixturePath), listFiles(this.esmFixturePath), listFiles(this.mixedFixturePath)]);
 		return [
 			...cjsFiles.map(path => `cjs/${path}`),
 			...esmFiles.map(path => `esm/${path}`),
+			...mixedFiles.map(path => `mixed/${path}`),
 		].sort();
 	}
 }
