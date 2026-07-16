@@ -30,10 +30,6 @@ import './extHost.node.services.js';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 
-import { applyBunCompatibilityPatches } from './bunCompat.js';
-
-applyBunCompatibilityPatches();
-
 interface ParsedExtHostArgs {
 	transformURIs?: boolean;
 	skipWorkspaceStorageLock?: boolean;

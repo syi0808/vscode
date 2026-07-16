@@ -5,7 +5,7 @@
 
 import * as performance from '../../../base/common/performance.js';
 import type * as vscode from 'vscode';
-import { createApiFactoryAndRegisterActors } from '../common/extHost.api.impl.js';
+import { createApiFactoryAndRegisterActors, IExtensionApiFactory } from '../common/extHost.api.impl.js';
 import { INodeModuleFactory, RequireInterceptor } from '../common/extHostRequireInterceptor.js';
 import { ExtensionActivationTimesBuilder } from '../common/extHostExtensionActivator.js';
 import { connectProxyResolver } from './proxyResolver.js';
@@ -23,8 +23,12 @@ import nodeModule from 'node:module';
 import { assertType } from '../../../base/common/types.js';
 import { generateUuid } from '../../../base/common/uuid.js';
 import { BidirectionalMap } from '../../../base/common/map.js';
-import { DisposableStore, toDisposable } from '../../../base/common/lifecycle.js';
+import { DisposableStore, IDisposable, toDisposable } from '../../../base/common/lifecycle.js';
 const require = nodeModule.createRequire(import.meta.url);
+
+function isCurrentRuntimeBun(): boolean {
+	return typeof process.versions.bun === 'string';
+}
 
 class NodeModuleRequireInterceptor extends RequireInterceptor {
 
@@ -54,53 +58,35 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 			return request;
 		};
 
-		if (process.versions.bun) {
-			// Bun does not route CommonJS requires through a replaced
-			// `Module._load`, but it does call `Module.prototype.require`.
-			const originalRequire = node_module.prototype.require;
-			node_module.prototype.require = function bunRequire(this: { filename: string }, request: string) {
-				request = applyAlternatives(request);
-				if (!that._factories.has(request)) {
-					return originalRequire.call(this, request);
-				}
+		const originalLoad = node_module._load;
+		node_module._load = function load(request: string, parent: { filename: string }, isMain: boolean) {
+			request = applyAlternatives(request);
+			if (!that._factories.has(request)) {
+				return originalLoad.apply(this, arguments);
+			}
+			return that._factories.get(request)!.load(
+				request,
+				URI.file(realpathSync(parent.filename)),
+				request => originalLoad.apply(this, [request, parent, isMain])
+			);
+		};
 
-				return that._factories.get(request)!.load(
-					request,
-					URI.file(realpathSync(this.filename)),
-					request => originalRequire.call(this, request)
-				);
-			};
-		} else {
-			const originalLoad = node_module._load;
-			node_module._load = function load(request: string, parent: { filename: string }, isMain: boolean) {
-				request = applyAlternatives(request);
-				if (!that._factories.has(request)) {
-					return originalLoad.apply(this, arguments);
-				}
-				return that._factories.get(request)!.load(
-					request,
-					URI.file(realpathSync(parent.filename)),
-					request => originalLoad.apply(this, [request, parent, isMain])
-				);
-			};
+		const originalLookup = node_module._resolveLookupPaths;
+		node_module._resolveLookupPaths = (request: string, parent: unknown) => {
+			return originalLookup.call(this, applyAlternatives(request), parent);
+		};
 
-			const originalLookup = node_module._resolveLookupPaths;
-			node_module._resolveLookupPaths = (request: string, parent: unknown) => {
-				return originalLookup.call(this, applyAlternatives(request), parent);
-			};
-
-			const originalResolveFilename = node_module._resolveFilename;
-			node_module._resolveFilename = function resolveFilename(request: string, parent: unknown, isMain: boolean, options?: { paths?: string[] }) {
-				if (request === 'vsda' && Array.isArray(options?.paths) && options.paths.length === 0) {
-					// ESM: ever since we moved to ESM, `require.main` will be `undefined` for extensions
-					// Some extensions have been using `require.resolve('vsda', { paths: require.main.paths })`
-					// to find the `vsda` module in our app root. To be backwards compatible with this pattern,
-					// we help by filling in the `paths` array with the node modules paths of the current module.
-					options.paths = node_module._nodeModulePaths(import.meta.dirname);
-				}
-				return originalResolveFilename.call(this, request, parent, isMain, options);
-			};
-		}
+		const originalResolveFilename = node_module._resolveFilename;
+		node_module._resolveFilename = function resolveFilename(request: string, parent: unknown, isMain: boolean, options?: { paths?: string[] }) {
+			if (request === 'vsda' && Array.isArray(options?.paths) && options.paths.length === 0) {
+				// ESM: ever since we moved to ESM, `require.main` will be `undefined` for extensions
+				// Some extensions have been using `require.resolve('vsda', { paths: require.main.paths })`
+				// to find the `vsda` module in our app root. To be backwards compatible with this pattern,
+				// we help by filling in the `paths` array with the node modules paths of the current module.
+				options.paths = node_module._nodeModulePaths(import.meta.dirname);
+			}
+			return originalResolveFilename.call(this, request, parent, isMain, options);
+		};
 
 		const apiInstances = new BidirectionalMap<typeof vscode, string>();
 		const apiImportDataUrl = new Map<string, string>();
@@ -146,14 +132,7 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 			return scriptDataUrlSrc;
 		};
 
-		// Bun 1.4 implements the CommonJS `module._load` hooks above, but does
-		// not expose Node's newer `module.registerHooks` API yet. CommonJS VS
-		// Code extensions remain fully interceptable; ESM extension support can
-		// be enabled when Bun implements this API or through a Bun loader hook.
 		if (typeof nodeModule.registerHooks !== 'function') {
-			if (process.versions.bun) {
-				process.stderr.write('[code-tauri ext-host] node:module.registerHooks unavailable; using CommonJS interceptor only\n');
-			}
 			return;
 		}
 
@@ -176,6 +155,21 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 export class ExtHostExtensionService extends AbstractExtHostExtensionService {
 
 	readonly extensionRuntime = ExtensionRuntime.Node;
+
+	private async _createModuleInterceptor(extensionApiFactory: IExtensionApiFactory): Promise<RequireInterceptor & IDisposable> {
+		const registries = {
+			mine: this._myRegistry,
+			all: this._globalRegistry,
+		};
+
+		if (isCurrentRuntimeBun()) {
+			const { BunModuleRequireInterceptor } = await import('./bunCompat.js');
+
+			return this._instaService.createInstance(BunModuleRequireInterceptor, extensionApiFactory, registries);
+		}
+
+		return this._instaService.createInstance(NodeModuleRequireInterceptor, extensionApiFactory, registries);
+	}
 
 	protected async _beforeAlmostReadyToRunExtensions(): Promise<void> {
 		// make sure console.log calls make it to the render
@@ -200,8 +194,8 @@ export class ExtHostExtensionService extends AbstractExtHostExtensionService {
 		// `module._load` intercepts `require(...)`.
 		// Module loading tricks based on `module.registerHooks`.
 		// `module.registerHooks` is a generic interceptor that intercepts `require(...)`, `import ...`, and `import(...)`.
-		await this._store.add(this._instaService.createInstance(NodeModuleRequireInterceptor, extensionApiFactory, { mine: this._myRegistry, all: this._globalRegistry }))
-			.install();
+		const moduleInterceptor = await this._createModuleInterceptor(extensionApiFactory);
+		await this._store.add(moduleInterceptor).install();
 
 		performance.mark('code/extHost/didInitAPI');
 
