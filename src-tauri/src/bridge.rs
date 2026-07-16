@@ -58,6 +58,11 @@ pub fn resolve_window_configuration(
 }
 
 #[tauri::command]
+pub fn code_tauri_log(message: String) {
+    eprintln!("[code-tauri webview] {message}");
+}
+
+#[tauri::command]
 pub fn vscode_ipc_invoke(
     channel: String,
     args: Vec<Value>,

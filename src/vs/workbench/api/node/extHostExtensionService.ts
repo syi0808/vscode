@@ -43,36 +43,6 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 	protected _installInterceptor(): void {
 		const that = this;
 		const node_module = require('module');
-		const originalLoad = node_module._load;
-		node_module._load = function load(request: string, parent: { filename: string }, isMain: boolean) {
-			request = applyAlternatives(request);
-			if (!that._factories.has(request)) {
-				return originalLoad.apply(this, arguments);
-			}
-			return that._factories.get(request)!.load(
-				request,
-				URI.file(realpathSync(parent.filename)),
-				request => originalLoad.apply(this, [request, parent, isMain])
-			);
-		};
-
-		const originalLookup = node_module._resolveLookupPaths;
-		node_module._resolveLookupPaths = (request: string, parent: unknown) => {
-			return originalLookup.call(this, applyAlternatives(request), parent);
-		};
-
-		const originalResolveFilename = node_module._resolveFilename;
-		node_module._resolveFilename = function resolveFilename(request: string, parent: unknown, isMain: boolean, options?: { paths?: string[] }) {
-			if (request === 'vsda' && Array.isArray(options?.paths) && options.paths.length === 0) {
-				// ESM: ever since we moved to ESM, `require.main` will be `undefined` for extensions
-				// Some extensions have been using `require.resolve('vsda', { paths: require.main.paths })`
-				// to find the `vsda` module in our app root. To be backwards compatible with this pattern,
-				// we help by filling in the `paths` array with the node modules paths of the current module.
-				options.paths = node_module._nodeModulePaths(import.meta.dirname);
-			}
-			return originalResolveFilename.call(this, request, parent, isMain, options);
-		};
-
 		const applyAlternatives = (request: string) => {
 			for (const alternativeModuleName of that._alternatives) {
 				const alternative = alternativeModuleName(request);
@@ -83,6 +53,54 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 			}
 			return request;
 		};
+
+		if (process.versions.bun) {
+			// Bun does not route CommonJS requires through a replaced
+			// `Module._load`, but it does call `Module.prototype.require`.
+			const originalRequire = node_module.prototype.require;
+			node_module.prototype.require = function bunRequire(this: { filename: string }, request: string) {
+				request = applyAlternatives(request);
+				if (!that._factories.has(request)) {
+					return originalRequire.call(this, request);
+				}
+
+				return that._factories.get(request)!.load(
+					request,
+					URI.file(realpathSync(this.filename)),
+					request => originalRequire.call(this, request)
+				);
+			};
+		} else {
+			const originalLoad = node_module._load;
+			node_module._load = function load(request: string, parent: { filename: string }, isMain: boolean) {
+				request = applyAlternatives(request);
+				if (!that._factories.has(request)) {
+					return originalLoad.apply(this, arguments);
+				}
+				return that._factories.get(request)!.load(
+					request,
+					URI.file(realpathSync(parent.filename)),
+					request => originalLoad.apply(this, [request, parent, isMain])
+				);
+			};
+
+			const originalLookup = node_module._resolveLookupPaths;
+			node_module._resolveLookupPaths = (request: string, parent: unknown) => {
+				return originalLookup.call(this, applyAlternatives(request), parent);
+			};
+
+			const originalResolveFilename = node_module._resolveFilename;
+			node_module._resolveFilename = function resolveFilename(request: string, parent: unknown, isMain: boolean, options?: { paths?: string[] }) {
+				if (request === 'vsda' && Array.isArray(options?.paths) && options.paths.length === 0) {
+					// ESM: ever since we moved to ESM, `require.main` will be `undefined` for extensions
+					// Some extensions have been using `require.resolve('vsda', { paths: require.main.paths })`
+					// to find the `vsda` module in our app root. To be backwards compatible with this pattern,
+					// we help by filling in the `paths` array with the node modules paths of the current module.
+					options.paths = node_module._nodeModulePaths(import.meta.dirname);
+				}
+				return originalResolveFilename.call(this, request, parent, isMain, options);
+			};
+		}
 
 		const apiInstances = new BidirectionalMap<typeof vscode, string>();
 		const apiImportDataUrl = new Map<string, string>();
@@ -127,6 +145,18 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 			}
 			return scriptDataUrlSrc;
 		};
+
+		// Bun 1.4 implements the CommonJS `module._load` hooks above, but does
+		// not expose Node's newer `module.registerHooks` API yet. CommonJS VS
+		// Code extensions remain fully interceptable; ESM extension support can
+		// be enabled when Bun implements this API or through a Bun loader hook.
+		if (typeof nodeModule.registerHooks !== 'function') {
+			if (process.versions.bun) {
+				process.stderr.write('[code-tauri ext-host] node:module.registerHooks unavailable; using CommonJS interceptor only\n');
+			}
+			return;
+		}
+
 		const hooks = nodeModule.registerHooks({
 			resolve: (specifier, context, nextResolve) => {
 				if (specifier !== 'vscode' || !context.parentURL) {
@@ -186,6 +216,13 @@ export class ExtHostExtensionService extends AbstractExtHostExtensionService {
 	}
 
 	private async _doLoadModule<T>(extension: IExtensionDescription | null, module: URI, activationTimesBuilder: ExtensionActivationTimesBuilder, mode: 'esm' | 'cjs'): Promise<T> {
+		const bunTrace = (message: string): void => {
+			if (process.versions.bun) {
+				process.stderr.write(`[code-tauri ext-host] ${message}\n`);
+			}
+		};
+
+		bunTrace(`loadModule begin mode=${mode} module=${module.fsPath}`);
 		if (module.scheme !== Schemas.file) {
 			throw new Error(`Cannot load URI: '${module}', must be of file-scheme`);
 		}
@@ -195,7 +232,9 @@ export class ExtHostExtensionService extends AbstractExtHostExtensionService {
 		this._logService.flush();
 		const extensionId = extension?.identifier.value;
 		if (extension) {
+			bunTrace(`localization begin extension=${extension.identifier.value}`);
 			await this._extHostLocalizationService.initializeLocalizedMessages(extension);
+			bunTrace(`localization end extension=${extension.identifier.value}`);
 		}
 		try {
 			if (extensionId) {
@@ -204,7 +243,9 @@ export class ExtHostExtensionService extends AbstractExtHostExtensionService {
 			if (mode === 'esm') {
 				r = <T>await import(module.toString(true));
 			} else {
+				bunTrace(`require begin module=${module.fsPath}`);
 				r = <T>require(module.fsPath);
+				bunTrace(`require end module=${module.fsPath}`);
 			}
 		} finally {
 			if (extensionId) {

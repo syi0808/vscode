@@ -5,10 +5,11 @@
 
 import { mainWindow } from '../../../../base/browser/window.js';
 import { Schemas } from '../../../../base/common/network.js';
+import { URI } from '../../../../base/common/uri.js';
 import { IConfigurationService } from '../../../../platform/configuration/common/configuration.js';
 import { IDialogService } from '../../../../platform/dialogs/common/dialogs.js';
 import { ExtensionKind } from '../../../../platform/environment/common/environment.js';
-import { ExtensionIdentifier, IExtensionDescription } from '../../../../platform/extensions/common/extensions.js';
+import { ExtensionIdentifier, IExtensionDescription, IExtensionManifest, TargetPlatform } from '../../../../platform/extensions/common/extensions.js';
 import { IFileService } from '../../../../platform/files/common/files.js';
 import { InstantiationType, registerSingleton } from '../../../../platform/instantiation/common/extensions.js';
 import { IInstantiationService } from '../../../../platform/instantiation/common/instantiation.js';
@@ -42,6 +43,33 @@ import { IRemoteExplorerService } from '../../remote/common/remoteExplorerServic
 import { IUserDataInitializationService } from '../../userData/browser/userDataInit.js';
 import { IUserDataProfileService } from '../../userDataProfile/common/userDataProfile.js';
 import { AsyncIterableEmitter, AsyncIterableProducer } from '../../../../base/common/async.js';
+import { tauriInvoke } from '../../../../base/parts/sandbox/tauri-browser/globals.js';
+import { BunProcessExtensionHostRuntime } from '../tauri-browser/processExtensionHostRuntime.js';
+import { ITauriLocalProcessExtensionHostDataProvider, TauriLocalProcessExtensionHost } from '../tauri-browser/localProcessExtensionHost.js';
+
+const isTauri = (globalThis as typeof globalThis & { _VSCODE_TAURI?: boolean })._VSCODE_TAURI === true;
+
+interface ITauriScannedLocalExtension {
+	readonly location: string;
+	readonly manifest: IExtensionManifest;
+}
+
+function toTauriExtensionDescription(extension: ITauriScannedLocalExtension): IExtensionDescription {
+	const manifest = extension.manifest;
+	const id = `${manifest.publisher}.${manifest.name}`;
+
+	return {
+		id,
+		identifier: new ExtensionIdentifier(id),
+		isBuiltin: false,
+		isUserBuiltin: false,
+		isUnderDevelopment: true,
+		extensionLocation: URI.file(extension.location),
+		targetPlatform: TargetPlatform.UNDEFINED,
+		preRelease: false,
+		...manifest
+	};
+}
 
 export class ExtensionService extends AbstractExtensionService implements IExtensionService {
 
@@ -72,8 +100,9 @@ export class ExtensionService extends AbstractExtensionService implements IExten
 		const extensionsProposedApi = instantiationService.createInstance(ExtensionsProposedApi);
 		const extensionHostFactory = new BrowserExtensionHostFactory(
 			extensionsProposedApi,
-			() => this._scanWebExtensions(),
+			() => this._scanLocalExtensions(),
 			() => this._getExtensionRegistrySnapshotWhenReady(),
+			isTauri,
 			instantiationService,
 			remoteAgentService,
 			remoteAuthorityResolverService,
@@ -81,10 +110,10 @@ export class ExtensionService extends AbstractExtensionService implements IExten
 			logService
 		);
 		super(
-			{ hasLocalProcess: false, allowRemoteExtensionsInLocalWebWorker: true },
+			{ hasLocalProcess: isTauri, allowRemoteExtensionsInLocalWebWorker: true },
 			extensionsProposedApi,
 			extensionHostFactory,
-			new BrowserExtensionHostKindPicker(logService),
+			isTauri ? new TauriExtensionHostKindPicker(logService) : new BrowserExtensionHostKindPicker(logService),
 			instantiationService,
 			notificationService,
 			_browserEnvironmentService,
@@ -143,9 +172,40 @@ export class ExtensionService extends AbstractExtensionService implements IExten
 		return this._scanWebExtensionsPromise;
 	}
 
+	private _scanLocalExtensionsPromise: Promise<IExtensionDescription[]> | undefined;
+	private async _scanLocalExtensions(): Promise<IExtensionDescription[]> {
+		if (!isTauri) {
+			return this._scanWebExtensions();
+		}
+
+		if (!this._scanLocalExtensionsPromise) {
+			this._scanLocalExtensionsPromise = (async () => {
+				const webExtensions = await this._scanWebExtensions();
+				const configuration = await tauriInvoke<{ appRoot: string }>('resolve_window_configuration');
+				const appRoot = configuration.appRoot;
+				if (!appRoot) {
+					return webExtensions;
+				}
+
+				let development: IExtensionDescription[] = [];
+				try {
+					const scanned = await tauriInvoke<ITauriScannedLocalExtension[]>('scan_local_extensions');
+					development = scanned.map(toTauriExtensionDescription);
+					this._logService.info(`[code-tauri] Discovered ${development.length} local Bun extension(s).`);
+				} catch (error) {
+					this._logService.error('[code-tauri] Failed to scan local Bun extensions.', error);
+				}
+
+				return dedupExtensions([], webExtensions, [], development, this._logService);
+			})();
+		}
+
+		return this._scanLocalExtensionsPromise;
+	}
+
 	private async _resolveExtensionsDefault(emitter: AsyncIterableEmitter<ResolvedExtensions>) {
 		const [localExtensions, remoteExtensions] = await Promise.all([
-			this._scanWebExtensions(),
+			this._scanLocalExtensions(),
 			this._remoteExtensionsScannerService.scanExtensions()
 		]);
 
@@ -171,7 +231,7 @@ export class ExtensionService extends AbstractExtensionService implements IExten
 		// override the trust state through the resolver result.
 		await this._workspaceTrustManagementService.workspaceResolved;
 
-		const localExtensions = await this._scanWebExtensions();
+		const localExtensions = await this._scanLocalExtensions();
 		const resolverExtensions = localExtensions.filter(extension => isResolverExtension(extension));
 		if (resolverExtensions.length) {
 			emitter.emitOne(new ResolverExtensions(resolverExtensions));
@@ -228,8 +288,9 @@ class BrowserExtensionHostFactory implements IExtensionHostFactory {
 
 	constructor(
 		private readonly _extensionsProposedApi: ExtensionsProposedApi,
-		private readonly _scanWebExtensions: () => Promise<IExtensionDescription[]>,
+		private readonly _scanLocalExtensions: () => Promise<IExtensionDescription[]>,
 		private readonly _getExtensionRegistrySnapshotWhenReady: () => Promise<ExtensionDescriptionRegistrySnapshot>,
+		private readonly _hasLocalProcess: boolean,
 		@IInstantiationService private readonly _instantiationService: IInstantiationService,
 		@IRemoteAgentService private readonly _remoteAgentService: IRemoteAgentService,
 		@IRemoteAuthorityResolverService private readonly _remoteAuthorityResolverService: IRemoteAuthorityResolverService,
@@ -238,9 +299,30 @@ class BrowserExtensionHostFactory implements IExtensionHostFactory {
 	) { }
 
 	createExtensionHost(runningLocations: ExtensionRunningLocationTracker, runningLocation: ExtensionRunningLocation, isInitialStart: boolean): IExtensionHost | null {
+		if (isTauri) {
+			void tauriInvoke('code_tauri_log', {
+				message: `createExtensionHost kind=${extensionHostKindToString(runningLocation.kind)} initial=${isInitialStart} hasLocalProcess=${this._hasLocalProcess}`
+			});
+		}
+
 		switch (runningLocation.kind) {
 			case ExtensionHostKind.LocalProcess: {
-				return null;
+				if (!this._hasLocalProcess) {
+					return null;
+				}
+
+				// The Tauri init-data provider already waits for the local scan and sends
+				// the complete extension snapshot. Let the Bun host open its activation
+				// gate immediately instead of waiting for a second `$startExtensionHost`
+				// round-trip from the browser workbench.
+				const startup = ExtensionHostStartup.EagerAutoStart;
+				return this._instantiationService.createInstance(
+					TauriLocalProcessExtensionHost,
+					runningLocation,
+					startup,
+					this._createTauriLocalProcessExtensionHostDataProvider(runningLocations, runningLocation, isInitialStart),
+					new BunProcessExtensionHostRuntime()
+				);
 			}
 			case ExtensionHostKind.LocalWebWorker: {
 				const startup = (
@@ -265,7 +347,7 @@ class BrowserExtensionHostFactory implements IExtensionHostFactory {
 			getInitData: async (): Promise<IWebWorkerExtensionHostInitData> => {
 				if (isInitialStart) {
 					// Here we load even extensions that would be disabled by workspace trust
-					const localExtensions = checkEnabledAndProposedAPI(this._logService, this._extensionEnablementService, this._extensionsProposedApi, await this._scanWebExtensions(), /* ignore workspace trust */true);
+					const localExtensions = checkEnabledAndProposedAPI(this._logService, this._extensionEnablementService, this._extensionsProposedApi, await this._scanLocalExtensions(), /* ignore workspace trust */true);
 					const runningLocation = runningLocations.computeRunningLocation(localExtensions, [], false);
 					const myExtensions = filterExtensionDescriptions(localExtensions, runningLocation, extRunningLocation => desiredRunningLocation.equals(extRunningLocation));
 					const extensions = new ExtensionHostExtensions(0, localExtensions, myExtensions.map(extension => extension.identifier));
@@ -277,6 +359,50 @@ class BrowserExtensionHostFactory implements IExtensionHostFactory {
 					const extensions = new ExtensionHostExtensions(snapshot.versionId, snapshot.extensions, myExtensions.map(extension => extension.identifier));
 					return { extensions };
 				}
+			}
+		};
+	}
+
+	private _createTauriLocalProcessExtensionHostDataProvider(
+		runningLocations: ExtensionRunningLocationTracker,
+		desiredRunningLocation: ExtensionRunningLocation,
+		isInitialStart: boolean
+	): ITauriLocalProcessExtensionHostDataProvider {
+		return {
+			getInitData: async () => {
+				if (isInitialStart) {
+					const localExtensions = checkEnabledAndProposedAPI(
+						this._logService,
+						this._extensionEnablementService,
+						this._extensionsProposedApi,
+						await this._scanLocalExtensions(),
+						true
+					);
+					const runningLocation = runningLocations.computeRunningLocation(localExtensions, [], false);
+					const myExtensions = filterExtensionDescriptions(
+						localExtensions,
+						runningLocation,
+						extensionRunningLocation => desiredRunningLocation.equals(extensionRunningLocation)
+					);
+
+					return {
+						extensions: new ExtensionHostExtensions(
+							0,
+							localExtensions,
+							myExtensions.map(extension => extension.identifier)
+						)
+					};
+				}
+
+				const snapshot = await this._getExtensionRegistrySnapshotWhenReady();
+				const myExtensions = runningLocations.filterByRunningLocation(snapshot.extensions, desiredRunningLocation);
+				return {
+					extensions: new ExtensionHostExtensions(
+						snapshot.versionId,
+						snapshot.extensions,
+						myExtensions.map(extension => extension.identifier)
+					)
+				};
 			}
 		};
 	}
@@ -354,6 +480,40 @@ export class BrowserExtensionHostKindPicker implements IExtensionHostKindPicker 
 			result.push(ExtensionHostKind.Remote);
 		}
 		return (result.length > 0 ? result[0] : null);
+	}
+}
+
+class TauriExtensionHostKindPicker implements IExtensionHostKindPicker {
+
+	constructor(
+		@ILogService private readonly _logService: ILogService,
+	) { }
+
+	pickExtensionHostKind(
+		extensionId: ExtensionIdentifier,
+		extensionKinds: ExtensionKind[],
+		isInstalledLocally: boolean,
+		_isInstalledRemotely: boolean,
+		preference: ExtensionRunningPreference
+	): ExtensionHostKind | null {
+		let result: ExtensionHostKind | null = null;
+
+		if (isInstalledLocally) {
+			if (preference === ExtensionRunningPreference.Local) {
+				result = ExtensionHostKind.LocalProcess;
+			} else if (extensionKinds.includes('workspace') || extensionKinds.includes('ui')) {
+				result = ExtensionHostKind.LocalProcess;
+			} else if (extensionKinds.includes('web')) {
+				result = ExtensionHostKind.LocalWebWorker;
+			} else {
+				result = ExtensionHostKind.LocalProcess;
+			}
+		}
+
+		this._logService.trace(
+			`[code-tauri] pickRunningLocation for ${extensionId.value}, extension kinds: [${extensionKinds.join(', ')}], preference: ${extensionRunningPreferenceToString(preference)} => ${extensionHostKindToString(result)}`
+		);
+		return result;
 	}
 }
 

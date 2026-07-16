@@ -1,0 +1,24 @@
+{
+  "name": "code-tauri-test",
+  "displayName": "Code Tauri Test",
+  "publisher": "local",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "*"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:codeTauri.test"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "codeTauri.test",
+        "title": "Code Tauri: Test Bun Extension Host"
+      }
+    ]
+  }
+}

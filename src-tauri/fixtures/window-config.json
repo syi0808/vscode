@@ -1,6 +1,6 @@
 {
   "_": [
-    "/Users/sung-yein/Workspace/vscode"
+    "/Users/classting/Workspace/temp/vscode"
   ],
   "diff": false,
   "merge": false,
@@ -78,8 +78,8 @@
   "isPortable": false,
   "windowId": 1,
   "mainPid": 0,
-  "appRoot": "/Users/sung-yein/Workspace/vscode",
-  "execPath": "/Users/sung-yein/Workspace/vscode/.build/electron/Code - OSS.app/Contents/MacOS/Code - OSS",
+  "appRoot": "/Users/classting/Workspace/temp/vscode",
+  "execPath": "/Users/classting/Workspace/temp/vscode/.build/electron/Code - OSS.app/Contents/MacOS/Code - OSS",
   "backupPath": "/Users/classting/Library/Application Support/code-oss-dev/Backups/80e3935dae3ea8e1e312792857c32820",
   "profiles": {
     "home": {
@@ -209,7 +209,7 @@
           {
             "scheme": "file",
             "authority": "",
-            "path": "/Users/sung-yein/Workspace/vscode",
+            "path": "/Users/classting/Workspace/temp/vscode",
             "query": "",
             "fragment": "",
             "_formatted": null,
@@ -335,7 +335,7 @@
         {
           "scheme": "file",
           "authority": "",
-          "path": "/Users/sung-yein/Workspace/vscode",
+          "path": "/Users/classting/Workspace/temp/vscode",
           "query": "",
           "fragment": "",
           "_formatted": null,
@@ -352,16 +352,16 @@
     "uri": {
       "scheme": "file",
       "authority": "",
-      "path": "/Users/sung-yein/Workspace/vscode",
+      "path": "/Users/classting/Workspace/temp/vscode",
       "query": "",
       "fragment": "",
-      "_formatted": "file:///Users/sung-yein/Workspace/vscode",
-      "_fsPath": "/Users/sung-yein/Workspace/vscode"
+      "_formatted": "file:///Users/classting/Workspace/temp/vscode",
+      "_fsPath": "/Users/classting/Workspace/temp/vscode"
     }
   },
   "userEnv": {
     "VSCODE_IPC_HOOK": "/Users/classting/Library/Application Support/code-oss-dev/1.13-main.sock",
-    "VSCODE_NLS_CONFIG": "{\"userLocale\":\"en-us\",\"osLocale\":\"en-kr\",\"resolvedLanguage\":\"en\",\"defaultMessagesFile\":\"/Users/sung-yein/Workspace/vscode/out/nls.messages.json\",\"locale\":\"en-us\",\"availableLanguages\":{}}",
+    "VSCODE_NLS_CONFIG": "{\"userLocale\":\"en-us\",\"osLocale\":\"en-kr\",\"resolvedLanguage\":\"en\",\"defaultMessagesFile\":\"/Users/classting/Workspace/temp/vscode/out/nls.messages.json\",\"locale\":\"en-us\",\"availableLanguages\":{}}",
     "VSCODE_DEV": "1",
     "NODE_ENV": "development"
   },

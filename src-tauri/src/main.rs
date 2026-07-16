@@ -1,14 +1,20 @@
 mod bridge;
+mod extension_host;
+mod extensions_scanner;
 mod fs_bridge;
 mod paths_bridge;
 mod vscode_file_protocol;
 mod watch_bridge;
 
 use bridge::{
-    resolve_window_configuration, set_webview_zoom, vscode_ipc_invoke, vscode_ipc_send, AppState,
+    code_tauri_log, resolve_window_configuration, set_webview_zoom, vscode_ipc_invoke,
+    vscode_ipc_send, AppState,
 };
 
-use std::path::{Path, PathBuf};
+use std::{
+    path::{Path, PathBuf},
+    sync::Arc,
+};
 
 use tauri::{WebviewUrl, WebviewWindowBuilder};
 
@@ -63,11 +69,13 @@ fn main() {
             config_path,
         })
         .manage(watch_bridge::FileWatchState::default())
+        .manage(Arc::new(extension_host::ExtensionHostState::default()))
         .register_uri_scheme_protocol("vscode-file", move |_context, request| {
             vscode_file_protocol::handle(&protocol_root, request)
         })
         .invoke_handler(tauri::generate_handler![
             resolve_window_configuration,
+            code_tauri_log,
             vscode_ipc_invoke,
             vscode_ipc_send,
             set_webview_zoom,
@@ -81,6 +89,9 @@ fn main() {
             watch_bridge::fs_watch_start,
             watch_bridge::fs_watch_stop,
             paths_bridge::get_app_paths,
+            extension_host::broker::extension_host_start,
+            extension_host::broker::extension_host_stop,
+            extensions_scanner::scan_local_extensions,
         ])
         .setup(move |app| {
             let url = workbench_url(&root);
