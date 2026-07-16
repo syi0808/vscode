@@ -34,6 +34,17 @@ interface ICodeTauriGlobal {
 			| Uint8Array,
 		options?: IInvokeOptions
 	): Promise<T>;
+
+	listen<T>(
+		event: string,
+		listener: (event: ITauriEvent<T>) => void
+	): Promise<() => Promise<void>>;
+}
+
+export interface ITauriEvent<T> {
+	readonly event: string;
+	readonly id: number;
+	readonly payload: T;
 }
 
 
@@ -81,6 +92,13 @@ export function tauriInvokeRaw<T>(
 		body,
 		options
 	);
+}
+
+export async function tauriListen<T>(
+	event: string,
+	listener: (event: ITauriEvent<T>) => void
+): Promise<() => Promise<void>> {
+	return bridge.listen(event, listener);
 }
 
 

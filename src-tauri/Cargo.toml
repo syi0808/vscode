@@ -16,7 +16,5 @@ percent-encoding = "2"
 url = "2"
 notify = "8.2.0"
 globset = "0.4.18"
-futures-util = "0.3.32"
-tokio = { version = "1.52.3", features = ["rt-multi-thread", "macros", "net", "process", "io-util", "sync", "time"] }
-tokio-tungstenite = "0.30.0"
+tokio = { version = "1.52.3", features = ["rt-multi-thread", "macros", "net", "process", "io-util", "sync", "time", "fs"] }
 uuid = { version = "1.24.0", features = ["v4"] }

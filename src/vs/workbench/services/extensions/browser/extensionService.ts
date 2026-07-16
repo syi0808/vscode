@@ -44,7 +44,6 @@ import { IUserDataInitializationService } from '../../userData/browser/userDataI
 import { IUserDataProfileService } from '../../userDataProfile/common/userDataProfile.js';
 import { AsyncIterableEmitter, AsyncIterableProducer } from '../../../../base/common/async.js';
 import { tauriInvoke } from '../../../../base/parts/sandbox/tauri-browser/globals.js';
-import { BunProcessExtensionHostRuntime } from '../tauri-browser/processExtensionHostRuntime.js';
 import { ITauriLocalProcessExtensionHostDataProvider, TauriLocalProcessExtensionHost } from '../tauri-browser/localProcessExtensionHost.js';
 
 const isTauri = (globalThis as typeof globalThis & { _VSCODE_TAURI?: boolean })._VSCODE_TAURI === true;
@@ -320,8 +319,7 @@ class BrowserExtensionHostFactory implements IExtensionHostFactory {
 					TauriLocalProcessExtensionHost,
 					runningLocation,
 					startup,
-					this._createTauriLocalProcessExtensionHostDataProvider(runningLocations, runningLocation, isInitialStart),
-					new BunProcessExtensionHostRuntime()
+					this._createTauriLocalProcessExtensionHostDataProvider(runningLocations, runningLocation, isInitialStart)
 				);
 			}
 			case ExtensionHostKind.LocalWebWorker: {

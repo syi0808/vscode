@@ -1,3 +1,6 @@
-pub mod broker;
+pub mod commands;
+mod process;
+mod resource;
+mod transport;
 
-pub use broker::ExtensionHostState;
+pub use resource::ExtensionHostRegistry;

@@ -16,7 +16,7 @@ use std::{
     sync::Arc,
 };
 
-use tauri::{WebviewUrl, WebviewWindowBuilder};
+use tauri::{Manager, RunEvent, WebviewUrl, WebviewWindowBuilder};
 
 use url::Url;
 
@@ -63,13 +63,13 @@ fn main() {
              window-config.json",
     );
 
-    tauri::Builder::default()
+    let app = tauri::Builder::default()
         .manage(AppState {
             root: root.clone(),
             config_path,
         })
         .manage(watch_bridge::FileWatchState::default())
-        .manage(Arc::new(extension_host::ExtensionHostState::default()))
+        .manage(Arc::new(extension_host::ExtensionHostRegistry::default()))
         .register_uri_scheme_protocol("vscode-file", move |_context, request| {
             vscode_file_protocol::handle(&protocol_root, request)
         })
@@ -89,8 +89,11 @@ fn main() {
             watch_bridge::fs_watch_start,
             watch_bridge::fs_watch_stop,
             paths_bridge::get_app_paths,
-            extension_host::broker::extension_host_start,
-            extension_host::broker::extension_host_stop,
+            extension_host::commands::ext_host_create,
+            extension_host::commands::ext_host_start,
+            extension_host::commands::ext_host_send,
+            extension_host::commands::ext_host_wait_for_exit,
+            extension_host::commands::ext_host_kill,
             extensions_scanner::scan_local_extensions,
         ])
         .setup(move |app| {
@@ -107,6 +110,16 @@ fn main() {
 
             Ok(())
         })
-        .run(tauri::generate_context!())
-        .expect("failed to run Code Tauri");
+        .build(tauri::generate_context!())
+        .expect("failed to build Code Tauri");
+
+    app.run(|app, event| {
+        if matches!(event, RunEvent::ExitRequested { .. } | RunEvent::Exit) {
+            let registry = Arc::clone(
+                app.state::<Arc<extension_host::ExtensionHostRegistry>>()
+                    .inner(),
+            );
+            tauri::async_runtime::block_on(registry.kill_all());
+        }
+    });
 }

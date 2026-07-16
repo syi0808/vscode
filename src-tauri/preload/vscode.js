@@ -105,6 +105,43 @@
       value: {
         invoke,
 
+        async listen(
+          event,
+          listener,
+        ) {
+          const handler =
+            globalThis.__TAURI_INTERNALS__
+              .transformCallback(
+                message => listener(message),
+              );
+
+          const eventId =
+            await invoke(
+              "plugin:event|listen",
+              {
+                event,
+                target: { kind: "Any" },
+                handler,
+              },
+            );
+
+          return async () => {
+            globalThis
+              .__TAURI_EVENT_PLUGIN_INTERNALS__
+              .unregisterListener(
+                event,
+                eventId,
+              );
+            await invoke(
+              "plugin:event|unlisten",
+              {
+                event,
+                eventId,
+              },
+            );
+          };
+        },
+
         invokeRaw(
           command,
           body,
