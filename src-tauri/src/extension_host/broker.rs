@@ -67,6 +67,44 @@ fn repo_root() -> Result<PathBuf, String> {
         .ok_or_else(|| "src-tauri must be inside the VS Code repository".to_owned())
 }
 
+fn bundled_bun_path() -> Option<PathBuf> {
+    let executable_name = if cfg!(windows) {
+        "vscode-bun.exe"
+    } else {
+        "vscode-bun"
+    };
+
+    if let Ok(current_executable) = std::env::current_exe() {
+        if let Some(directory) = current_executable.parent() {
+            let bundled = directory.join(executable_name);
+            if bundled.is_file() {
+                return Some(bundled);
+            }
+        }
+    }
+
+    let target_name = if cfg!(all(target_os = "macos", target_arch = "aarch64")) {
+        Some("vscode-bun-aarch64-apple-darwin")
+    } else {
+        None
+    };
+
+    target_name
+        .map(|name| {
+            PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+                .join("binaries")
+                .join(name)
+        })
+        .filter(|path| path.is_file())
+}
+
+fn bun_path() -> PathBuf {
+    std::env::var_os("CODE_TAURI_BUN")
+        .map(PathBuf::from)
+        .or_else(bundled_bun_path)
+        .unwrap_or_else(|| PathBuf::from("bun"))
+}
+
 async fn forward_stdout(stdout: ChildStdout, channel: Channel<String>) {
     forward_lines(stdout, channel, "stdout").await;
 }
@@ -272,8 +310,8 @@ pub async fn extension_host_start(
         .port();
     let token = Uuid::new_v4().to_string();
 
-    let bun = std::env::var("CODE_TAURI_BUN").unwrap_or_else(|_| "bun".to_owned());
-    eprintln!("[code-tauri] spawning Bun from {bun}");
+    let bun = bun_path();
+    eprintln!("[code-tauri] spawning Bun from {}", bun.display());
     let mut command = Command::new(bun);
     command
         .current_dir(&root)

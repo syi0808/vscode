@@ -29,9 +29,12 @@ import { IExtHostContext } from '../../../services/extensions/common/extHostCust
 import { ProxyIdentifier } from '../../../services/extensions/common/proxyIdentifier.js';
 import { RPCProtocol } from '../../../services/extensions/common/rpcProtocol.js';
 
-const commandId = 'bunFixture.cjs';
-const extensionId = new ExtensionIdentifier('vscode-test-bun-cjs');
-const deactivateSentinel = '[vscode-test-bun-cjs] deactivate';
+const cjsCommandId = 'bunFixture.cjs';
+const esmCommandId = 'bunFixture.esm.report';
+const cjsExtensionId = new ExtensionIdentifier('vscode-test.vscode-bun-fixture-cjs');
+const esmExtensionId = new ExtensionIdentifier('vscode-test.vscode-bun-fixture-esm');
+const cjsDeactivateSentinel = '[vscode-test-bun-cjs] deactivate';
+const esmDeactivateSentinel = '[vscode-test-bun-esm] deactivate';
 
 export interface IBunCjsFixtureResult {
 	readonly kind: string;
@@ -41,11 +44,21 @@ export interface IBunCjsFixtureResult {
 	readonly deactivated: boolean;
 }
 
+export interface IBunEsmFixtureResult {
+	readonly fixture: string;
+	readonly loader: string;
+	readonly namedImportIdentity: boolean;
+	readonly dynamicImportIdentity: boolean;
+}
+
 export interface IBunExtensionHostFixtureRun {
-	readonly result: IBunCjsFixtureResult;
-	readonly extensionActivated: boolean;
-	readonly commandRegistered: boolean;
-	readonly deactivated: boolean;
+	readonly cjsResult: IBunCjsFixtureResult;
+	readonly esmResult: IBunEsmFixtureResult;
+	readonly activatedExtensionIds: readonly string[];
+	readonly cjsCommandRegistered: boolean;
+	readonly esmCommandRegistered: boolean;
+	readonly cjsDeactivated: boolean;
+	readonly esmDeactivated: boolean;
 	readonly output: string;
 	readonly fixtureFilesBefore: readonly string[];
 	readonly fixtureFilesAfter: readonly string[];
@@ -102,8 +115,19 @@ class BunFixtureMainThreadCommands implements MainThreadCommandsShape {
 export class BunExtensionHostTestHarness {
 
 	private readonly repoRoot = process.cwd();
-	private readonly fixturePath = join(this.repoRoot, 'extensions', 'vscode-test-bun-cjs');
-	private readonly bunPath = process.env['CODE_TAURI_BUN'] || 'bun';
+	private readonly cjsFixturePath = join(this.repoRoot, 'extensions', 'vscode-test-bun-cjs');
+	private readonly esmFixturePath = join(this.repoRoot, 'extensions', 'vscode-test-bun-esm');
+	private readonly bunPath = process.env['CODE_TAURI_BUN'] || this.getBundledBunPath();
+
+	private getBundledBunPath(): string {
+		if (process.platform === 'darwin' && process.arch === 'arm64') {
+			const bundled = join(this.repoRoot, 'src-tauri', 'binaries', 'vscode-bun-aarch64-apple-darwin');
+			if (existsSync(bundled)) {
+				return bundled;
+			}
+		}
+		return 'bun';
+	}
 
 	async isAvailable(): Promise<boolean> {
 		if (!existsSync(join(this.repoRoot, 'out', 'bootstrap-fork.js'))) {
@@ -126,7 +150,7 @@ export class BunExtensionHostTestHarness {
 		const logsPath = join(temporaryDirectory, 'logs');
 		await Promise.all([mkdir(bunCachePath), mkdir(logsPath)]);
 
-		const fixtureFilesBefore = await listFiles(this.fixturePath);
+		const fixtureFilesBefore = await this.listFixtureFiles();
 		let host: IRunningHost | undefined;
 		const disposables = new DisposableStore();
 		let mainThreadCommands: BunFixtureMainThreadCommands | undefined;
@@ -139,7 +163,7 @@ export class BunExtensionHostTestHarness {
 			await waitForMessage(host.protocol, MessageType.Initialized, 'initialized');
 
 			const rpc = disposables.add(new RPCProtocol(host.protocol));
-			let extensionActivated = false;
+			const activatedExtensionIds = new Set<string>();
 			const defaultActor = new Proxy({}, {
 				get: (_target, property) => {
 					if (property === 'dispose') {
@@ -152,7 +176,10 @@ export class BunExtensionHostTestHarness {
 						if (property === '$logExtensionHostMessage' || property === '$log') {
 							host!.output.push(JSON.stringify(args));
 						} else if (property === '$onDidActivateExtension') {
-							extensionActivated = true;
+							const extensionIdentifier = args[0] as ExtensionIdentifier;
+							activatedExtensionIds.add(extensionIdentifier.value);
+						} else if (property === '$onExtensionActivationError') {
+							host!.output.push(JSON.stringify({ property, args }).replace(/data:text\/javascript;base64,[A-Za-z0-9+/=]+/g, '<vscode-api-module>'));
 						} else if (property === '$asBrowserUri') {
 							return args[0];
 						}
@@ -190,25 +217,34 @@ export class BunExtensionHostTestHarness {
 			};
 			await rpc.getProxy(ExtHostContext.ExtHostConfiguration).$initializeConfiguration(configuration);
 			await rpc.getProxy(ExtHostContext.ExtHostWorkspace).$initializeWorkspace(null as IWorkspaceData | null, true);
-			await rpc.getProxy(ExtHostContext.ExtHostExtensionService).$activateByEvent(`onCommand:${commandId}`, ActivationKind.Normal);
+			await rpc.getProxy(ExtHostContext.ExtHostExtensionService).$activateByEvent('*', ActivationKind.Normal);
+			await rpc.getProxy(ExtHostContext.ExtHostExtensionService).$activateByEvent(`onCommand:${cjsCommandId}`, ActivationKind.Normal);
 
-			const commandRegistered = CommandsRegistry.getCommand(commandId) !== undefined;
-			const result = await mainThreadCommands.$executeCommand<IBunCjsFixtureResult>(commandId, []);
-			if (!result) {
-				throw new Error(`Command '${commandId}' returned no fixture result.`);
+			const cjsCommandRegistered = CommandsRegistry.getCommand(cjsCommandId) !== undefined;
+			const esmCommandRegistered = CommandsRegistry.getCommand(esmCommandId) !== undefined;
+			const cjsResult = await mainThreadCommands.$executeCommand<IBunCjsFixtureResult>(cjsCommandId, []);
+			if (!cjsResult) {
+				throw new Error(`Command '${cjsCommandId}' returned no fixture result.\n${host.output.join('')}`);
+			}
+			const esmResult = await mainThreadCommands.$executeCommand<IBunEsmFixtureResult>(esmCommandId, []);
+			if (!esmResult) {
+				throw new Error(`Command '${esmCommandId}' returned no fixture result.\n${host.output.join('')}`);
 			}
 
 			host.protocol.send(createMessageOfType(MessageType.Terminate));
 			await waitForExit(host.child);
-			const fixtureFilesAfter = await listFiles(this.fixturePath);
+			const fixtureFilesAfter = await this.listFixtureFiles();
 			const bunCacheFiles = await listFiles(bunCachePath);
 			const output = host.output.join('\n');
 
 			return {
-				result,
-				extensionActivated,
-				commandRegistered,
-				deactivated: output.includes(deactivateSentinel),
+				cjsResult,
+				esmResult,
+				activatedExtensionIds: [...activatedExtensionIds].sort(),
+				cjsCommandRegistered,
+				esmCommandRegistered,
+				cjsDeactivated: output.includes(cjsDeactivateSentinel),
+				esmDeactivated: output.includes(esmDeactivateSentinel),
 				output,
 				fixtureFilesBefore,
 				fixtureFilesAfter,
@@ -260,25 +296,26 @@ export class BunExtensionHostTestHarness {
 	}
 
 	private createInitData(temporaryDirectory: string, logsPath: string): IExtensionHostInitData {
-		const manifest = {
-			name: 'vscode-test-bun-cjs',
+		const cjsManifest = {
+			name: 'vscode-bun-fixture-cjs',
 			publisher: 'vscode-test',
 			version: '0.0.1',
 			engines: { vscode: '*' },
 			main: './extension.js',
-			activationEvents: [`onCommand:${commandId}`]
+			activationEvents: [`onCommand:${cjsCommandId}`]
 		} satisfies IExtensionManifest;
-		const extension: IExtensionDescription = {
-			...manifest,
-			id: extensionId.value,
-			identifier: extensionId,
-			isBuiltin: false,
-			isUserBuiltin: false,
-			isUnderDevelopment: true,
-			preRelease: false,
-			extensionLocation: URI.file(this.fixturePath),
-			targetPlatform: TargetPlatform.UNDEFINED
-		};
+		const cjsExtension = this.createFixtureDescription(cjsManifest, cjsExtensionId, this.cjsFixturePath);
+		const esmManifest = {
+			name: 'vscode-bun-fixture-esm',
+			displayName: 'Bun Fixture ESM',
+			publisher: 'vscode-test',
+			version: '0.0.1',
+			type: 'module',
+			engines: { vscode: '*' },
+			main: './extension.js',
+			activationEvents: ['*']
+		} satisfies IExtensionManifest;
+		const esmExtension = this.createFixtureDescription(esmManifest, esmExtensionId, this.esmFixturePath);
 
 		return {
 			version: 'test',
@@ -298,12 +335,12 @@ export class BunExtensionHostTestHarness {
 				isSessionsWindow: false
 			},
 			workspace: undefined,
-			extensions: new ExtensionHostExtensions(0, [extension], [extensionId]).toSnapshot(),
+			extensions: new ExtensionHostExtensions(0, [cjsExtension, esmExtension], [cjsExtensionId, esmExtensionId]).toSnapshot(),
 			telemetryInfo: {
-				sessionId: 'bun-cjs-fixture',
-				machineId: 'bun-cjs-fixture',
-				sqmId: 'bun-cjs-fixture',
-				devDeviceId: 'bun-cjs-fixture',
+				sessionId: 'bun-fixtures',
+				machineId: 'bun-fixtures',
+				sqmId: 'bun-fixtures',
+				devDeviceId: 'bun-fixtures',
 				firstSessionDate: new Date(0).toISOString()
 			},
 			logLevel: LogLevel.Off,
@@ -314,6 +351,28 @@ export class BunExtensionHostTestHarness {
 			consoleForward: { includeStack: true, logNative: false },
 			uiKind: UIKind.Desktop
 		};
+	}
+
+	private createFixtureDescription(manifest: IExtensionManifest, identifier: ExtensionIdentifier, fixturePath: string): IExtensionDescription {
+		return {
+			...manifest,
+			id: identifier.value,
+			identifier,
+			isBuiltin: false,
+			isUserBuiltin: false,
+			isUnderDevelopment: true,
+			preRelease: false,
+			extensionLocation: URI.file(fixturePath),
+			targetPlatform: TargetPlatform.UNDEFINED
+		};
+	}
+
+	private async listFixtureFiles(): Promise<string[]> {
+		const [cjsFiles, esmFiles] = await Promise.all([listFiles(this.cjsFixturePath), listFiles(this.esmFixturePath)]);
+		return [
+			...cjsFiles.map(path => `cjs/${path}`),
+			...esmFiles.map(path => `esm/${path}`),
+		].sort();
 	}
 }
 

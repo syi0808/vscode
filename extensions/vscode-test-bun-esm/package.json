@@ -1,0 +1,14 @@
+{
+  "name": "vscode-bun-fixture-esm",
+  "displayName": "Bun Fixture ESM",
+  "version": "0.0.1",
+  "publisher": "vscode-test",
+  "type": "module",
+  "engines": {
+    "vscode": "*"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "*"
+  ]
+}

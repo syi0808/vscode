@@ -1,5 +1,6 @@
 {
-  "name": "vscode-test-bun-cjs",
+  "name": "vscode-bun-fixture-cjs",
+  "publisher": "vscode-test",
   "version": "0.0.1",
   "engines": {
     "vscode": "*"
