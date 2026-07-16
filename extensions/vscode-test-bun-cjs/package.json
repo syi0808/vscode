@@ -1,0 +1,19 @@
+{
+  "name": "vscode-test-bun-cjs",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "*"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:bunFixture.cjs"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "bunFixture.cjs",
+        "title": "Bun CJS Fixture"
+      }
+    ]
+  }
+}

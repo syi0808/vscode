@@ -1784,6 +1784,19 @@ export default defineConfig(
 					]
 				},
 				{
+					'target': 'src/vs/workbench/tauri-browser/~',
+					'restrictions': [
+						'vs/base/~',
+						'vs/base/parts/*/~',
+						'vs/platform/*/~',
+						'vs/workbench/api/~',
+						'vs/workbench/services/*/~',
+						'vs/workbench/tauri-browser/~',
+						'assert',
+						'path'
+					]
+				},
+				{
 					'target': 'src/vs/workbench/api/~',
 					'restrictions': [
 						'vscode',

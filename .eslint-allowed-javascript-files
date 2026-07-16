@@ -46,6 +46,8 @@ extensions/copilot/test/simulation/fixtures/tests/generate-jest/some/sum.test.js
 extensions/copilot/test/simulation/fixtures/tests/simple-js-proj copy/src/index.js
 extensions/copilot/test/simulation/fixtures/tests/simple-js-proj/src/index.js
 extensions/copilot/test/simulationExtension/extension.js
+extensions/vscode-test-bun-cjs/extension.js
+extensions/vscode-test-bun-cjs/nested.js
 extensions/cpp/build/update-grammars.js
 extensions/css-language-features/server/test/index.js
 extensions/css-language-features/server/test/pathCompletionFixtures/.foo.js
