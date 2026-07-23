@@ -75,10 +75,6 @@ fn main() {
         direct_ipc::macos::adapter(&root, &renderer_bootstrap).expect("failed to configure NWIPC");
 
     let builder = tauri::Builder::default()
-        .manage(AppState {
-            root: root.clone(),
-            config_path,
-        })
         .manage(Arc::clone(&direct_ipc))
         .manage(watch_bridge::FileWatchState::default())
         .manage(Arc::new(extension_host::ExtensionHostRegistry::default()));
@@ -114,6 +110,14 @@ fn main() {
             extensions_scanner::scan_local_extensions,
         ])
         .setup(move |app| {
+            app.manage(
+                AppState::new(
+                    app.handle(),
+                    root.clone(),
+                    config_path.clone(),
+                )
+                .map_err(std::io::Error::other)?,
+            );
             let url = workbench_url(&root);
 
             let webview = WebviewWindowBuilder::new(app, "main", WebviewUrl::CustomProtocol(url));
