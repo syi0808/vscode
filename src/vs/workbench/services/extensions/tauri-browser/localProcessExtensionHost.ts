@@ -11,6 +11,7 @@ import { Disposable } from '../../../../base/common/lifecycle.js';
 import * as objects from '../../../../base/common/objects.js';
 import { removeDangerousEnvVariables } from '../../../../base/common/processes.js';
 import { IMessagePassingProtocol } from '../../../../base/parts/ipc/common/ipc.js';
+import { getNwipcNativeBinding, NwipcMessagePassingProtocol } from '../../../../base/parts/ipc/common/ipc.nwipc.js';
 import { tauriInvoke } from '../../../../base/parts/sandbox/tauri-browser/globals.js';
 import { extensionHostGraceTimeMs, IExtensionHostProcessOptions } from '../../../../platform/extensions/common/extensionHostStarter.js';
 import { ILabelService } from '../../../../platform/label/common/label.js';
@@ -150,6 +151,17 @@ export class TauriLocalProcessExtensionHost extends Disposable implements IExten
 	}
 
 	private _establishProtocol(process: ExtensionHostProcess, options: IExtensionHostProcessOptions): Promise<IMessagePassingProtocol> {
+		const directBinding = getNwipcNativeBinding();
+		if (directBinding) {
+			return process.start(options).then(({ pid }) => {
+				this.pid = pid ?? null;
+				this._logService.info(`Started local Bun extension host with pid ${pid} using direct NWIPC.`);
+				const directProtocol = this._register(new NwipcMessagePassingProtocol(directBinding.connect()));
+				this._register(Event.once(directProtocol.onDidClose)(() => void process.kill()));
+				return directProtocol;
+			});
+		}
+
 		const protocol = this._register(new TauriExtensionHostProtocol(process.id, this._extensionHostStarter));
 
 		return new Promise<IMessagePassingProtocol>((resolve, reject) => {

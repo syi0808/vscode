@@ -14,6 +14,7 @@ import * as performance from '../../../base/common/performance.js';
 import { IURITransformer } from '../../../base/common/uriIpc.js';
 import { Promises } from '../../../base/node/pfs.js';
 import { IMessagePassingProtocol } from '../../../base/parts/ipc/common/ipc.js';
+import { connectNwipcMessagePassingProtocol } from '../../../base/parts/ipc/common/ipc.nwipc.js';
 import { BufferedEmitter, PersistentProtocol, ProtocolConstants } from '../../../base/parts/ipc/common/ipc.net.js';
 import { NodeSocket, WebSocketNodeSocket } from '../../../base/parts/ipc/node/ipc.net.js';
 import type { MessagePortMain, MessageEvent as UtilityMessageEvent } from '../../../base/parts/sandbox/node/electronTypes.js';
@@ -178,6 +179,12 @@ function readReconnectionValue(envKey: string, fallback: number): number {
 }
 
 function _createExtHostProtocol(): Promise<IMessagePassingProtocol> {
+	const directProtocol = connectNwipcMessagePassingProtocol();
+	if (directProtocol) {
+		Event.once(directProtocol.onDidClose)(() => onTerminate('renderer closed the NWIPC port'));
+		return Promise.resolve(directProtocol);
+	}
+
 	const extHostConnection = readExtHostConnection(process.env);
 
 	if (extHostConnection.type === ExtHostConnectionType.MessagePort) {
