@@ -16,6 +16,9 @@
     "active": false,
     "externalBin": [
       "binaries/vscode-bun"
+    ],
+    "resources": [
+      "binaries/NWIPC.bundle"
     ]
   }
 }

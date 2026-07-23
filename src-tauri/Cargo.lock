@@ -9,6 +9,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "320119579fcad9c21884f5c4861d16174d0e06250625266f50fe6898340abefa"
 
 [[package]]
+name = "aead"
+version = "0.5.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d122413f284cf2d62fb1b7db97e02edb8cda96d769b16e443a4f6195e35662b0"
+dependencies = [
+ "crypto-common",
+ "generic-array",
+]
+
+[[package]]
 name = "aho-corasick"
 version = "1.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -320,6 +330,30 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
 
 [[package]]
+name = "chacha20"
+version = "0.9.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c3613f74bd2eac03dad61bd53dbe620703d4371614fe0bc3b9f04dd36fe4e818"
+dependencies = [
+ "cfg-if",
+ "cipher",
+ "cpufeatures",
+]
+
+[[package]]
+name = "chacha20poly1305"
+version = "0.10.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "10cd79432192d1c0f4e1a0fef9527696cc039165d729fb41b3f4f4f354c2dc35"
+dependencies = [
+ "aead",
+ "chacha20",
+ "cipher",
+ "poly1305",
+ "zeroize",
+]
+
+[[package]]
 name = "chrono"
 version = "0.4.45"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -332,6 +366,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "cipher"
+version = "0.4.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "773f3b9af64447d2ce9850330c473515014aa235e6a783b02db81ff39e4a3dad"
+dependencies = [
+ "crypto-common",
+ "inout",
+ "zeroize",
+]
+
+[[package]]
 name = "code-tauri"
 version = "0.1.0"
 dependencies = [
@@ -339,6 +384,14 @@ dependencies = [
  "http",
  "mime_guess",
  "notify",
+ "nwipc",
+ "nwipc-error",
+ "nwipc-macos-host",
+ "nwipc-macos-spi",
+ "nwipc-tauri",
+ "objc2",
+ "objc2-foundation",
+ "objc2-web-kit",
  "percent-encoding",
  "serde",
  "serde_json",
@@ -574,6 +627,7 @@ checksum = "9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292"
 dependencies = [
  "block-buffer",
  "crypto-common",
+ "subtle",
 ]
 
 [[package]]
@@ -1260,6 +1314,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
 
 [[package]]
+name = "hkdf"
+version = "0.12.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7b5f8eb2ad728638ea2c7d47a21db23b7b58a72ed6a38256b8a1849f15fbbdf7"
+dependencies = [
+ "hmac",
+]
+
+[[package]]
+name = "hmac"
+version = "0.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6c49c37c09c17a53d937dfbb742eb3a961d65a994e6bcdcf37e7399d0cc8ab5e"
+dependencies = [
+ "digest",
+]
+
+[[package]]
 name = "html5ever"
 version = "0.38.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1544,6 +1616,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c033f80b2c113cdf91ab7a33faa9cbc014726dcad99880c8609af2a370edf37d"
 dependencies = [
  "libc",
+]
+
+[[package]]
+name = "inout"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "879f10e63c20629ecabbb64a8010319738c66a5cd0c29b02d63d272b03751d01"
+dependencies = [
+ "generic-array",
 ]
 
 [[package]]
@@ -1948,6 +2029,421 @@ dependencies = [
 ]
 
 [[package]]
+name = "nwipc"
+version = "0.0.0"
+dependencies = [
+ "nwipc-bootstrap-codec",
+ "nwipc-bootstrap-schema",
+ "nwipc-capabilities",
+ "nwipc-diagnostics",
+ "nwipc-error",
+ "nwipc-macos-transport",
+ "nwipc-metrics",
+ "nwipc-peer-bootstrap",
+ "nwipc-renderer-api",
+ "nwipc-renderer-bootstrap",
+ "nwipc-runtime",
+ "nwipc-session",
+ "nwipc-session-machine",
+ "nwipc-state",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-atomic"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-layout",
+ "nwipc-memory-api",
+]
+
+[[package]]
+name = "nwipc-bootstrap-codec"
+version = "0.0.0"
+dependencies = [
+ "nwipc-bootstrap-schema",
+ "nwipc-error",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-bootstrap-schema"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-capabilities"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+]
+
+[[package]]
+name = "nwipc-channel-core"
+version = "0.0.0"
+dependencies = [
+ "nwipc-atomic",
+ "nwipc-error",
+ "nwipc-flow-control",
+ "nwipc-fragment",
+ "nwipc-record",
+ "nwipc-ring-reader",
+ "nwipc-ring-writer",
+]
+
+[[package]]
+name = "nwipc-channel-transport"
+version = "0.0.0"
+dependencies = [
+ "nwipc-atomic",
+ "nwipc-capabilities",
+ "nwipc-channel-core",
+ "nwipc-error",
+ "nwipc-layout",
+ "nwipc-memory-api",
+ "nwipc-protocol",
+ "nwipc-signal-api",
+ "nwipc-signal-hybrid",
+ "nwipc-signal-poll",
+ "nwipc-validation",
+]
+
+[[package]]
+name = "nwipc-crypto"
+version = "0.0.0"
+dependencies = [
+ "chacha20poly1305",
+ "hkdf",
+ "nwipc-error",
+ "nwipc-types",
+ "sha2",
+ "zeroize",
+]
+
+[[package]]
+name = "nwipc-diagnostics"
+version = "0.0.0"
+dependencies = [
+ "nwipc-capabilities",
+ "nwipc-error",
+ "nwipc-metrics",
+ "nwipc-state",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-error"
+version = "0.0.0"
+
+[[package]]
+name = "nwipc-flow-control"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+]
+
+[[package]]
+name = "nwipc-fragment"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-layout",
+ "nwipc-record",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-layout"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-mach-transfer"
+version = "0.0.0"
+dependencies = [
+ "nwipc-bootstrap-schema",
+ "nwipc-error",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-macos-artifact"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+]
+
+[[package]]
+name = "nwipc-macos-bundle-api"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+]
+
+[[package]]
+name = "nwipc-macos-host"
+version = "0.0.0"
+dependencies = [
+ "nwipc-capabilities",
+ "nwipc-error",
+ "nwipc-macos-artifact",
+ "nwipc-macos-bundle-api",
+ "nwipc-macos-spi",
+ "nwipc-state",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-macos-spi"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+]
+
+[[package]]
+name = "nwipc-macos-transport"
+version = "0.0.0"
+dependencies = [
+ "nwipc-bootstrap-schema",
+ "nwipc-capabilities",
+ "nwipc-channel-core",
+ "nwipc-channel-transport",
+ "nwipc-crypto",
+ "nwipc-error",
+ "nwipc-layout",
+ "nwipc-memory-api",
+ "nwipc-memory-mach",
+ "nwipc-peer-core",
+ "nwipc-protocol",
+ "nwipc-renderer-api",
+ "nwipc-renderer-bootstrap",
+ "nwipc-signal-api",
+ "nwipc-signal-mach",
+ "nwipc-signal-poll",
+ "nwipc-types",
+ "nwipc-validation",
+]
+
+[[package]]
+name = "nwipc-memory-api"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-memory-mach"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-mach-transfer",
+ "nwipc-memory-api",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-metrics"
+version = "0.0.0"
+
+[[package]]
+name = "nwipc-peer-bootstrap"
+version = "0.0.0"
+dependencies = [
+ "nwipc-bootstrap-codec",
+ "nwipc-bootstrap-schema",
+ "nwipc-error",
+]
+
+[[package]]
+name = "nwipc-peer-core"
+version = "0.0.0"
+dependencies = [
+ "nwipc-bootstrap-schema",
+ "nwipc-capabilities",
+ "nwipc-error",
+ "nwipc-protocol",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-protocol"
+version = "0.0.0"
+dependencies = [
+ "nwipc-capabilities",
+ "nwipc-error",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-record"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-layout",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-renderer-api"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-renderer-bootstrap"
+version = "0.0.0"
+dependencies = [
+ "nwipc-bootstrap-schema",
+ "nwipc-capabilities",
+ "nwipc-error",
+ "nwipc-protocol",
+ "nwipc-renderer-api",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-ring-core"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-layout",
+ "nwipc-record",
+]
+
+[[package]]
+name = "nwipc-ring-reader"
+version = "0.0.0"
+dependencies = [
+ "nwipc-atomic",
+ "nwipc-error",
+ "nwipc-record",
+ "nwipc-ring-core",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-ring-writer"
+version = "0.0.0"
+dependencies = [
+ "nwipc-atomic",
+ "nwipc-error",
+ "nwipc-fragment",
+ "nwipc-layout",
+ "nwipc-record",
+ "nwipc-ring-core",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-runtime"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-session",
+ "nwipc-session-machine",
+ "nwipc-state",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-session"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-state",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-session-machine"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-session",
+ "nwipc-state",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-signal-api"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+]
+
+[[package]]
+name = "nwipc-signal-hybrid"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-signal-api",
+ "nwipc-signal-poll",
+]
+
+[[package]]
+name = "nwipc-signal-mach"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-mach-transfer",
+ "nwipc-signal-api",
+ "nwipc-types",
+]
+
+[[package]]
+name = "nwipc-signal-poll"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+]
+
+[[package]]
+name = "nwipc-state"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+]
+
+[[package]]
+name = "nwipc-tauri"
+version = "0.0.0"
+dependencies = [
+ "nwipc",
+ "nwipc-capabilities",
+ "nwipc-error",
+ "nwipc-macos-artifact",
+ "nwipc-macos-host",
+ "nwipc-macos-spi",
+ "nwipc-types",
+ "serde",
+ "tauri",
+]
+
+[[package]]
+name = "nwipc-types"
+version = "0.0.0"
+
+[[package]]
+name = "nwipc-validation"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-layout",
+ "nwipc-record",
+ "nwipc-types",
+]
+
+[[package]]
 name = "objc2"
 version = "0.6.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2070,6 +2566,7 @@ checksum = "e3e0adef53c21f888deb4fa59fc59f7eb17404926ee8a6f59f5df0fd7f9f3272"
 dependencies = [
  "bitflags 2.13.0",
  "block2",
+ "libc",
  "objc2",
  "objc2-core-foundation",
 ]
@@ -2086,6 +2583,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "objc2-javascript-core"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2a1e6550c4caed348956ce3370c9ffeca70bb1dbed4fa96112e7c6170e074586"
+dependencies = [
+ "objc2",
+ "objc2-core-foundation",
+]
+
+[[package]]
 name = "objc2-quartz-core"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2095,6 +2602,17 @@ dependencies = [
  "objc2",
  "objc2-core-foundation",
  "objc2-foundation",
+]
+
+[[package]]
+name = "objc2-security"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "709fe137109bd1e8b5a99390f77a7d8b2961dafc1a1c5db8f2e60329ad6d895a"
+dependencies = [
+ "bitflags 2.13.0",
+ "objc2",
+ "objc2-core-foundation",
 ]
 
 [[package]]
@@ -2140,6 +2658,8 @@ dependencies = [
  "objc2-app-kit",
  "objc2-core-foundation",
  "objc2-foundation",
+ "objc2-javascript-core",
+ "objc2-security",
 ]
 
 [[package]]
@@ -2147,6 +2667,12 @@ name = "once_cell"
 version = "1.21.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
+
+[[package]]
+name = "opaque-debug"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c08d65885ee38876c4f86fa503fb49d7b507c2b62552df7c70b2fce627e06381"
 
 [[package]]
 name = "option-ext"
@@ -2310,6 +2836,17 @@ dependencies = [
  "fdeflate",
  "flate2",
  "miniz_oxide",
+]
+
+[[package]]
+name = "poly1305"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8159bd90725d2df49889a078b54f4f79e87f1f8a8444194cdca81d38f5393abf"
+dependencies = [
+ "cpufeatures",
+ "opaque-debug",
+ "universal-hash",
 ]
 
 [[package]]
@@ -2952,6 +3489,12 @@ name = "strsim"
 version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
+
+[[package]]
+name = "subtle"
+version = "2.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 
 [[package]]
 name = "swift-rs"
@@ -3714,6 +4257,16 @@ name = "unicode-segmentation"
 version = "1.13.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c6f5d3c3b1bf09027a88a6bc961fc00497d651009560b5463668dc81b0fa87a8"
+
+[[package]]
+name = "universal-hash"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fc1de2c688dc15305988b563c3854064043356019f97a4b46276fe734c4f07ea"
+dependencies = [
+ "crypto-common",
+ "subtle",
+]
 
 [[package]]
 name = "url"
@@ -4573,6 +5126,12 @@ dependencies = [
  "syn 2.0.119",
  "synstructure",
 ]
+
+[[package]]
+name = "zeroize"
+version = "1.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e13c156562582aa81c60cb29407084cdb54c4164760106ab78e6c5b0858cf64e"
 
 [[package]]
 name = "zerotrie"

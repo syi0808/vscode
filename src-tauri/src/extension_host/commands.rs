@@ -4,7 +4,11 @@ use super::{
     transport,
 };
 use serde::{Deserialize, Serialize};
-use std::{collections::HashMap, path::PathBuf, sync::Arc};
+use std::{
+    collections::HashMap,
+    path::{Path, PathBuf},
+    sync::Arc,
+};
 use tauri::{AppHandle, State};
 use tokio::{
     io::AsyncWriteExt,
@@ -53,6 +57,7 @@ pub async fn ext_host_create(
 pub async fn ext_host_start(
     app: AppHandle,
     registry: State<'_, Arc<ExtensionHostRegistry>>,
+    direct_ipc: State<'_, Arc<crate::direct_ipc::DirectIpcState>>,
     id: String,
     options: ExtensionHostProcessOptions,
 ) -> Result<StartResult, String> {
@@ -69,20 +74,50 @@ pub async fn ext_host_start(
         .get("VSCODE_EXTHOST_IPC_HOOK")
         .and_then(|value| value.as_ref())
         .ok_or_else(|| "VSCODE_EXTHOST_IPC_HOOK is missing".to_owned())?;
-    if PathBuf::from(hook) != expected_path {
+    if Path::new(hook) != expected_path {
         return Err("Extension Host IPC hook does not match its resource".to_owned());
     }
 
     transport::cleanup_socket(&expected_path).await;
     let listener = UnixListener::bind(&expected_path)
         .map_err(|error| format!("failed to bind {}: {error}", expected_path.display()))?;
-    let mut child = match process::spawn(&options.env, &options.exec_argv) {
+    let mut session = direct_ipc.take_peer_session()?;
+    let mut child = match process::spawn(&options.env, &options.exec_argv, &session) {
         Ok(child) => child,
         Err(error) => {
             transport::cleanup_socket(&expected_path).await;
             return Err(error);
         }
     };
+    let mut bootstrap = Vec::new();
+    if let Err(error) = session
+        .write_peer_bootstrap(&mut bootstrap)
+        .map_err(|error| error.to_string())
+    {
+        let _ = child.start_kill();
+        transport::cleanup_socket(&expected_path).await;
+        return Err(error);
+    }
+    let bootstrap_result = async {
+        let mut stdin = child
+            .stdin
+            .take()
+            .ok_or_else(|| "Bun extension host bootstrap pipe is unavailable".to_owned())?;
+        stdin
+            .write_all(&bootstrap)
+            .await
+            .map_err(|error| format!("failed to write Bun NWIPC bootstrap: {error}"))?;
+        stdin
+            .shutdown()
+            .await
+            .map_err(|error| format!("failed to close Bun NWIPC bootstrap pipe: {error}"))
+    }
+    .await;
+    if let Err(error) = bootstrap_result {
+        let _ = child.start_kill();
+        transport::cleanup_socket(&expected_path).await;
+        return Err(error);
+    }
     let pid = child.id();
     if let Some(stdout) = child.stdout.take() {
         process::forward_stdout(app.clone(), id.clone(), stdout);

@@ -8,6 +8,7 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 tauri = { version = "2", features = [] }
+nwipc = { path = "../../nwipc/crates/facade/nwipc" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 http = "1"
@@ -18,3 +19,12 @@ notify = "8.2.0"
 globset = "0.4.18"
 tokio = { version = "1.52.3", features = ["rt-multi-thread", "macros", "net", "process", "io-util", "sync", "time", "fs"] }
 uuid = { version = "1.24.0", features = ["v4"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+nwipc-error = { path = "../../nwipc/crates/domain/nwipc-error" }
+nwipc-macos-host = { path = "../../nwipc/crates/platform/macos/nwipc-macos-host" }
+nwipc-macos-spi = { path = "../../nwipc/crates/platform/macos/nwipc-macos-spi" }
+nwipc-tauri = { path = "../../nwipc/crates/adapters/nwipc-tauri" }
+objc2 = "0.6"
+objc2-foundation = "0.3"
+objc2-web-kit = "0.3"

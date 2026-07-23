@@ -1,4 +1,5 @@
 mod bridge;
+mod direct_ipc;
 mod extension_host;
 mod extensions_scanner;
 mod fs_bridge;
@@ -19,6 +20,9 @@ use std::{
 use tauri::{Manager, RunEvent, WebviewUrl, WebviewWindowBuilder};
 
 use url::Url;
+
+#[cfg(target_os = "macos")]
+use nwipc_tauri::{TauriBuilderExt, TauriWebviewWindowBuilderExt};
 
 fn repo_root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -63,13 +67,26 @@ fn main() {
              window-config.json",
     );
 
-    let app = tauri::Builder::default()
+    let (direct_ipc, renderer_bootstrap) =
+        direct_ipc::DirectIpcState::initialize().expect("failed to initialize NWIPC");
+
+    #[cfg(target_os = "macos")]
+    let nwipc_adapter =
+        direct_ipc::macos::adapter(&root, &renderer_bootstrap).expect("failed to configure NWIPC");
+
+    let builder = tauri::Builder::default()
         .manage(AppState {
             root: root.clone(),
             config_path,
         })
+        .manage(Arc::clone(&direct_ipc))
         .manage(watch_bridge::FileWatchState::default())
-        .manage(Arc::new(extension_host::ExtensionHostRegistry::default()))
+        .manage(Arc::new(extension_host::ExtensionHostRegistry::default()));
+
+    #[cfg(target_os = "macos")]
+    let builder = builder.plugin_nwipc(&nwipc_adapter);
+
+    let app = builder
         .register_uri_scheme_protocol("vscode-file", move |_context, request| {
             vscode_file_protocol::handle(&protocol_root, request)
         })
@@ -99,7 +116,22 @@ fn main() {
         .setup(move |app| {
             let url = workbench_url(&root);
 
-            WebviewWindowBuilder::new(app, "main", WebviewUrl::CustomProtocol(url))
+            let webview = WebviewWindowBuilder::new(app, "main", WebviewUrl::CustomProtocol(url));
+
+            #[cfg(target_os = "macos")]
+            let webview = direct_ipc
+                .with_session(|session| {
+                    webview.with_nwipc(
+                        &nwipc_adapter,
+                        "main",
+                        session,
+                        direct_ipc::macos::Configuration::new()
+                            .expect("failed to create WebKit configuration"),
+                    )
+                })
+                .expect("failed to attach NWIPC to WebKit");
+
+            webview
                 .initialization_script(include_str!("../preload/channel.js"))
                 .initialization_script(include_str!("../preload/vscode.js"))
                 .title("Code Tauri")

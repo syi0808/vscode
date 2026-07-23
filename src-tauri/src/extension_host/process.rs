@@ -53,6 +53,7 @@ fn bun_path() -> PathBuf {
 pub fn spawn(
     environment: &std::collections::HashMap<String, Option<String>>,
     exec_argv: &[String],
+    session: &nwipc::Session,
 ) -> Result<tokio::process::Child, String> {
     let root = repo_root()?;
     let bootstrap = root.join("out/bootstrap-fork.js");
@@ -69,7 +70,7 @@ pub fn spawn(
         .args(exec_argv)
         .arg(bootstrap)
         .arg("--skipWorkspaceStorageLock")
-        .stdin(Stdio::null())
+        .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .kill_on_drop(false);
@@ -84,6 +85,7 @@ pub fn spawn(
             }
         }
     }
+    session.peer_environment().apply(command.as_std_mut());
     command.env("VSCODE_PARENT_PID", std::process::id().to_string());
     command
         .spawn()
