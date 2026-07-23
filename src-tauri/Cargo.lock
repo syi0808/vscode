@@ -2165,15 +2165,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "nwipc-mach-transfer"
-version = "0.0.0"
-dependencies = [
- "nwipc-bootstrap-schema",
- "nwipc-error",
- "nwipc-types",
-]
-
-[[package]]
 name = "nwipc-macos-artifact"
 version = "0.0.0"
 dependencies = [
@@ -2219,13 +2210,13 @@ dependencies = [
  "nwipc-error",
  "nwipc-layout",
  "nwipc-memory-api",
- "nwipc-memory-mach",
+ "nwipc-memory-iosurface",
  "nwipc-peer-core",
  "nwipc-protocol",
  "nwipc-renderer-api",
  "nwipc-renderer-bootstrap",
  "nwipc-signal-api",
- "nwipc-signal-mach",
+ "nwipc-signal-darwin",
  "nwipc-signal-poll",
  "nwipc-types",
  "nwipc-validation",
@@ -2240,11 +2231,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "nwipc-memory-mach"
+name = "nwipc-memory-iosurface"
 version = "0.0.0"
 dependencies = [
  "nwipc-error",
- "nwipc-mach-transfer",
  "nwipc-memory-api",
  "nwipc-types",
 ]
@@ -2382,22 +2372,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "nwipc-signal-darwin"
+version = "0.0.0"
+dependencies = [
+ "nwipc-error",
+ "nwipc-signal-api",
+ "nwipc-types",
+]
+
+[[package]]
 name = "nwipc-signal-hybrid"
 version = "0.0.0"
 dependencies = [
  "nwipc-error",
  "nwipc-signal-api",
  "nwipc-signal-poll",
-]
-
-[[package]]
-name = "nwipc-signal-mach"
-version = "0.0.0"
-dependencies = [
- "nwipc-error",
- "nwipc-mach-transfer",
- "nwipc-signal-api",
- "nwipc-types",
 ]
 
 [[package]]
