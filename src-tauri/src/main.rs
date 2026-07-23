@@ -123,17 +123,25 @@ fn main() {
             let webview = WebviewWindowBuilder::new(app, "main", WebviewUrl::CustomProtocol(url));
 
             #[cfg(target_os = "macos")]
-            let webview = direct_ipc
-                .with_session(|session| {
-                    webview.with_nwipc(
-                        &nwipc_adapter,
-                        "main",
-                        session,
-                        direct_ipc::macos::Configuration::new()
-                            .expect("failed to create WebKit configuration"),
-                    )
-                })
-                .expect("failed to attach NWIPC to WebKit");
+            let webview = if std::env::var_os("CODE_TAURI_ENABLE_NWIPC").is_some() {
+                direct_ipc
+                    .with_session(|session| {
+                        webview.with_nwipc(
+                            &nwipc_adapter,
+                            "main",
+                            session,
+                            direct_ipc::macos::Configuration::new()
+                                .expect("failed to create WebKit configuration"),
+                        )
+                    })
+                    .expect("failed to attach NWIPC to WebKit")
+            } else {
+                eprintln!(
+                    "[code-tauri] direct NWIPC is disabled because system WebKit cannot render \
+                     external injected bundles; set CODE_TAURI_ENABLE_NWIPC=1 to experiment"
+                );
+                webview
+            };
 
             webview
                 .initialization_script(include_str!("../preload/channel.js"))
